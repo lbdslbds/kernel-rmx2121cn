@@ -6,7 +6,11 @@
 
 [4.14.186 构建 #2](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40205461469) 已成功。产出 `Image`、15,400,133 字节的 `Image.gz-dtb`、基础 DTB、符号表、调试内核与 5 个可构建模块；下载后校验 SHA-256，并确认 gzip 载荷等于单独 `Image`、附加 DTB 等于归档中的 `mediatek/mt6885.dtb`。详见 [验证报告](reports/kernel414-verified-build.json)。
 
-此结果不包含设备启动验证或完整项目 DTBO。内核 banner 的构建时间是脚本固定的源码提交时间，不是云端任务实际执行时间。
+[Android 17 / 6.18.33 通用 ACK 构建](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40206193209) 也已编译成功。下载后确认 ARM64 镜像头与配置均为 4 KiB 页，8 个文件的 SHA-256 全部一致，gzip 载荷等于原始 `Image`；原始镜像 43,600,384 字节。详见 [6.18 验证报告](reports/android17-verified-build.json) 和包含 58 个项目提交的 [完整源码快照](reports/android17-resolved-manifest.xml)。这不是 RMX2121 机型内核，尚未移植或验证真机启动。
+
+Kleaf 默认未启用 stamp，因此该镜像 banner 含 `maybe-dirty` 和 1970 时间戳；这不是检测到源码修改的结论，见 [固定 Kleaf 实现](https://android.googlesource.com/kernel/build/+/38e2a76ecb0257fe1f27b0078cd9169191601ec7/kleaf/impl/stamp.bzl)。实际源码与构建提交以诊断文件和 resolved manifest 为准。本次通用产物未收集重命名后的 `kernel_aarch64_Module.symvers`，脚本已补充后续构建的收集规则；本次报告不包含 6.18 模块 ABI 校验。
+
+4.14 结果不包含设备启动验证或完整项目 DTBO。其内核 banner 的构建时间是脚本固定的源码提交时间，不是云端任务实际执行时间。
 
 `olddefconfig` 没有禁用或改变任何既有启用项；新增 `CONFIG_F2FS_BD_STAT=y`，并移除 10 条原先未启用且该源码没有定义的配置记录。完整差异保存在 Actions 产物 `config.diff`。
 
@@ -28,7 +32,20 @@
 
 在 Actions 选择 **Reproduce RMX2121CN kernel 4.14**，手动运行。工作流只在 `workflow_dispatch` 时执行，权限为 `contents: read`。
 
-产物保留 14 天，包括完整日志、输入/实际配置及差异、源码与工具链引用、下载校验、内核映像、符号和可构建模块。失败也上传诊断材料。
+6.18 选择 **Android 17 ACK 6.18 baseline - NOT for flashing**。完整机型移植步骤、可复用上游框架和验收条件见 [PORTING.md](PORTING.md)。
+
+产物保留 14 天。4.14 产物包含日志、输入/实际配置及差异、源码与工具链引用、下载校验、内核映像、符号和可构建模块；6.18 分别上传 diagnostics 和 generic 两个产物，包含依赖快照、最终配置及通用映像。失败时也上传已经收集到的诊断材料。
+
+下载 6.18 的 diagnostics 与 generic 两个产物后，可运行以下离线检查；`--expected-build-commit` 应取自对应 Actions 运行的 `headSha`，预期 target 应取自该提交的 `targets/android17.json`。
+
+```bash
+python3 scripts/verify-android17-artifacts.py DIAGNOSTICS_DIR GENERIC_DIR \
+  --run-url https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40206193209 \
+  --expected-build-commit af6bf3a3af2a1fb77fcc43aa0c5ad2a6ff2beaff \
+  --output verification.json
+```
+
+检查只验证下载内容、配置、版本与指定构建输入的一致性，不执行内核或模块。脚本不访问 GitHub，运行状态与提交来源须通过 Actions 单独核对。
 
 ## 验收顺序
 

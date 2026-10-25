@@ -177,6 +177,11 @@ for artifact in Image Image.gz Image.lz4 Image.lzma Image.zst System.map Module.
     cp "$dist/$artifact" "$baseline/$artifact"
   fi
 done
+# keep_module_symvers=True in the pinned Kleaf exports a renamed output.
+# Preserve it under the conventional name for later module ABI investigation.
+if [[ ! -f "$baseline/Module.symvers" && -f "$dist/kernel_aarch64_Module.symvers" ]]; then
+  cp "$dist/kernel_aarch64_Module.symvers" "$baseline/Module.symvers"
+fi
 cat > "$baseline/DO-NOT-FLASH.txt" <<EOF
 Generic Android 17 ACK 6.18 / 4 KiB build baseline.
 NOT a realme X7 Pro / RMX2121 port. DO NOT FLASH ON THE PHONE.

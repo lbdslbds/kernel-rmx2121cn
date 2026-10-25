@@ -1,0 +1,31 @@
+{
+  "run_url": "https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40206193209",
+  "build_commit": "af6bf3a3af2a1fb77fcc43aa0c5ad2a6ff2beaff",
+  "kernel_version": "6.18.33",
+  "banner": "Linux version 6.18.33-android17-5-maybe-dirty-4k (kleaf@build-host) (Android (15323222, +pgo, +bolt, +lto, +mlgo, based on r584948c) clang version 22.0.1 (https://android.googlesource.com/toolchain/llvm-project 2d65e4108033380e6fe8e08b1f1826cd2bfb0c99), LLD 22.0.1 (/mnt/disks/build-disk/src/googleplex-android/llvm-r584948-release/out/llvm-project/llvm 2d65e4108033380e6fe8e08b1f1826cd2bfb0c99)) #1 SMP PREEMPT Thu Jan  1 00:00:00 UTC 1970",
+  "kernel_commit": "846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef",
+  "kleaf_commit": "38e2a76ecb0257fe1f27b0078cd9169191601ec7",
+  "sha256_verified": {
+    "DO-NOT-FLASH.txt": "11ff7ff9c346fe3c5a72ac58a77faca27e04cf2a67d3c5a94629a36844c5cc0f",
+    "Image": "f6c881edb063bd55d4ae7319a62a05b9c4f5b7960e5fe30bb5bc0a4d50e7373e",
+    "Image.gz": "8500ee075d1d134d6d9ac3e2c39480659bdece48ebb142e509ce5385ff933aa0",
+    "Image.lz4": "f7535df9377f5da4f5f99594323b60aaf87f6c9d2195206884ebd782c90b7316",
+    "Image.lzma": "217760bbcfe9ff12db8f91293373860659c1f274e8de163b0741c9d4c9f44082",
+    "Image.zst": "35a3a052bf8679160d32a10cd008caa853278f609fd1bfea0317fd8d56645c1a",
+    "System.map": "e910a04d6ae11049a6c339b387b87e3a4fbdea262b9f4f5136de1dbe72f1e7e3",
+    "final.config": "1c98e44e2bae2398bd158cbefce2721a770600d5cde2749656d1eab9e2e003eb"
+  },
+  "image_bytes": 43600384,
+  "image_header_size": 44302336,
+  "image_header_page_size_bytes": 4096,
+  "final_config_page_size_bytes": 4096,
+  "gzip_payload_matches_Image": true,
+  "module_symvers_exported": false,
+  "manifest_project_count": 58,
+  "resolved_manifest_sha256": "fcad94c204469b371bb6dcda788619f1a508d662b8f94d0fbc17bb5108bc5678",
+  "all_manifest_project_revisions_pinned": true,
+  "artifact_kind": "generic_ACK_baseline",
+  "rmx2121_board_support_added": false,
+  "device_boot_tested": false,
+  "flashable_on_rmx2121": false
+}
