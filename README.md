@@ -2,6 +2,14 @@
 
 公开的内核源码构建与移植工程。当前任务是用 GitHub Actions 复现 realme 官方 Android S / Linux 4.14.186 源码编译；后续移植目标为 Android 17 对应的 ACK `android17-6.18`。
 
+## 已完成的验证
+
+[4.14.186 构建 #2](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40205461469) 已成功。产出 `Image`、15,400,133 字节的 `Image.gz-dtb`、基础 DTB、符号表、调试内核与 5 个可构建模块；下载后校验 SHA-256，并确认 gzip 载荷等于单独 `Image`、附加 DTB 等于归档中的 `mediatek/mt6885.dtb`。详见 [验证报告](reports/kernel414-verified-build.json)。
+
+此结果不包含设备启动验证、完整项目 DTBO 或额外厂商模块的 ABI 验证。内核 banner 的构建时间是脚本固定的源码提交时间，不是云端任务实际执行时间。
+
+`olddefconfig` 没有禁用或改变任何既有启用项；新增 `CONFIG_F2FS_BD_STAT=y`，并移除 10 条原先未启用且该源码没有定义的配置记录。完整差异保存在 Actions 产物 `config.diff`。
+
 ## 当前边界
 
 - 4.14 工作流使用 RMX2121CN 导出的完整内核配置，项目号 20601，内核平台 MT6885、Android 工程 k6889v1_64。

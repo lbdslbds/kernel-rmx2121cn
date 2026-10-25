@@ -1,0 +1,27 @@
+{
+  "run_url": "https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40205461469",
+  "build_commit": "ce06673c5d321af275667db79ec05ed1f00a282d",
+  "kernelrelease": "4.14.186",
+  "banner": "Linux version 4.14.186 (kernel-builder@github-actions) (Android (6443078 based on r383902) clang version 11.0.1 (https://android.googlesource.com/toolchain/llvm-project b397f81060ce6d701042b782172ed13bee898b79), LLD 11.0.1 (/buildbot/tmp/tmp6_m7QH b397f81060ce6d701042b782172ed13bee898b79)) #1 SMP PREEMPT Tue Oct 31 02:15:05 UTC 2023",
+  "sha256_verified": {
+    "Image": "9b32a43468b81a4c13693da6d70530b38b8a171fd39a3109582de89b3643e47c",
+    "Image.gz": "08c1792e7c164287a4d94043b2506f09ae884e8fe33af261b0ad6daefa1768a4",
+    "Image.gz-dtb": "40e9c72ac324351b0391d018edd1ec320f029c4da3d4c1188fec8dff30590a38",
+    "Module.symvers": "e3094950c9da935ddaab37d9f3fa865088ede622b2be49a1e9d82b4631e2bf13",
+    "System.map": "6cf788ccdbeeeef29e0895e3c89844f7e21fd8512e419fd92986e1562bea57c9",
+    "vmlinux.xz": "6b4be241f14e250bed2eb68de9ae2bf1cc0b925988a2b62d5130c62667261e7a"
+  },
+  "image_bytes": 40456192,
+  "gzip_dtb_bytes": 15400133,
+  "appended_dtb_bytes": 198529,
+  "gzip_payload_matches_Image": true,
+  "appended_dtb_matches_archive": true,
+  "modules": [
+    "kernel/kheaders.ko",
+    "drivers/video/backlight/lcd.ko",
+    "net/ipv4/tcp_westwood.ko",
+    "net/ipv4/tcp_htcp.ko",
+    "net/bridge/br_netfilter.ko"
+  ],
+  "device_boot_tested": false
+}
