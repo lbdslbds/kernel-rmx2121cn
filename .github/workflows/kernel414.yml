@@ -1,0 +1,44 @@
+name: Reproduce RMX2121CN kernel 4.14
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kernel414-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 180
+    defaults:
+      run:
+        shell: bash
+    env:
+      JOBS: '4'
+    steps:
+      - name: Check out build inputs
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential bc bison flex libssl-dev libelf-dev libncurses-dev libxml2-utils libtinfo5 device-tree-compiler python3 curl xz-utils
+      - name: Build official source with captured device configuration
+        run: |
+          mkdir -p artifacts/kernel414
+          bash scripts/build-4.14.sh 2>&1 | tee artifacts/kernel414/build.log
+      - name: Upload build evidence and candidate binaries
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: RMX2121CN-kernel414-${{ github.run_number }}
+          path: artifacts/kernel414/
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 6
+          include-hidden-files: true

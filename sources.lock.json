@@ -1,0 +1,25 @@
+{
+  "device": "realme X7 Pro RMX2121CN",
+  "project": "20601",
+  "soc_platform": "mt6885",
+  "android_project": "k6889v1_64",
+  "kernel": {
+    "repository": "https://github.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source",
+    "commit": "f0c2afc4d8aa699bacae223bf7506d6912e08da6",
+    "version": "4.14.186"
+  },
+  "clang": {
+    "repository": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86",
+    "commit": "252aba16f513a857bc923172f67b0e55e23de35f",
+    "subdirectory": "clang-r383902",
+    "expected_build": "6443078"
+  },
+  "gcc_arm64": {
+    "repository": "https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9",
+    "commit": "606f80986096476912e04e5c2913685a8f2c3b65"
+  },
+  "gcc_arm": {
+    "repository": "https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9",
+    "commit": "b0c6a654327ca8796bed1e61dffcf523d04dceaa"
+  }
+}
