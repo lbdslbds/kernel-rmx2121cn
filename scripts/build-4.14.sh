@@ -6,6 +6,17 @@ ART="$ROOT/artifacts/kernel414"
 SRC="$WORK/source"
 OUT="$WORK/out"
 mkdir -p "$WORK/downloads" "$ART" "$OUT"
+finish() {
+  code=$?
+  trap - EXIT
+  if [[ -f "$OUT/.config" ]]; then
+    cp "$OUT/.config" "$ART/effective.config"
+    diff -u "$ART/input.config" "$ART/effective.config" > "$ART/config.diff" || true
+  fi
+  printf '%s\n' "$code" > "$ART/exit-code.txt"
+  exit "$code"
+}
+trap finish EXIT
 export LC_ALL=C
 export TZ=UTC
 export KBUILD_BUILD_USER=kernel-builder
@@ -53,17 +64,6 @@ ln -sfn "$SRC/OplusKernelEnvConfig.mk" "$OUT/OplusKernelEnvConfig.mk"
 cp "$ROOT/configs/rmx2121cn-stock.config" "$OUT/.config"
 args=(O="$OUT" ARCH=arm64 CC=clang LD=ld.lld NM=llvm-nm OBJCOPY=llvm-objcopy
   CROSS_COMPILE=aarch64-linux-androidkernel- CLANG_TRIPLE=aarch64-linux-gnu-)
-finish() {
-  code=$?
-  trap - EXIT
-  if [[ -f "$OUT/.config" ]]; then
-    cp "$OUT/.config" "$ART/effective.config"
-    diff -u "$ART/input.config" "$ART/effective.config" > "$ART/config.diff" || true
-  fi
-  printf '%s\n' "$code" > "$ART/exit-code.txt"
-  exit "$code"
-}
-trap finish EXIT
 make -C "$SRC" "${args[@]}" olddefconfig
 python3 "$ROOT/scripts/validate-config.py" "$OUT/.config"
 make -C "$SRC" "${args[@]}" -j"${JOBS:-4}" Image.gz-dtb modules

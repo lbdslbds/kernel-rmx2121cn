@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "purpose": "Generic Android 17 ACK 6.18 build baseline only; no RMX2121 board support has been added.",
+  "flashable_on_rmx2121": false,
+  "kernel": {
+    "url": "https://android.googlesource.com/kernel/common",
+    "branch": "android17-6.18",
+    "revision": "846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef",
+    "version_prefix": "6.18",
+    "page_size": "4k"
+  },
+  "manifest": {
+    "url": "https://android.googlesource.com/kernel/manifest",
+    "branch": "common-android17-6.18",
+    "revision": "46a1a5274ff0b40419952c861a8958bba5f28cfc"
+  },
+  "build": {
+    "branch": "main-kernel-2026",
+    "revision": "38e2a76ecb0257fe1f27b0078cd9169191601ec7",
+    "target": "//common:kernel_aarch64_dist"
+  },
+  "repo": {
+    "url": "https://gerrit.googlesource.com/git-repo",
+    "version": "v2.58",
+    "revision": "38d2fe11b9df521727fcca23c9dac086ce8378d3"
+  },
+  "dependency_lock_policy": "The manifest, kernel, build tooling and repo launcher are pinned. Other manifest projects resolve their branches on first sync. Archive resolved-manifest.xml to replay the complete source and toolchain snapshot; repeated fresh runs are not guaranteed to select identical remaining dependencies."
+}

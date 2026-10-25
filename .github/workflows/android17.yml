@@ -1,0 +1,57 @@
+name: Android 17 ACK 6.18 baseline - NOT for flashing
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android17-ack-baseline-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  generic-ack-baseline:
+    name: Generic ACK 6.18 / 4K (no X7 Pro port)
+    runs-on: ubuntu-22.04
+    timeout-minutes: 180
+    env:
+      TZ: UTC
+      LC_ALL: C.UTF-8
+      GIT_TERMINAL_PROMPT: "0"
+    steps:
+      - name: Check out build definitions
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Install host dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            bc bison build-essential ca-certificates curl flex git gnupg \
+            libelf-dev libssl-dev python3 rsync unzip xz-utils zip zstd
+
+      - name: Build generic ACK baseline
+        shell: bash
+        run: bash scripts/build-android17.sh
+
+      - name: Upload build logs and resolved source manifest
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: android17-ack-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/android17/diagnostics/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Upload generic baseline images - NOT for flashing
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: android17-ack-generic-NOT-FOR-RMX2121-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/android17/generic-not-for-flashing/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
