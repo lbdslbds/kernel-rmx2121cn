@@ -6,9 +6,13 @@
 
 [4.14.186 构建 #2](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40205461469) 已成功。产出 `Image`、15,400,133 字节的 `Image.gz-dtb`、基础 DTB、符号表、调试内核与 5 个可构建模块；下载后校验 SHA-256，并确认 gzip 载荷等于单独 `Image`、附加 DTB 等于归档中的 `mediatek/mt6885.dtb`。详见 [验证报告](reports/kernel414-verified-build.json)。
 
-此结果不包含设备启动验证、完整项目 DTBO 或额外厂商模块的 ABI 验证。内核 banner 的构建时间是脚本固定的源码提交时间，不是云端任务实际执行时间。
+此结果不包含设备启动验证或完整项目 DTBO。内核 banner 的构建时间是脚本固定的源码提交时间，不是云端任务实际执行时间。
 
 `olddefconfig` 没有禁用或改变任何既有启用项；新增 `CONFIG_F2FS_BD_STAT=y`，并移除 10 条原先未启用且该源码没有定义的配置记录。完整差异保存在 Actions 产物 `config.diff`。
+
+现有 vendor 另有 9 个厂商模块尚未在本次构建中复现，涉及无线、GPS、FPSGO 和 MET。离线比较共 1276 项版本化导入：1162 匹配，`conninfra.ko` 的 3 个 `alarm_*` 符号 CRC 不匹配，111 项在本次内核符号表中缺少但能找到其他 vendor 模块中的可能提供者。后者尚未核对提供者 CRC，不能当作 111 个缺失内核 API。正常模块版本校验会拒绝上述 CRC 不匹配的 `conninfra.ko`；不能直接宣称旧模块可复用。见 [完整 CRC 报告](reports/vendor-module-crc-comparison.json) 与 [模块缺口记录](reports/vendor-module-gap.json)。
+
+公开源码包含 8 个外部模块的构建入口；原厂 `fpsgo.ko` 所用的 `fpsgo_cus` 源码尚未找到。后续入口、参数依据及依赖顺序见 [外部模块调查](EXTERNAL_MODULES.md)，尚未执行补编译。目录中有模块文件、静态配置中有加载指令，均不代表本轮实际加载成功。构建还报告 `OPLUS_F2FS_DEBUG` 环境变量未定义；原厂值尚未核实。
 
 ## 当前边界
 

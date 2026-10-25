@@ -1,0 +1,29 @@
+{
+  "evidence": "Read-only inspection of historical stock and ALPHA5 vendor files; no device access or module loading performed.",
+  "stock_and_alpha5_modules_identical_by_sha256": true,
+  "stock_vermagic": "4.14.186+ SMP preempt mod_unload modversions aarch64",
+  "new_kernel_release": "4.14.186",
+  "vendor_modules_not_reproduced_in_kernel414_run_40205461469": [
+    "bt_drv_6885.ko",
+    "connfem.ko",
+    "conninfra.ko",
+    "fmradio_drv_connac2x.ko",
+    "fpsgo.ko",
+    "gps_drv.ko",
+    "met.ko",
+    "wlan_drv_gen4m.ko",
+    "wmt_chrdev_wifi.ko"
+  ],
+  "compatibility_with_new_kernel": "conninfra_crc_mismatch_confirmed; full_runtime_compatibility_not_tested",
+  "symbol_crc_comparison_performed": true,
+  "symbol_crc_report": "vendor-module-crc-comparison.json",
+  "conninfra_mismatched_symbols": [
+    "alarm_cancel",
+    "alarm_init",
+    "alarm_start_relative"
+  ],
+  "external_module_source_entries_found": 8,
+  "unlocated_module_source": "vendor/mediatek/kernel_modules/fpsgo_cus (used by stock fpsgo.ko)",
+  "module_load_test_performed": false,
+  "note": "The release suffix alone does not prove compatibility or incompatibility. Three conninfra symbol CRC mismatches were independently found by offline comparison; normal CONFIG_MODVERSIONS checks reject those mismatches. Matching CRCs elsewhere do not establish runtime compatibility. Android 17 / 6.18 requires porting and rebuilding the relevant vendor modules."
+}
