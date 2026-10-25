@@ -134,17 +134,26 @@ tools/bazel help kleaf > "$diagnostics/kleaf-help.txt"
 tools/bazel query //common:kernel_aarch64_dist > "$diagnostics/build-target.txt"
 tools/bazel run --page_size=4k //common:kernel_aarch64_dist -- --destdir="$dist"
 
-# Validate the final generated configuration, not the input defconfig. If the
-# distribution omits it, ask Bazel for the files of the same configured target.
-final_config="$dist/.config"
+# The pinned Kleaf common_kernel keeps the final generated configuration as
+# kernel_aarch64_dot_config (keep_dot_config=True), not as .config. Preserve
+# support for a distribution that also uses the original filename.
+final_config="$dist/kernel_aarch64_dot_config"
+if [[ ! -f "$final_config" && -f "$dist/.config" ]]; then
+  final_config="$dist/.config"
+fi
+# If the distribution omits it, ask Bazel for the files of the same configured
+# target and retain the output list and discovered configurations for diagnosis.
 if [[ ! -f "$final_config" ]]; then
   tools/bazel cquery --page_size=4k --output=files //common:kernel_aarch64 \
     > "$diagnostics/kernel-output-files.txt"
   final_config=''
+  config_candidates=0
   while IFS= read -r output_file; do
-    if [[ "$output_file" == */.config && -f "$output_file" ]]; then
+    if [[ ( "$output_file" == */kernel_aarch64_dot_config || "$output_file" == */.config ) && -f "$output_file" ]]; then
+      config_candidates=$((config_candidates + 1))
+      cp "$output_file" "$diagnostics/config-candidate-$config_candidates.config"
       if [[ -n "$final_config" ]]; then
-        printf '%s\n' 'Multiple final .config outputs found; refusing an ambiguous result.' >&2
+        printf '%s\n' 'Multiple final configuration outputs found; refusing an ambiguous result.' >&2
         exit 1
       fi
       final_config="$output_file"
