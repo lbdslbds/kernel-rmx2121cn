@@ -49,6 +49,12 @@ while IFS=$'\t' read -r name url strip; do
   fi
   sha256sum "$archive" >> "$ART/downloads.sha256"
 done < "$WORK/downloads.tsv"
+mkdir -p "$ART/patches"
+for source_patch in "$ROOT"/patches/*.patch; do
+  [[ -f "$source_patch" ]] || continue
+  patch -d "$SRC" -p1 --fuzz=0 < "$source_patch"
+  cp "$source_patch" "$ART/patches/"
+done
 export PATH="$WORK/clang/bin:$WORK/gcc_arm64/bin:$WORK/gcc_arm/bin:$PATH"
 export LD_LIBRARY_PATH="$WORK/clang/lib64${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 clang --version | tee "$ART/clang-version.txt"
@@ -66,6 +72,8 @@ args=(O="$OUT" ARCH=arm64 CC=clang LD=ld.lld NM=llvm-nm OBJCOPY=llvm-objcopy
   CROSS_COMPILE=aarch64-linux-androidkernel- CLANG_TRIPLE=aarch64-linux-gnu-)
 make -C "$SRC" "${args[@]}" olddefconfig
 python3 "$ROOT/scripts/validate-config.py" "$OUT/.config"
+# Compile the previously failing subsystem first for quicker diagnostics.
+make -C "$SRC" "${args[@]}" -j"${JOBS:-4}" drivers/power/
 make -C "$SRC" "${args[@]}" -j"${JOBS:-4}" Image.gz-dtb modules
 test -s "$OUT/arch/arm64/boot/Image.gz-dtb"
 test -s "$OUT/vmlinux"

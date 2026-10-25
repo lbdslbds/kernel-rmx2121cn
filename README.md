@@ -7,6 +7,7 @@
 - 4.14 工作流使用 RMX2121CN 导出的完整内核配置，项目号 20601，内核平台 MT6885、Android 工程 k6889v1_64。
 - 固定官方源码提交及与原厂日志一致的 Android Clang r383902 / build 6443078 和 AOSP GCC binutils。参考 `sources.lock.json`。
 - 保留官方发布的 `nativefeatures.mk`、`OplusKernelEnvConfig.mk`，记录 `olddefconfig` 前后的差异。
+- `patches/` 记录最小编译修复：目前仅修正 MTK6889 充电头文件中多余的 `kernel-4.14/` 路径组件，不关闭驱动。每次构建都会附带实际应用的补丁。
 - 构建产物仅用于验证和后续本地封装，不生成可直接刷写的 boot.img。编译成功不等于原厂二进制一致、不等于手机可启动。
 - 现有移植系统曾对预编译 4.14 内核做 BPF/bpffs/LPM 二进制修补，这些补丁不包含在本官方源码基线里。
 - 6.18 工作流若构建成功，只证明通用 ACK 构建环境可用；MT6885、RMX2121 的驱动移植尚需单独完成。
