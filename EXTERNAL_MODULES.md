@@ -22,6 +22,8 @@
 
 即便其余 CRC 匹配，也仍需验证模块依赖、签名要求、固件接口、设备初始化及运行行为。该静态报告没有证明任何模块已成功加载。
 
+初步追查将范围缩小到 `alarmtimer.h` 中 `struct alarm` 及相关类型声明：公开头文件没有 Android vendor data 字段；相关 RTC、hrtimer 配置没有变化；`met.ko` 的四个 `hrtimer_*` 导入与本次内核 CRC 均匹配。这些证据尚不能确定原厂头文件具体差在哪里。原模块不含 DWARF/BTF，下一步应以 `V=1 KBUILD_SYMTYPES=1` 重建 `kernel/time/alarmtimer.o`，保留预处理类型图，并与原厂对应头文件或调试内核比对；不能虚构字段或改写 CRC 来消除检查错误。
+
 ## 已找到的 8 个外部模块入口
 
 以下路径均相对于源码根的 `drivers/kernel_modules/`。参数来自相应 `Android.mk`、`Makefile` 或 `Kbuild`；“先编译依赖”同时与备份原厂模块的 `depends=` 字段核对过。
