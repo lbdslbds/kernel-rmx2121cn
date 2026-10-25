@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "device": "RMX2121CN",
+  "project_id": "20601",
+  "baseline": {
+    "kernel_version": "4.14.186",
+    "source_commit": "f0c2afc4d8aa699bacae223bf7506d6912e08da6",
+    "source_defconfig_candidate": "k6889v1_64_defconfig",
+    "build_configuration": "configs/rmx2121cn-stock.config",
+    "kernel_platform": "MT6885",
+    "architecture": "arm64",
+    "page_size_bytes": 4096,
+    "compat_32bit": true,
+    "tee": "Trustonic 500",
+    "gpu_driver": "Mali valhall r32p1",
+    "display_panel": "oplus20601_samsung_sofe03f_m_1080p_dsi_cmd",
+    "dtb": "mediatek/mt6885.dtb",
+    "overlay_source": "arch/arm64/boot/dts/mediatek/oplus6889_20601.dts"
+  },
+  "boot_image": {
+    "header_version": 2,
+    "page_size_bytes": 2048,
+    "partition_size_bytes": 33554432
+  },
+  "target": {
+    "android_kernel_branch": "android17-6.18",
+    "board_port_status": "not_started"
+  },
+  "verification": {
+    "hardware_evidence": "historical exports from existing device backups",
+    "device_read_performed_this_run": false,
+    "build_success": null,
+    "boot_success": null,
+    "null_status_meaning": "unknown; no successful build or device boot is asserted"
+  }
+}
