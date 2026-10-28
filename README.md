@@ -1,8 +1,10 @@
 # realme X7 Pro RMX2121CN kernel work
 
-公开的内核源码构建与移植工程。当前任务是用 GitHub Actions 复现 realme 官方 Android S / Linux 4.14.186 源码编译；后续移植目标为 Android 17 对应的 ACK `android17-6.18`。
+公开的内核源码构建与移植工程。已用 GitHub Actions 编译 realme 官方 Android S / Linux 4.14.186，并完成真机最小诊断启动；移植目标为 Android 17 对应的 ACK `android17-6.18`。
 
 ## 已完成的验证
+
+2026-10-28，源码重编的 **4.14.186 在 RMX2121CN 上启动到 root ADB，8 个 CPU 在线**。运行 config 与编译产物一致，诊断环境没有挂载块设备文件系统或加载外部模块。测试后恢复原 boot 并验证原 Android 17 正常启动。此次为约 40 秒日志覆盖的最小诊断验证，尚未验证完整 Android、厂商模块和长期稳定性；详情见 [实机报告](DEVICE_TEST_20261028.md)。
 
 [4.14.186 构建 #2](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40205461469) 已成功。产出 `Image`、15,400,133 字节的 `Image.gz-dtb`、基础 DTB、符号表、调试内核与 5 个可构建模块；下载后校验 SHA-256，并确认 gzip 载荷等于单独 `Image`、附加 DTB 等于归档中的 `mediatek/mt6885.dtb`。详见 [验证报告](reports/kernel414-verified-build.json)。
 
@@ -10,13 +12,13 @@
 
 Kleaf 默认未启用 stamp，因此该镜像 banner 含 `maybe-dirty` 和 1970 时间戳；这不是检测到源码修改的结论，见 [固定 Kleaf 实现](https://android.googlesource.com/kernel/build/+/38e2a76ecb0257fe1f27b0078cd9169191601ec7/kleaf/impl/stamp.bzl)。实际源码与构建提交以诊断文件和 resolved manifest 为准。本次通用产物未收集重命名后的 `kernel_aarch64_Module.symvers`，脚本已补充后续构建的收集规则；本次报告不包含 6.18 模块 ABI 校验。
 
-4.14 结果不包含设备启动验证或完整项目 DTBO。其内核 banner 的构建时间是脚本固定的源码提交时间，不是云端任务实际执行时间。
+4.14 云端结果不包含完整项目 DTBO；实机诊断保留了原 boot 的独立 DT table 组件与原 dtbo 分区。内核 banner 的构建时间是脚本固定的源码提交时间，不是云端任务实际执行时间。
 
 `olddefconfig` 没有禁用或改变任何既有启用项；新增 `CONFIG_F2FS_BD_STAT=y`，并移除 10 条原先未启用且该源码没有定义的配置记录。完整差异保存在 Actions 产物 `config.diff`。
 
-现有 vendor 另有 9 个厂商模块尚未在本次构建中复现，涉及无线、GPS、FPSGO 和 MET。离线比较共 1276 项版本化导入：1162 匹配，`conninfra.ko` 的 3 个 `alarm_*` 符号 CRC 不匹配，111 项在本次内核符号表中缺少但能找到其他 vendor 模块中的可能提供者。后者尚未核对提供者 CRC，不能当作 111 个缺失内核 API。正常模块版本校验会拒绝上述 CRC 不匹配的 `conninfra.ko`；不能直接宣称旧模块可复用。见 [完整 CRC 报告](reports/vendor-module-crc-comparison.json) 与 [模块缺口记录](reports/vendor-module-gap.json)。
+早期构建 #2 未包含 vendor 的 9 个厂商模块，涉及无线、GPS、FPSGO 和 MET。旧模块与该内核的离线比较共 1276 项版本化导入：1162 匹配，`conninfra.ko` 的 3 个 `alarm_*` 符号 CRC 不匹配，111 项在内核符号表中缺少但能找到其他 vendor 模块中的可能提供者。后者尚未核对旧提供者 CRC，不能当作 111 个缺失内核 API。正常模块版本校验会拒绝上述 CRC 不匹配的旧 `conninfra.ko`；不能直接宣称旧模块可复用。见 [完整 CRC 报告](reports/vendor-module-crc-comparison.json) 与 [模块缺口记录](reports/vendor-module-gap.json)。
 
-公开源码包含 8 个外部模块的构建入口；原厂 `fpsgo.ko` 所用的 `fpsgo_cus` 源码尚未找到。后续入口、参数依据及依赖顺序见 [外部模块调查](EXTERNAL_MODULES.md)，尚未执行补编译。目录中有模块文件、静态配置中有加载指令，均不代表本轮实际加载成功。构建还报告 `OPLUS_F2FS_DEBUG` 环境变量未定义；原厂值尚未核实。
+公开源码包含 8 个外部模块的构建入口；首轮已编译并离线验证其中 6 个，Wi-Fi 参数修复正在重跑，MET 待验证。原厂 `fpsgo.ko` 所用的 `fpsgo_cus` 源码尚未找到。入口、参数依据、签名配套要求及依赖顺序见 [外部模块调查](EXTERNAL_MODULES.md)。目录中有模块文件、静态配置中有加载指令，均不代表新模块实际加载成功。构建还报告 `OPLUS_F2FS_DEBUG` 环境变量未定义；原厂值尚未核实。
 
 ## 当前边界
 

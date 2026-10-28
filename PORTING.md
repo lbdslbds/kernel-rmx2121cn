@@ -9,7 +9,9 @@
 
 ## 已核对的机型输入
 
+- 2026-10-28 已完成原内核与源码重编 4.14 的最小诊断启动、root ADB 采集及原 boot 恢复；见 [实机报告](DEVICE_TEST_20261028.md)。完整 Android/vendor 功能未验证，6.18 尚未进行设备启动测试。
 - 项目 20601；平台 MT6885，Android 工程 k6889v1_64。
+- 实机 CPU 为 4 × Cortex-A55 + 4 × Cortex-A77，旧 DT 中的 A75 声明不正确。普通启动与 recovery 的协处理器、保留内存配置有差异，应使用普通启动 FDT 交叉核对；原始 FDT 仅保存在本地。
 - 基础 DTB 为 `mediatek/mt6885.dtb`。
 - 官方提供 `arch/arm64/boot/dts/mediatek/oplus6889_20601.dts`，但它引用生成文件 `<oplus6889_20601/cust.dtsi>`。对应输入是 `drivers/misc/mediatek/dws/mt6885/oplus6889_20601.dws`；公开仓库的已审计目录未找到匹配生成器，完整 DTBO 的生成仍需补齐来源。
 - 上述项目 DTBO 依赖不影响当前基础 `mt6885.dts` 的独立编译。不能把基础 DTB 直接当成完整机型 DTBO。

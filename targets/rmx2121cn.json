@@ -27,8 +27,8 @@
     "board_port_status": "not_started"
   },
   "verification": {
-    "hardware_evidence": "historical exports from existing device backups",
-    "device_read_performed_this_run": false,
+    "hardware_evidence": "USB device observations and normal-boot diagnostic FDT, 2026-10-28",
+    "device_read_performed_this_run": true,
     "build_success": true,
     "build_kernel_version": "4.14.186",
     "build_run": "https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40205461469",
@@ -38,7 +38,14 @@
     "generic_ack_build_run": "https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40206193209",
     "generic_ack_build_report": "reports/android17-verified-build.json",
     "vendor_module_crc_report": "reports/vendor-module-crc-comparison.json",
-    "boot_success": null,
-    "null_status_meaning": "unknown; not tested in this task"
+    "boot_success": true,
+    "null_status_meaning": "unknown; not tested in this task",
+    "boot_success_scope": "compiled 4.14 diagnostic initramfs only; root ADB and eight CPUs; no external modules",
+    "diagnostic_boot_report": "reports/device-diagnostic-20261028.json",
+    "compiled_kernel_android_boot_success": null,
+    "generic_ack_device_boot_success": null,
+    "original_boot_restored": true,
+    "original_android_boot_completed": true,
+    "external_modules_run3_report": "reports/external-modules-run3-verification.json"
   }
 }

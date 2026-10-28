@@ -23,5 +23,7 @@
     "net/ipv4/tcp_htcp.ko",
     "net/bridge/br_netfilter.ko"
   ],
-  "device_boot_tested": false
+  "device_boot_tested": true,
+  "device_boot_scope": "2026-10-28 minimal diagnostic initramfs only; not Android framework or vendor modules",
+  "device_boot_report": "device-diagnostic-20261028.json"
 }

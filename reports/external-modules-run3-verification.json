@@ -1,0 +1,190 @@
+{
+  "run_url": "https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40701676318",
+  "artifact_name": "RMX2121CN-kernel414-3",
+  "artifact_hashes": {
+    "kernel": {
+      "verified_files": 6,
+      "manifest_sha256": "580a72f102b0d7168150cb445c75a5a4c2590989b91da98818f946bad524d70e"
+    },
+    "external_modules": {
+      "verified_files": 67,
+      "manifest_sha256": "f9064fb6b6014d2ba81e0c7073c819865c42996fcac208ba48b7539197209b02"
+    }
+  },
+  "kernel_symvers_sha256": "e3094950c9da935ddaab37d9f3fa865088ede622b2be49a1e9d82b4631e2bf13",
+  "kernel_symvers_matches_run40205461469": true,
+  "certificate_sha256": "6fc1bdcbf4dc5aba06f480d59721aff409fa62f6685ef2f5b34b7dd141f952d6",
+  "certificate_occurrences_in_Image": 1,
+  "private_key_files_found": [],
+  "modules": [
+    {
+      "module": "conninfra.ko",
+      "sha256": "2b970da9d1b177ebf1f18abaf0d0aac2dcbd345d78835b8c8ccb75726f59ed60",
+      "versioned_imports": 182,
+      "missing_imports": [],
+      "crc_mismatches": [],
+      "vermagic": "4.14.186 SMP preempt mod_unload modversions aarch64",
+      "depends": [],
+      "pkcs7_signature_valid_with_run_certificate_only": true,
+      "digest": "sha512",
+      "alarm_import_crcs": {
+        "alarm_cancel": "0x6f13fc92",
+        "alarm_init": "0x7fc40798",
+        "alarm_start_relative": "0x3f7cc77d"
+      }
+    },
+    {
+      "module": "connfem.ko",
+      "sha256": "48d4fe16a5fcbea77a3b306a08281838f2d598fe8b64fc7a5489816ca3183b0a",
+      "versioned_imports": 50,
+      "missing_imports": [],
+      "crc_mismatches": [],
+      "vermagic": "4.14.186 SMP preempt mod_unload modversions aarch64",
+      "depends": [],
+      "pkcs7_signature_valid_with_run_certificate_only": true,
+      "digest": "sha512"
+    },
+    {
+      "module": "bt_drv_6885.ko",
+      "sha256": "27c350a48a868d21ede76c191ef69b6599253c9ce55d8fc9add29e5191c47d24",
+      "versioned_imports": 198,
+      "missing_imports": [],
+      "crc_mismatches": [],
+      "vermagic": "4.14.186 SMP preempt mod_unload modversions aarch64",
+      "depends": [
+        "conninfra",
+        "connfem"
+      ],
+      "pkcs7_signature_valid_with_run_certificate_only": true,
+      "digest": "sha512"
+    },
+    {
+      "module": "fmradio_drv_connac2x.ko",
+      "sha256": "3cd7a7971fbe2c8fe0f0078a0a1660d8727b8c26831da2094dbf540c3bb21625",
+      "versioned_imports": 108,
+      "missing_imports": [],
+      "crc_mismatches": [],
+      "vermagic": "4.14.186 SMP preempt mod_unload modversions aarch64",
+      "depends": [
+        "conninfra"
+      ],
+      "pkcs7_signature_valid_with_run_certificate_only": true,
+      "digest": "sha512"
+    },
+    {
+      "module": "gps_drv.ko",
+      "sha256": "b5280b0f573c1ac94801d6162efa329b702cda02dd6a27323a98673b1ed0c3b1",
+      "versioned_imports": 113,
+      "missing_imports": [],
+      "crc_mismatches": [],
+      "vermagic": "4.14.186 SMP preempt mod_unload modversions aarch64",
+      "depends": [
+        "conninfra"
+      ],
+      "pkcs7_signature_valid_with_run_certificate_only": true,
+      "digest": "sha512"
+    },
+    {
+      "module": "wmt_chrdev_wifi.ko",
+      "sha256": "5d3165fa6d2fc214bd3caae5b39578dfb2f051fe57237af44faad84230966e48",
+      "versioned_imports": 61,
+      "missing_imports": [],
+      "crc_mismatches": [],
+      "vermagic": "4.14.186 SMP preempt mod_unload modversions aarch64",
+      "depends": [
+        "conninfra"
+      ],
+      "pkcs7_signature_valid_with_run_certificate_only": true,
+      "digest": "sha512"
+    }
+  ],
+  "factory_modules_static_comparison_to_kernel_and_six_new_modules": [
+    {
+      "module": "bt_drv_6885.ko",
+      "missing_from_kernel_and_six_modules": [],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "connfem.ko",
+      "missing_from_kernel_and_six_modules": [],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "conninfra.ko",
+      "missing_from_kernel_and_six_modules": [],
+      "crc_mismatches": [
+        {
+          "symbol": "alarm_init",
+          "module_crc": "0x1a98ba12",
+          "candidate_crc": "0x7fc40798"
+        },
+        {
+          "symbol": "alarm_cancel",
+          "module_crc": "0x93a4d852",
+          "candidate_crc": "0x6f13fc92"
+        },
+        {
+          "symbol": "alarm_start_relative",
+          "module_crc": "0x64223914",
+          "candidate_crc": "0x3f7cc77d"
+        }
+      ],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "fmradio_drv_connac2x.ko",
+      "missing_from_kernel_and_six_modules": [],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "fpsgo.ko",
+      "missing_from_kernel_and_six_modules": [],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "gps_drv.ko",
+      "missing_from_kernel_and_six_modules": [],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "met.ko",
+      "missing_from_kernel_and_six_modules": [],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "wlan_drv_gen4m.ko",
+      "missing_from_kernel_and_six_modules": [
+        "wifi_fwlog_get_fw_ver_register"
+      ],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "wmt_chrdev_wifi.ko",
+      "missing_from_kernel_and_six_modules": [],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    }
+  ],
+  "failure": {
+    "module": "wlan_drv_gen4m",
+    "stage": "compile",
+    "missing_build_argument": "MTK_ANDROID_EMI=y",
+    "errors": [
+      "WIFI_EMI_ADDR_MASK undeclared",
+      "gConEmiPhyBaseFinal undeclared"
+    ],
+    "met_built": false
+  },
+  "limitations": [
+    "Offline verification only; no modules were loaded or executed.",
+    "CMS signature checked with only the run public certificate (-nointern); system CA verification disabled because the certificate is a pinned build key.",
+    "Matching CRCs and candidate signatures do not establish boot, firmware, device initialization, or old-module signature compatibility."
+  ]
+}

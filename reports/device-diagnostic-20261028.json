@@ -1,0 +1,610 @@
+{
+  "schema_version": 1,
+  "review_type": "sanitized offline comparison of two real-device diagnostic captures",
+  "review_device_operations_performed": false,
+  "raw_log_text_included": false,
+  "serial_imei_account_unique_id_seed_values_included": false,
+  "current_kernel": {
+    "evidence_directory": "device/20261028-current-kernel-diagnostic",
+    "captured_utc": "2026-10-28T14:29:00.343557+00:00",
+    "kernel_release": "4.14.186+",
+    "root_adb_uid_zero": true,
+    "properties": {
+      "ro.product.model": "RMX2121-diagnostic",
+      "ro.boot.init_rc": "/init.diagnostic.rc",
+      "sys.usb.controller": "musb-hdrc",
+      "ro.boot.vbmeta.device_state": "",
+      "ro.boot.verifiedbootstate": "orange",
+      "sys.boot_completed": "",
+      "ro.debuggable": "1",
+      "ro.secure": "0"
+    },
+    "cpu_online": "0-7",
+    "loaded_modules_count": 0,
+    "userspace_process_names": [
+      "init",
+      "init",
+      "ueventd",
+      "adbd",
+      "ueventd",
+      "ps"
+    ],
+    "mountinfo": {
+      "mounts": [
+        {
+          "target": "/",
+          "device_major_minor": "0:1",
+          "filesystem": "rootfs",
+          "source": "rootfs"
+        },
+        {
+          "target": "/dev",
+          "device_major_minor": "0:17",
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "target": "/dev/pts",
+          "device_major_minor": "0:18",
+          "filesystem": "devpts",
+          "source": "devpts"
+        },
+        {
+          "target": "/proc",
+          "device_major_minor": "0:4",
+          "filesystem": "proc",
+          "source": "proc"
+        },
+        {
+          "target": "/sys",
+          "device_major_minor": "0:19",
+          "filesystem": "sysfs",
+          "source": "sysfs"
+        },
+        {
+          "target": "/sys/fs/selinux",
+          "device_major_minor": "0:15",
+          "filesystem": "selinuxfs",
+          "source": "selinuxfs"
+        },
+        {
+          "target": "/mnt",
+          "device_major_minor": "0:20",
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "target": "/apex",
+          "device_major_minor": "0:21",
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "target": "/linkerconfig",
+          "device_major_minor": "0:22",
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "target": "/mnt/installer",
+          "device_major_minor": "0:20",
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "target": "/mnt/androidwritable",
+          "device_major_minor": "0:20",
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "target": "/dev/cg2_bpf",
+          "device_major_minor": "0:23",
+          "filesystem": "cgroup2",
+          "source": "none"
+        },
+        {
+          "target": "/dev/cpuctl",
+          "device_major_minor": "0:24",
+          "filesystem": "cgroup",
+          "source": "none"
+        },
+        {
+          "target": "/acct",
+          "device_major_minor": "0:25",
+          "filesystem": "cgroup",
+          "source": "none"
+        },
+        {
+          "target": "/dev/cpuset",
+          "device_major_minor": "0:26",
+          "filesystem": "cgroup",
+          "source": "none"
+        },
+        {
+          "target": "/dev/memcg",
+          "device_major_minor": "0:27",
+          "filesystem": "cgroup",
+          "source": "none"
+        },
+        {
+          "target": "/dev/stune",
+          "device_major_minor": "0:28",
+          "filesystem": "cgroup",
+          "source": "none"
+        },
+        {
+          "target": "/tmp",
+          "device_major_minor": "0:29",
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "target": "/config",
+          "device_major_minor": "0:14",
+          "filesystem": "configfs",
+          "source": "none"
+        },
+        {
+          "target": "/dev/usb-ffs/adb",
+          "device_major_minor": "0:30",
+          "filesystem": "functionfs",
+          "source": "adb"
+        }
+      ],
+      "count": 20,
+      "all_types_in_virtual_fs_allowlist": true,
+      "all_device_majors_zero": true,
+      "block_backed_mounts_observed": false,
+      "scope": "captured /proc/self/mountinfo at one point in time"
+    },
+    "battery_snapshot": {
+      "percent": 40,
+      "temperature_tenths_celsius": 330,
+      "status": "Not charging",
+      "charging_function_validated": false
+    },
+    "dmesg": {
+      "lines": 6249,
+      "last_timestamp_seconds": 69.154278,
+      "pattern_counts": {
+        "kernel_panic": 0,
+        "oops": 0,
+        "BUG": 0,
+        "unable_to_handle": 0,
+        "call_trace": 8,
+        "soft_lockup": 0,
+        "hung_task": 0,
+        "rcu_stall": 0,
+        "io_error": 0,
+        "other_kernel_fault": 0,
+        "avc_permissive": 5,
+        "avc_enforcing": 0
+      },
+      "call_trace_driver_paths": [
+        [
+          "regulatory_init"
+        ],
+        [
+          "mtk_flashlight_init"
+        ],
+        [
+          "st21nfc_probe"
+        ],
+        [
+          "tfa98xx_i2c_probe",
+          "tfa98xx_i2c_init"
+        ],
+        [
+          "cmdq_mbox_create"
+        ],
+        [
+          "ssusb_debugfs_init",
+          "ssusb_otg_switch_init",
+          "mtu3_probe",
+          "mtu3_driver_init"
+        ],
+        [
+          "oplus_chg_init"
+        ],
+        [
+          "xhci_mtk_probe"
+        ]
+      ],
+      "first_stage_mount_skipped_recovery_mode": true,
+      "module_loading_skipped_missing_directory": true,
+      "missing_fstab_messages_observed": true,
+      "missing_build_property_file_messages": 7,
+      "phoenix_watchdog_pet_time_seconds": 240
+    },
+    "failed_reads": {
+      "vendor_module_directory_files": 10,
+      "other_files": []
+    }
+  },
+  "compiled_kernel": {
+    "evidence_directory": "device/20261028-compiled-414-diagnostic",
+    "captured_utc": "2026-10-28T14:34:41.796932+00:00",
+    "kernel_release": "4.14.186",
+    "root_adb_uid_zero": true,
+    "properties": {
+      "ro.product.model": "RMX2121-diagnostic",
+      "ro.boot.init_rc": "/init.diagnostic.rc",
+      "sys.usb.controller": "musb-hdrc",
+      "ro.boot.vbmeta.device_state": "",
+      "ro.boot.verifiedbootstate": "orange",
+      "sys.boot_completed": "",
+      "ro.debuggable": "1",
+      "ro.secure": "0"
+    },
+    "cpu_online": "0-7",
+    "loaded_modules_count": 0,
+    "userspace_process_names": [
+      "init",
+      "init",
+      "ueventd",
+      "adbd",
+      "ueventd",
+      "ps"
+    ],
+    "mountinfo": {
+      "mounts": [
+        {
+          "target": "/",
+          "device_major_minor": "0:1",
+          "filesystem": "rootfs",
+          "source": "rootfs"
+        },
+        {
+          "target": "/dev",
+          "device_major_minor": "0:17",
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "target": "/dev/pts",
+          "device_major_minor": "0:18",
+          "filesystem": "devpts",
+          "source": "devpts"
+        },
+        {
+          "target": "/proc",
+          "device_major_minor": "0:4",
+          "filesystem": "proc",
+          "source": "proc"
+        },
+        {
+          "target": "/sys",
+          "device_major_minor": "0:19",
+          "filesystem": "sysfs",
+          "source": "sysfs"
+        },
+        {
+          "target": "/sys/fs/selinux",
+          "device_major_minor": "0:15",
+          "filesystem": "selinuxfs",
+          "source": "selinuxfs"
+        },
+        {
+          "target": "/mnt",
+          "device_major_minor": "0:20",
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "target": "/apex",
+          "device_major_minor": "0:21",
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "target": "/linkerconfig",
+          "device_major_minor": "0:22",
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "target": "/mnt/installer",
+          "device_major_minor": "0:20",
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "target": "/mnt/androidwritable",
+          "device_major_minor": "0:20",
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "target": "/dev/cg2_bpf",
+          "device_major_minor": "0:23",
+          "filesystem": "cgroup2",
+          "source": "none"
+        },
+        {
+          "target": "/dev/cpuctl",
+          "device_major_minor": "0:24",
+          "filesystem": "cgroup",
+          "source": "none"
+        },
+        {
+          "target": "/acct",
+          "device_major_minor": "0:25",
+          "filesystem": "cgroup",
+          "source": "none"
+        },
+        {
+          "target": "/dev/cpuset",
+          "device_major_minor": "0:26",
+          "filesystem": "cgroup",
+          "source": "none"
+        },
+        {
+          "target": "/dev/memcg",
+          "device_major_minor": "0:27",
+          "filesystem": "cgroup",
+          "source": "none"
+        },
+        {
+          "target": "/dev/stune",
+          "device_major_minor": "0:28",
+          "filesystem": "cgroup",
+          "source": "none"
+        },
+        {
+          "target": "/tmp",
+          "device_major_minor": "0:29",
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "target": "/config",
+          "device_major_minor": "0:14",
+          "filesystem": "configfs",
+          "source": "none"
+        },
+        {
+          "target": "/dev/usb-ffs/adb",
+          "device_major_minor": "0:30",
+          "filesystem": "functionfs",
+          "source": "adb"
+        }
+      ],
+      "count": 20,
+      "all_types_in_virtual_fs_allowlist": true,
+      "all_device_majors_zero": true,
+      "block_backed_mounts_observed": false,
+      "scope": "captured /proc/self/mountinfo at one point in time"
+    },
+    "battery_snapshot": {
+      "percent": 40,
+      "temperature_tenths_celsius": 334,
+      "status": "Not charging",
+      "charging_function_validated": false
+    },
+    "dmesg": {
+      "lines": 6093,
+      "last_timestamp_seconds": 40.290403,
+      "pattern_counts": {
+        "kernel_panic": 0,
+        "oops": 0,
+        "BUG": 0,
+        "unable_to_handle": 0,
+        "call_trace": 7,
+        "soft_lockup": 0,
+        "hung_task": 0,
+        "rcu_stall": 0,
+        "io_error": 0,
+        "other_kernel_fault": 0,
+        "avc_permissive": 5,
+        "avc_enforcing": 0
+      },
+      "call_trace_driver_paths": [
+        [
+          "regulatory_init"
+        ],
+        [
+          "mtk_flashlight_init"
+        ],
+        [
+          "st21nfc_probe"
+        ],
+        [
+          "tfa98xx_i2c_probe",
+          "tfa98xx_i2c_init"
+        ],
+        [
+          "cmdq_mbox_create"
+        ],
+        [
+          "ssusb_debugfs_init",
+          "ssusb_otg_switch_init",
+          "mtu3_probe",
+          "mtu3_driver_init"
+        ],
+        [
+          "xhci_mtk_probe",
+          "xhci_mtk_register_plat",
+          "ssusb_set_mode"
+        ]
+      ],
+      "first_stage_mount_skipped_recovery_mode": true,
+      "module_loading_skipped_missing_directory": true,
+      "missing_fstab_messages_observed": true,
+      "missing_build_property_file_messages": 7,
+      "phoenix_watchdog_pet_time_seconds": 240
+    },
+    "failed_reads": {
+      "vendor_module_directory_files": 10,
+      "other_files": []
+    }
+  },
+  "config_comparison": {
+    "compiled_runtime_equals_build_effective_config_bytes": true,
+    "compiled_runtime_sha256": "ab5f3832c509fa7fe113b70a16bb09ab52a1cca1ea55c20a6b9f71f7ad717305",
+    "build_effective_config_sha256": "ab5f3832c509fa7fe113b70a16bb09ab52a1cca1ea55c20a6b9f71f7ad717305",
+    "current_runtime_sha256": "2acc47a71f9ef2f94c12f7cd32134c3fbc88de476574a5806a8a1570817849b6",
+    "runtime_vs_build_option_differences": [],
+    "compiled_vs_current_option_differences": [
+      {
+        "option": "CONFIG_DRM_PANEL_OPLUS21101_NT36672C_TM_CPHY_DSI_VDO",
+        "current": "n",
+        "compiled": null
+      },
+      {
+        "option": "CONFIG_DRM_PANEL_OPLUS22604_BOE_HX83102D_DPHY_VDO",
+        "current": "n",
+        "compiled": null
+      },
+      {
+        "option": "CONFIG_DRM_PANEL_OPLUS22604_TXD_ICNL9911C_DPHY_VDO",
+        "current": "n",
+        "compiled": null
+      },
+      {
+        "option": "CONFIG_DRM_PANEL_OPLUS22609_TXD_HX83112F_CPHY_VDO",
+        "current": "n",
+        "compiled": null
+      },
+      {
+        "option": "CONFIG_F2FS_BD_STAT",
+        "current": null,
+        "compiled": "y"
+      },
+      {
+        "option": "CONFIG_MTK_LENS_GT9778AF_SUPPORT",
+        "current": "n",
+        "compiled": null
+      },
+      {
+        "option": "CONFIG_OPLUS_FEATURE_LOG_CORE",
+        "current": "n",
+        "compiled": null
+      },
+      {
+        "option": "CONFIG_OPLUS_FINGERPRINT_FOCALTECH",
+        "current": "n",
+        "compiled": null
+      },
+      {
+        "option": "CONFIG_OPLUS_MTK_DRM_GKI_NOTIFY_CHG",
+        "current": "n",
+        "compiled": null
+      },
+      {
+        "option": "CONFIG_SND_SOC_CODEC_AW87418",
+        "current": "n",
+        "compiled": null
+      },
+      {
+        "option": "CONFIG_TOUCHPANEL_CHIPONE",
+        "current": "n",
+        "compiled": null
+      }
+    ],
+    "enabled_option_change": "CONFIG_F2FS_BD_STAT=y added; ten old explicitly disabled names disappear",
+    "artifact_reference": "runs/40205461469/RMX2121CN-kernel414-2/effective.config"
+  },
+  "baseline_comparison": {
+    "mountinfo_byte_identical": true,
+    "mounts_byte_identical": true,
+    "userspace_process_name_sequence_equal": true,
+    "new_call_trace_driver_categories": [],
+    "current_only_call_trace_driver_category": "oplus_chg_init"
+  },
+  "fdt_comparison": {
+    "current_bytes": 298521,
+    "compiled_bytes": 298521,
+    "nodes_each": 1250,
+    "properties_each": 6672,
+    "added_properties": 0,
+    "removed_properties": 0,
+    "changed_properties": [
+      "/bootprof:lk_logo_t",
+      "/bootprof:lk_t",
+      "/bootprof:pl_t",
+      "/chosen:atag,videolfb",
+      "/chosen:bootargs"
+    ],
+    "videolfb_changed_byte_offsets": [
+      12
+    ],
+    "bootarg_changed_keys": [
+      "lcm",
+      "ogauge_auth"
+    ],
+    "bootarg_added_keys": [],
+    "bootarg_removed_keys": [],
+    "bootarg_values_disclosed": false,
+    "cpu_usb_ufs_clock_regulator_interrupt_properties_equal": true,
+    "tee_security_properties_equal": true,
+    "memory_properties_equal": true,
+    "reserved_memory_properties_equal": true,
+    "reserved_memory_nodes": 44,
+    "reserved_memory_properties": 157,
+    "status_properties_equal": true,
+    "status_properties_count": 88,
+    "atag_masp_equal": true,
+    "tee_reserved_mem_equal": true,
+    "fdt_memory_reservation_map_equal": true,
+    "fdt_memory_reservation_map_entries_each": 0,
+    "source": "independent offline FDT parser review by diagnostic FDT comparison sub-agent",
+    "runtime_device_functionality_implied": false
+  },
+  "local_image_provenance": {
+    "candidate_sha256": "dc8db4bd99ba800ebd30f3eca0b4993e1dbc1cfe3fce24142771ecb718e6c93e",
+    "zero_padded_32_mib_sha256": "f2a7a2ca3495328789f5bab79c855a3238a175f7547b0add99793ca1f4c49025",
+    "parent_reported_running_boot_hash_matched_prepared_image": true,
+    "device_hash_independently_read_by_this_review": false
+  },
+  "proven": [
+    "The compiled Linux 4.14.186 kernel reached the same minimal diagnostic userspace with root ADB and eight CPUs online.",
+    "Its running configuration exactly matches the saved successful-build effective.config.",
+    "The sampled mount namespace has the same twenty virtual/RAM filesystem mounts as the current-kernel diagnostic baseline, and no loaded external modules.",
+    "No searched panic/Oops/BUG/kernel-fault/lockup/I/O-error signature occurs in the captured approximately forty-second compiled-kernel log.",
+    "All seven compiled-kernel call-trace driver paths have corresponding current-kernel baseline paths.",
+    "Compared hardware, memory reservation and TEE/security FDT properties are byte-identical; the entire FDT is not identical."
+  ],
+  "not_proven": [
+    "Normal Android framework or vendor userspace boot, module ABI/signatures, Wi-Fi/modem/GPU/display/camera/audio/touch functionality.",
+    "Long-term stability, suspend/resume, charging behavior, thermal limits, secure-world or coprocessor operation.",
+    "Enforcing SELinux behavior; this experiment deliberately uses permissive mode.",
+    "Absolute absence of persistent writes: mount snapshots do not account for bootloader, kernel drivers, panic paths or transient activity.",
+    "Safety or functionality of generic Android17/6.18 on the device; this comparison concerns only compiled 4.14.",
+    "Equivalence of changed lcm/ogauge_auth boot parameter values and framebuffer metadata; those values are deliberately not disclosed."
+  ],
+  "operational_limits": [
+    "Both normal-boot diagnostic paths show the 240-second PHOENIX watchdog and no Android boot-completed property; captures do not prove safe long-term residence.",
+    "ro.boot.vbmeta.device_state is empty in diagnostic userspace; keep the write guard and use the untouched recovery for installation/restoration.",
+    "v2 has no reboot executable, and direct sys.powerctl reboot,recovery needs a removed fstab to update the bootloader message.",
+    "Parent reported the exercised exit path: toolbox setprop sys.powerctl reboot,bootloader followed by fastboot reboot recovery; compiled diagnostic exited at approximately 45 seconds.",
+    "Original boot restored with a complete SHA256 readback; original Android17 boot_completed=1 was independently verified after restoration."
+  ],
+  "restoration": {
+    "boot_partition_write": {
+      "completed_utc": "2026-10-28T14:36:06.983390+00:00",
+      "partition": "boot",
+      "bytes": 33554432,
+      "previous_sha256": "f2a7a2ca3495328789f5bab79c855a3238a175f7547b0add99793ca1f4c49025",
+      "written_sha256": "72a42c948b0d570ccdc009fdacc50523e8766dedc251270c44c96233a633e7d2",
+      "readback_verified": true,
+      "support_partitions_unchanged": [
+        "dtbo",
+        "vbmeta",
+        "recovery"
+      ],
+      "reboot_performed": false
+    },
+    "android_after_restore": {
+      "captured_utc": "2026-10-28T14:38:33.897393+00:00",
+      "observations": {
+        "boot_completed": "1",
+        "android_release": "17",
+        "android_sdk": "37",
+        "kernel_release": "4.14.186+",
+        "battery_percent": "39",
+        "battery_status": "Charging"
+      }
+    }
+  }
+}
