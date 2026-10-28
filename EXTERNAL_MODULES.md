@@ -2,7 +2,7 @@
 
 更新日期：2026-10-28。
 
-**状态：Actions 运行 40701676318 已完成 6 个外部模块的编译、CRC 检查与签名，在第 7 个 Wi-Fi 模块编译时失败；第 8 个 MET 尚未执行。已补齐本次报错所需的 EMI 构建参数，修复后尚未重跑。新编译内核及模块尚未通过设备加载或启动验证。**
+**状态：Actions 运行 40701676318 已完成 6 个外部模块的编译、CRC 检查与签名；补齐 EMI 参数后的运行 40706006165 推进至 Wi-Fi WFD 源码，在未声明的 `debug()` 调用处失败，第 8 个 MET 仍未执行。已准备最小日志调用修复，尚未重跑完整编译。运行 40205461469 的 4.14 内核已完成实机最小诊断启动，但这些外部模块均未进行实机加载验证。**
 
 源码基线为 [realme 官方 Android S 仓库固定提交](https://github.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/tree/f0c2afc4d8aa699bacae223bf7506d6912e08da6)，提交号 `f0c2afc4d8aa699bacae223bf7506d6912e08da6`。工具链版本见 [sources.lock.json](sources.lock.json)。内核主体成功编译证据来自 [Actions 运行 40205461469](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40205461469)。
 
@@ -21,7 +21,13 @@
 
 新 `conninfra.ko` 的检查覆盖了下文旧模块不匹配的三个 alarm 符号。它针对本轮内核重新编译，并未改写旧模块的 CRC。
 
-Wi-Fi 在 `nic/nic_cmd_event.c` 编译失败：`WIFI_EMI_ADDR_MASK` 和 `gConEmiPhyBaseFinal` 未声明。日志显示 `CFG_MTK_ANDROID_EMI=0`；官方 `fw_dl.h:107` 的条件块同时隐藏了这两个声明，`os/linux/gl_init.c` 也按同一开关定义变量，而已启用的 LLS 代码仍引用它们。当前实机 `wlan_drv_gen4m.ko` 的 ELF 符号表也包含已定义的 `gConEmiPhyBaseFinal` 和 `gConEmiSizeFinal`，支持启用该 EMI 分支。修复为给 gen4m 显式传入 `MTK_ANDROID_EMI=y`，不禁用 LLS，不添加伪声明，也不放宽 modpost、CRC 或签名检查。此修改尚未经过下一轮完整编译。
+Wi-Fi 在 `nic/nic_cmd_event.c` 编译失败：`WIFI_EMI_ADDR_MASK` 和 `gConEmiPhyBaseFinal` 未声明。日志显示 `CFG_MTK_ANDROID_EMI=0`；官方 `fw_dl.h:107` 的条件块同时隐藏了这两个声明，`os/linux/gl_init.c` 也按同一开关定义变量，而已启用的 LLS 代码仍引用它们。当前实机 `wlan_drv_gen4m.ko` 的 ELF 符号表也包含已定义的 `gConEmiPhyBaseFinal` 和 `gConEmiSizeFinal`，支持启用该 EMI 分支。修复为给 gen4m 显式传入 `MTK_ANDROID_EMI=y`，不禁用 LLS，不添加伪声明，也不放宽 modpost、CRC 或签名检查。运行 40706006165 已越过这两处错误，但随后在下述 WFD 日志调用处失败，尚未完成 Wi-Fi 模块构建。
+
+## 第二轮的 WFD 源码修复
+
+[Actions 运行 40706006165](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40706006165) 报告 `oplus_wfd/wlan_oplus_wfd.c:259` 隐式声明 `debug()`。固定官方源码在 `get_avoid_channels()` 发送固件查询后调用这个未声明的日志函数；同一文件已包含 `debug.h`，其中定义了 `DBGLOG`、`DBG_P2P_IDX` 与 `DBG_CLASS_TRACE`。
+
+[补丁 0002](patches/0002-fix-wlan-oplus-wfd-logging.patch) 仅把该日志调用改为 `DBGLOG(P2P, TRACE, ...)`，保留 WFD 功能、固件查询、完成等待与信道过滤流程；不关闭编译警告。现有 `build-4.14.sh` 会按名称应用并归档 `patches/*.patch`，无需调整工作流。补丁适用性在固定源码上离线检查；修复后的完整编译及模块运行仍待验证。
 
 ## 旧模块不能直接复用的已知原因
 
@@ -56,7 +62,7 @@ Wi-Fi 在 `nic/nic_cmd_event.c` 编译失败：`WIFI_EMI_ADDR_MASK` 和 `gConEmi
 | `wlan_drv_gen4m.ko` | `connectivity/wlan/core/gen4m` | 见下方 Wi-Fi 参数说明 | conninfra、connfem、wmt_chrdev_wifi |
 | `met.ko` | `met_drv/4.14` | 从现有配置读取 MT6885、`CONFIG_MODULES=y`、FTRACE 和 TRACING | 无 |
 
-上述前六个模块已经过首轮编译；Wi-Fi 的 EMI 参数修复及 MET 尚待下一轮验证，因此不能承诺没有其他源码、头文件或导出符号问题。MET 构建会根据平台文件和内核接口决定功能，应保留日志并检查实际启用项，不能把自动退化的默认模块视为完整复现。
+上述前六个模块已经过首轮编译；Wi-Fi 已从 EMI 参数问题推进到 WFD 日志调用修复，修复后的完整 Wi-Fi 构建及 MET 仍待下一轮验证，因此不能承诺没有其他源码、头文件或导出符号问题。MET 构建会根据平台文件和内核接口决定功能，应保留日志并检查实际启用项，不能把自动退化的默认模块视为完整复现。
 
 ## 准备相同的内核编译环境
 

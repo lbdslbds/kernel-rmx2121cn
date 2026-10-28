@@ -1,0 +1,22 @@
+From: RMX2121CN build reproduction
+Subject: [PATCH] wlan: oplus_wfd: use the driver's defined debug logger
+
+The pinned public source calls an undeclared debug() in get_avoid_channels.
+The file already includes debug.h, which provides DBGLOG and the P2P/TRACE
+category. Use that logger for the firmware-wait trace. Keep the WFD feature,
+firmware query, completion timeout and channel filtering unchanged.
+
+Source: f0c2afc4d8aa699bacae223bf7506d6912e08da6
+Observed in Actions run 40706006165 with -Werror=implicit-function-declaration.
+
+--- a/drivers/kernel_modules/connectivity/wlan/core/gen4m/oplus_wfd/wlan_oplus_wfd.c
++++ b/drivers/kernel_modules/connectivity/wlan/core/gen4m/oplus_wfd/wlan_oplus_wfd.c
+@@ -256,7 +256,7 @@
+ 
+     reinit_completion(&s_avoid_channel_query_comp);
+     if (WLAN_STATUS_SUCCESS == oplus_wlanQueryLteSafeChannel(prAdapter, 0)) {
+-        debug("get_avoid_channels begine to wait for fw");
++        DBGLOG(P2P, TRACE, "get_avoid_channels begin to wait for fw\n");
+         if (!wait_for_completion_timeout(&s_avoid_channel_query_comp, msecs_to_jiffies(1000))) {
+         } else {
+             if (s_event_lte_safe_chn.u4Flags & BIT(0)) {
