@@ -43,6 +43,10 @@
 
 ## 准备相同的内核编译环境
 
+工作流现可选择 `external_modules=true`，在同一 job 的完整内核构建后执行 `scripts/build-external-4.14.sh`。它保存逐模块命令、日志、符号表、CRC 检查、签名公钥及哈希；不导出签名私钥。该流程已实现，实际执行结果须以对应 Actions 运行和产物为准。
+
+当前配置强制模块签名，成功的旧内核构建曾临时生成新密钥，未保留私钥。因此仅恢复旧 `Module.symvers` 不能给旧候选内核生成受信任的新模块。新流程在同一 OUT 中编译内核与模块，并显式调用 `sign-file`；不会关闭签名或改写 CRC。旧原厂模块也不能仅因 CRC 匹配就被认定可被新候选内核加载。
+
 补编译需要固定源码、已经记录的构建修补、相同工具链及 `effective.config`。如果重新创建输出目录，应执行 `modules_prepare`，并恢复成功构建产物中的 `Module.symvers`。`modules_prepare` 本身不会生成完整的模块 CRC 表。
 
 应继续保留现有构建脚本为独立输出目录准备的 `OplusKernelEnvConfig.mk` 与 `nativefeatures.mk` 链接；否则相对 `-include` 会静默漏读厂商编译宏。生成的 `kernelrelease` 必须与此次目标内核一致。

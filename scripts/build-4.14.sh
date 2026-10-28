@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
+[[ ${BUILD_EXTERNAL_MODULES:-0} == 0 || ${BUILD_EXTERNAL_MODULES:-0} == 1 ]] || {
+  printf '%s\n' 'BUILD_EXTERNAL_MODULES must be 0 or 1' >&2
+  exit 2
+}
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 WORK="$ROOT/work/kernel414"
 ART="$ROOT/artifacts/kernel414"
@@ -94,3 +98,9 @@ fi
 file "$ART/Image" "$ART/Image.gz-dtb" > "$ART/image-types.txt"
 printf '%s\n' 'COMPILED. This proves source compilation only, not stock binary equivalence or phone boot.' > "$ART/STATUS.txt"
 (cd "$ART" && sha256sum Image Image.gz Image.gz-dtb Module.symvers System.map vmlinux.xz > SHA256SUMS)
+if [[ ${BUILD_EXTERNAL_MODULES:-0} == 1 ]]; then
+  # Keep the complete core evidence even if a later vendor module fails.
+  # The helper uses the same OUT key; no private key is exported as an artifact.
+  source "$ROOT/scripts/build-external-4.14.sh"
+  printf '%s\n' 'COMPILED: kernel and 8 vendor modules, same-build signatures and CRC checks. FPSGO excluded; device compatibility remains untested.' > "$ART/STATUS.txt"
+fi

@@ -2,6 +2,11 @@ name: Reproduce RMX2121CN kernel 4.14
 
 on:
   workflow_dispatch:
+    inputs:
+      external_modules:
+        description: Build and sign the eight available vendor modules with this kernel
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -19,6 +24,7 @@ jobs:
         shell: bash
     env:
       JOBS: '4'
+      BUILD_EXTERNAL_MODULES: ${{ inputs.external_modules && '1' || '0' }}
     steps:
       - name: Check out build inputs
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -27,7 +33,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential bc bison flex libssl-dev libelf-dev libncurses-dev libxml2-utils libtinfo5 device-tree-compiler python3 curl xz-utils
+          sudo apt-get install -y build-essential bc bison flex libssl-dev libelf-dev libncurses-dev libxml2-utils libtinfo5 device-tree-compiler python3 curl xz-utils openssl
       - name: Build official source with captured device configuration
         run: |
           mkdir -p artifacts/kernel414
