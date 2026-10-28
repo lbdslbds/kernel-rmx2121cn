@@ -115,10 +115,18 @@ Every actual make invocation is recorded in its module's commands.txt and make-a
 
 Known platform selections: MT6885, user build, BT 6885, FM connac2x/mt6635,
 GPS root entry (not GPS_CHIP_ID=common), Wi-Fi adaptor CONNAC_VER=2_0,
-gen4m CONNAC2X2_SOC3_0 + WLAN_CHIP_ID=6885 + AXI + MTK_WLAN_SERVICE=yes.
+gen4m CONNAC2X2_SOC3_0 + WLAN_CHIP_ID=6885 + AXI + MTK_WLAN_SERVICE=yes
+and MTK_ANDROID_EMI=y.
 MTK_WLAN_SERVICE=yes follows the official build_wlan_drv.mk.
-The exact factory values of MTK_ANDROID_EMI, MTK_ANDROID_WMT, WIFI_IP_SET,
-OPLUS_FEATURE_WIFI_SMARTGEAR and MTK_WLAN_SERVICE_PATH have not been recovered.
+MTK_ANDROID_EMI=y enables the EMI declarations and storage required by the
+source's enabled LLS code. Run 40701676318 failed with this option omitted:
+CFG_MTK_ANDROID_EMI=0 hid WIFI_EMI_ADDR_MASK and gConEmiPhyBaseFinal.
+The captured device wlan_drv_gen4m.ko also defines gConEmiPhyBaseFinal and
+gConEmiSizeFinal, consistent with the source's enabled EMI branch.
+The official Android build forwards MTK_ANDROID_EMI=$(WIFI_EMI), but the
+factory product assignment of WIFI_EMI has not been recovered.
+The exact factory values of MTK_ANDROID_WMT, WIFI_IP_SET, OPLUS_FEATURE_WIFI_SMARTGEAR
+and MTK_WLAN_SERVICE_PATH have not been recovered.
 They are not overridden here; source Makefiles/features and the recorded incoming
 environment determine them. This is a compile candidate, not a factory-equivalent build.
 MET can select reduced functionality from available platform headers; inspect its log.
@@ -251,7 +259,7 @@ build_external wmt_chrdev_wifi connectivity/wlan/adaptor conninfra \
   MODULE_NAME=wmt_chrdev_wifi CONNAC_VER=2_0
 build_external wlan_drv_gen4m connectivity/wlan/core/gen4m 'conninfra connfem wmt_chrdev_wifi' \
   MODULE_NAME=wlan_drv_gen4m WLAN_CHIP_ID=6885 MTK_COMBO_CHIP=CONNAC2X2_SOC3_0 \
-  CONFIG_MTK_COMBO_WIFI_HIF=axi MTK_WLAN_SERVICE=yes
+  CONFIG_MTK_COMBO_WIFI_HIF=axi MTK_WLAN_SERVICE=yes MTK_ANDROID_EMI=y
 build_external met met_drv/4.14 ''
 stage=complete
 current_module=none

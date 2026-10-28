@@ -1,10 +1,27 @@
 # RMX2121CN 4.14 外部模块补编译调查
 
-记录日期：2026-10-25。
+更新日期：2026-10-28。
 
-**状态：仅完成源码、构建入口及原厂模块的离线检查。尚未执行本文所列外部模块的重新编译，也未加载模块、刷写手机或验证设备启动。** 内核主体的编译成功不能替代这些验证。
+**状态：Actions 运行 40701676318 已完成 6 个外部模块的编译、CRC 检查与签名，在第 7 个 Wi-Fi 模块编译时失败；第 8 个 MET 尚未执行。已补齐本次报错所需的 EMI 构建参数，修复后尚未重跑。新编译内核及模块尚未通过设备加载或启动验证。**
 
 源码基线为 [realme 官方 Android S 仓库固定提交](https://github.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/tree/f0c2afc4d8aa699bacae223bf7506d6912e08da6)，提交号 `f0c2afc4d8aa699bacae223bf7506d6912e08da6`。工具链版本见 [sources.lock.json](sources.lock.json)。内核主体成功编译证据来自 [Actions 运行 40205461469](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40205461469)。
+
+## 首轮外部模块构建结果
+
+[Actions 运行 40701676318](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40701676318) 的 `RMX2121CN-kernel414-3` 产物保留了以下完成结果；各模块对同轮内核及依赖模块的导入 CRC 均无缺失或不匹配：
+
+| 模块 | 匹配的带版本导入项数 |
+| --- | ---: |
+| `conninfra.ko` | 182 |
+| `connfem.ko` | 50 |
+| `bt_drv_6885.ko` | 198 |
+| `fmradio_drv_connac2x.ko` | 108 |
+| `gps_drv.ko` | 113 |
+| `wmt_chrdev_wifi.ko` | 61 |
+
+新 `conninfra.ko` 的检查覆盖了下文旧模块不匹配的三个 alarm 符号。它针对本轮内核重新编译，并未改写旧模块的 CRC。
+
+Wi-Fi 在 `nic/nic_cmd_event.c` 编译失败：`WIFI_EMI_ADDR_MASK` 和 `gConEmiPhyBaseFinal` 未声明。日志显示 `CFG_MTK_ANDROID_EMI=0`；官方 `fw_dl.h:107` 的条件块同时隐藏了这两个声明，`os/linux/gl_init.c` 也按同一开关定义变量，而已启用的 LLS 代码仍引用它们。当前实机 `wlan_drv_gen4m.ko` 的 ELF 符号表也包含已定义的 `gConEmiPhyBaseFinal` 和 `gConEmiSizeFinal`，支持启用该 EMI 分支。修复为给 gen4m 显式传入 `MTK_ANDROID_EMI=y`，不禁用 LLS，不添加伪声明，也不放宽 modpost、CRC 或签名检查。此修改尚未经过下一轮完整编译。
 
 ## 旧模块不能直接复用的已知原因
 
@@ -39,7 +56,7 @@
 | `wlan_drv_gen4m.ko` | `connectivity/wlan/core/gen4m` | 见下方 Wi-Fi 参数说明 | conninfra、connfem、wmt_chrdev_wifi |
 | `met.ko` | `met_drv/4.14` | 从现有配置读取 MT6885、`CONFIG_MODULES=y`、FTRACE 和 TRACING | 无 |
 
-这些入口及相关平台目录已找到，但未逐项编译，因此不能承诺没有其他源码、头文件或导出符号问题。MET 构建会根据平台文件和内核接口决定功能，应保留日志并检查实际启用项，不能把自动退化的默认模块视为完整复现。
+上述前六个模块已经过首轮编译；Wi-Fi 的 EMI 参数修复及 MET 尚待下一轮验证，因此不能承诺没有其他源码、头文件或导出符号问题。MET 构建会根据平台文件和内核接口决定功能，应保留日志并检查实际启用项，不能把自动退化的默认模块视为完整复现。
 
 ## 准备相同的内核编译环境
 
@@ -71,7 +88,7 @@ make -C "$SRC" O="$OUT" \
   modules
 ```
 
-这只是尚未执行的命令模板，PATH、Clang 的 `lib64`、固定构建环境和 `Module.symvers` 必须提前准备好。不同模块替换 `M=` 并增加表中的参数。
+这是通用命令模板；实际执行参数以对应产物的 `commands.txt` 和 `make-argv.json` 为准。PATH、Clang 的 `lib64`、固定构建环境和 `Module.symvers` 必须提前准备好。不同模块替换 `M=` 并增加表中的参数。
 
 依赖模块应先编译，并通过 `KBUILD_EXTRA_SYMBOLS` 将它们**本次生成**的 `Module.symvers` 传给使用者。例如 Bluetooth 需要 conninfra、connfem 两份符号表；gen4m 还需要 adaptor 的符号表。不得用旧模块中提取的 CRC 填充新符号表来掩盖不匹配。建议顺序为：
 
@@ -83,18 +100,20 @@ FM 目录同时有用于多芯片构建的外层 Makefile 和实际 Kbuild。表
 
 ## Wi-Fi 参数的证据与待确认项
 
-gen4m 首轮补编译可采用以下有源码及原厂二进制佐证的参数：
+gen4m 当前构建参数如下；芯片和接口选择有源码及原厂二进制佐证，EMI 参数由首轮编译错误及源码条件块确认：
 
 ```text
 MODULE_NAME=wlan_drv_gen4m
 WLAN_CHIP_ID=6885
 MTK_COMBO_CHIP=CONNAC2X2_SOC3_0
 CONFIG_MTK_COMBO_WIFI_HIF=axi
+MTK_WLAN_SERVICE=yes
+MTK_ANDROID_EMI=y
 ```
 
 备份 `wlan_drv_gen4m.ko` 中包含 `mt6885DmashdlInit`、`rMT6885DmashdlCfg`、`soc3_0_*`、`hifAxiProbe`、`mtk_axi_probe`，并声明依赖 `conninfra,wmt_chrdev_wifi,connfem`。源码中对应的 MT6885 平台代码、SOC3_0 芯片代码与 AXI 接口代码均存在。不能采用 Makefile 在缺参数时回落到的 MT6632 默认值。
 
-官方 `build_wlan_drv.mk` 还传入 `MTK_WLAN_SERVICE=yes`，公开树有相应 `wlan_service/`。但原厂产品的 `MTK_ANDROID_EMI`、`WIFI_IP_SET`、`MTK_ANDROID_WMT`、SMARTGEAR 等选项尚未完整还原。应记录首轮选值及其来源，并在编译后核对符号与功能；上述核心参数不等于已精确复现原厂完整编译命令。
+官方 `build_wlan_drv.mk` 传入 `MTK_WLAN_SERVICE=yes` 及 `MTK_ANDROID_EMI=$(WIFI_EMI)`，公开树有相应 `wlan_service/`。当前显式设置 EMI 为 `y`，是为了满足已启用的 LLS 源码依赖；原厂产品中 `WIFI_EMI` 的赋值来源尚未找回。`WIFI_IP_SET`、`MTK_ANDROID_WMT`、SMARTGEAR 等选项也尚未完整还原。应记录选值及其来源，并在编译后核对符号与功能；这些参数不等于已精确复现原厂完整编译命令。
 
 ## `fpsgo.ko` 的源码缺口
 
