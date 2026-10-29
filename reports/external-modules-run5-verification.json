@@ -1,0 +1,598 @@
+{
+  "schema_version": 1,
+  "audit_type": "offline_kernel_external_module_artifact_verification",
+  "artifact_name": "RMX2121CN-kernel414-5",
+  "allow_partial": false,
+  "verifier_sha256": "4ce6a8eee48ff08fe035a9eed027b783d5b1d4b8e1ab25b533fff8b75fed195f",
+  "verified": true,
+  "errors": [],
+  "limitations": [
+    "Offline verification only; no module was loaded or executed and no device was accessed.",
+    "SHA256SUMS checks consistency with the downloaded manifests, not independent publisher authenticity.",
+    "CMS verification pins the run public certificate with -nointern; -noverify disables system CA-chain checks.",
+    "Certificate bytes embedded in Image plus valid signatures do not establish successful kernel trust-key initialization.",
+    "Matching CRCs and signatures do not establish boot, firmware, initialization or runtime compatibility.",
+    "Matching fpsgo_cus source is not included; these eight targets do not reproduce the separate fpsgo.ko."
+  ],
+  "private_key_scan": {
+    "scanned_files": 111,
+    "private_key_header_files": [],
+    "scope": "raw regular artifact files; compressed archives are not expanded",
+    "key_material_parsed_or_exported": false
+  },
+  "artifact_hashes": {
+    "kernel": {
+      "verified_files": 6,
+      "listed_files": 6,
+      "manifest_sha256": "0645e5c80c1a415b294ad390e5a9b5a7ab73a1e2cdbfc5aab9105f6ce609353e",
+      "mismatches": [],
+      "uncovered_files": [],
+      "complete_coverage_required": false,
+      "valid": true
+    },
+    "external_modules": {
+      "verified_files": 82,
+      "listed_files": 82,
+      "manifest_sha256": "225256f1a9b2016cad1ed296542838d87411df6a83652a686591a40ced4e45a2",
+      "mismatches": [],
+      "uncovered_files": [],
+      "complete_coverage_required": true,
+      "valid": true
+    }
+  },
+  "run_result": {
+    "run_exit_code": 0,
+    "external_exit_code": 0,
+    "stage": "complete",
+    "module": "none",
+    "completed_count": 8,
+    "expected_count": 8
+  },
+  "completed_modules": [
+    "conninfra",
+    "connfem",
+    "bt_drv_6885",
+    "fmradio_drv_connac2x",
+    "gps_drv",
+    "wmt_chrdev_wifi",
+    "wlan_drv_gen4m",
+    "met"
+  ],
+  "not_completed_modules": [],
+  "full_build_success": true,
+  "crc_parser_sha256": "885195fde6349140763f63c51c72f9890c4e3cf3c11e24319c45b5306c31f44b",
+  "kernel_symvers_sha256": "e3094950c9da935ddaab37d9f3fa865088ede622b2be49a1e9d82b4631e2bf13",
+  "kernel_symvers_copy_matches": true,
+  "kernelrelease": "4.14.186",
+  "certificate": {
+    "sha256": "e41980f26ded3b743e9c11ec6876681c83deb2cf4fa82436163ab96809330cf9",
+    "occurrences_in_Image": 1
+  },
+  "openssl_version": "OpenSSL 3.6.3 9 Jun 2026 (Library: OpenSSL 3.6.3 9 Jun 2026)",
+  "modules": [
+    {
+      "module": "conninfra.ko",
+      "sha256": "0771d652fd73d0f31126a5d813ea5b95ef9134e05221c526a86df37a214ac00d",
+      "module_name": "conninfra",
+      "vermagic": "4.14.186 SMP preempt mod_unload modversions aarch64",
+      "depends": [],
+      "expected_dependencies": [],
+      "metadata_matches": true,
+      "versioned_imports": 182,
+      "missing_imports": [],
+      "crc_mismatches": [],
+      "dependency_tables": [],
+      "module_symvers_sha256": "4865fa418764bd89e663a8ed1ad46e3a8e6b5109b14eb3f1aa3535c379e9c292",
+      "signature": {
+        "valid_with_run_certificate_only": true,
+        "digest": "sha512",
+        "signature_bytes": 681,
+        "payload_bytes": 3796800,
+        "payload_sha256": "e8edc013fb065773680dbf6e11ff5a975d76cf63d076db07aa6dac21694c2059",
+        "embedded_cms_certificates_ignored": true,
+        "system_ca_chain_verification": false,
+        "digest_algorithms": [
+          "sha512"
+        ],
+        "signer_digest_algorithms": [
+          "sha512"
+        ]
+      },
+      "alarm_import_crcs": {
+        "alarm_cancel": "0x6f13fc92",
+        "alarm_init": "0x7fc40798",
+        "alarm_start_relative": "0x3f7cc77d"
+      },
+      "alarm_target_crcs": {
+        "alarm_cancel": "0x6f13fc92",
+        "alarm_init": "0x7fc40798",
+        "alarm_start_relative": "0x3f7cc77d"
+      },
+      "verified": true
+    },
+    {
+      "module": "connfem.ko",
+      "sha256": "5183920e92ad2e3ce7367e47a86abd2e94e6204be3ba89d7a963ee53a4458a0a",
+      "module_name": "connfem",
+      "vermagic": "4.14.186 SMP preempt mod_unload modversions aarch64",
+      "depends": [],
+      "expected_dependencies": [],
+      "metadata_matches": true,
+      "versioned_imports": 50,
+      "missing_imports": [],
+      "crc_mismatches": [],
+      "dependency_tables": [],
+      "module_symvers_sha256": "dabdde4c669d2cde494ba9f5327a9b381887597053528aefaa2b2ddf34c5ae92",
+      "signature": {
+        "valid_with_run_certificate_only": true,
+        "digest": "sha512",
+        "signature_bytes": 681,
+        "payload_bytes": 557776,
+        "payload_sha256": "a0aba769bbf061c7f53732e03335db959353c58873ef3bd7f3e3c626f0993bcc",
+        "embedded_cms_certificates_ignored": true,
+        "system_ca_chain_verification": false,
+        "digest_algorithms": [
+          "sha512"
+        ],
+        "signer_digest_algorithms": [
+          "sha512"
+        ]
+      },
+      "verified": true
+    },
+    {
+      "module": "bt_drv_6885.ko",
+      "sha256": "335ecd920a8b1ee290710add1358233ed45a16260309ec85577fd91561e3d52f",
+      "module_name": "bt_drv_6885",
+      "vermagic": "4.14.186 SMP preempt mod_unload modversions aarch64",
+      "depends": [
+        "conninfra",
+        "connfem"
+      ],
+      "expected_dependencies": [
+        "conninfra",
+        "connfem"
+      ],
+      "metadata_matches": true,
+      "versioned_imports": 198,
+      "missing_imports": [],
+      "crc_mismatches": [],
+      "dependency_tables": [
+        "conninfra/Module.symvers",
+        "connfem/Module.symvers"
+      ],
+      "module_symvers_sha256": "c1da5491e58a552ed81b3f6854100fce82e9087d0a042ba21090feb3ca9f78a5",
+      "signature": {
+        "valid_with_run_certificate_only": true,
+        "digest": "sha512",
+        "signature_bytes": 681,
+        "payload_bytes": 3647952,
+        "payload_sha256": "5e7dc513f9f393fd29ed0a78b3462b4708ae672db2ee12130ff6ada22a8c5697",
+        "embedded_cms_certificates_ignored": true,
+        "system_ca_chain_verification": false,
+        "digest_algorithms": [
+          "sha512"
+        ],
+        "signer_digest_algorithms": [
+          "sha512"
+        ]
+      },
+      "verified": true
+    },
+    {
+      "module": "fmradio_drv_connac2x.ko",
+      "sha256": "a19b5e8ffff0fd5ca2fe6044a9ed03b6912b77cf3cf1e0efeceea2dd7cdf04c9",
+      "module_name": "fmradio_drv_connac2x",
+      "vermagic": "4.14.186 SMP preempt mod_unload modversions aarch64",
+      "depends": [
+        "conninfra"
+      ],
+      "expected_dependencies": [
+        "conninfra"
+      ],
+      "metadata_matches": true,
+      "versioned_imports": 108,
+      "missing_imports": [],
+      "crc_mismatches": [],
+      "dependency_tables": [
+        "conninfra/Module.symvers"
+      ],
+      "module_symvers_sha256": "e05062fadd042d30ff7cde758bce09f84db93ed63c8bf3e8e0ac3844c9acff10",
+      "signature": {
+        "valid_with_run_certificate_only": true,
+        "digest": "sha512",
+        "signature_bytes": 681,
+        "payload_bytes": 2166312,
+        "payload_sha256": "0101e29dc16fe763e665bfffe4daee4fe0fd1f795901914c2f174a903a541d35",
+        "embedded_cms_certificates_ignored": true,
+        "system_ca_chain_verification": false,
+        "digest_algorithms": [
+          "sha512"
+        ],
+        "signer_digest_algorithms": [
+          "sha512"
+        ]
+      },
+      "verified": true
+    },
+    {
+      "module": "gps_drv.ko",
+      "sha256": "9587702b56631d7ec5cb27e2774a66326dc4c9076f98cac6d231a9af5f268999",
+      "module_name": "gps_drv",
+      "vermagic": "4.14.186 SMP preempt mod_unload modversions aarch64",
+      "depends": [
+        "conninfra"
+      ],
+      "expected_dependencies": [
+        "conninfra"
+      ],
+      "metadata_matches": true,
+      "versioned_imports": 113,
+      "missing_imports": [],
+      "crc_mismatches": [],
+      "dependency_tables": [
+        "conninfra/Module.symvers"
+      ],
+      "module_symvers_sha256": "58ae65ccbf6aff795268df593374ebf02228dc1b8009f0bd04996d18c39ddb8a",
+      "signature": {
+        "valid_with_run_certificate_only": true,
+        "digest": "sha512",
+        "signature_bytes": 681,
+        "payload_bytes": 3477800,
+        "payload_sha256": "f8da684aa542b047718505d08d4200f07b0cbbe1dbc5dbd127b8ba2e99195f5d",
+        "embedded_cms_certificates_ignored": true,
+        "system_ca_chain_verification": false,
+        "digest_algorithms": [
+          "sha512"
+        ],
+        "signer_digest_algorithms": [
+          "sha512"
+        ]
+      },
+      "verified": true
+    },
+    {
+      "module": "wmt_chrdev_wifi.ko",
+      "sha256": "a9528b3356e5614e9519f6bf8129b37bc518a528ada9fc8c84a8763163cdad7e",
+      "module_name": "wmt_chrdev_wifi",
+      "vermagic": "4.14.186 SMP preempt mod_unload modversions aarch64",
+      "depends": [
+        "conninfra"
+      ],
+      "expected_dependencies": [
+        "conninfra"
+      ],
+      "metadata_matches": true,
+      "versioned_imports": 61,
+      "missing_imports": [],
+      "crc_mismatches": [],
+      "dependency_tables": [
+        "conninfra/Module.symvers"
+      ],
+      "module_symvers_sha256": "f0d8590302e76a9ab2261e32a04acfde7a90aba1a472671e33bb4ce77e5fd858",
+      "signature": {
+        "valid_with_run_certificate_only": true,
+        "digest": "sha512",
+        "signature_bytes": 681,
+        "payload_bytes": 848416,
+        "payload_sha256": "dd84192557f6cac1de1fc45a4169bfda6875109a8586b8c54293c9f2fe846c9b",
+        "embedded_cms_certificates_ignored": true,
+        "system_ca_chain_verification": false,
+        "digest_algorithms": [
+          "sha512"
+        ],
+        "signer_digest_algorithms": [
+          "sha512"
+        ]
+      },
+      "verified": true
+    },
+    {
+      "module": "wlan_drv_gen4m.ko",
+      "sha256": "4802f73f9afec24df12da20e81bfb77b4af931f23524682dc870552134056078",
+      "module_name": "wlan_drv_gen4m",
+      "vermagic": "4.14.186 SMP preempt mod_unload modversions aarch64",
+      "depends": [
+        "conninfra",
+        "wmt_chrdev_wifi",
+        "connfem"
+      ],
+      "expected_dependencies": [
+        "conninfra",
+        "connfem",
+        "wmt_chrdev_wifi"
+      ],
+      "metadata_matches": true,
+      "versioned_imports": 337,
+      "missing_imports": [],
+      "crc_mismatches": [],
+      "dependency_tables": [
+        "conninfra/Module.symvers",
+        "connfem/Module.symvers",
+        "wmt_chrdev_wifi/Module.symvers"
+      ],
+      "module_symvers_sha256": "256c269c4f6617a8056286128d7c022e96ce5abdb40c5f6cb0a57d8596646326",
+      "signature": {
+        "valid_with_run_certificate_only": true,
+        "digest": "sha512",
+        "signature_bytes": 681,
+        "payload_bytes": 60255960,
+        "payload_sha256": "9c491dabbed27e521a14aa6d53511058e88557426c0e8f91b840e9d3cf747413",
+        "embedded_cms_certificates_ignored": true,
+        "system_ca_chain_verification": false,
+        "digest_algorithms": [
+          "sha512"
+        ],
+        "signer_digest_algorithms": [
+          "sha512"
+        ]
+      },
+      "verified": true
+    },
+    {
+      "module": "met.ko",
+      "sha256": "c423d9314f4432a64a839e91873dd8ceec4f9881eb72971e5012be9a5b1d676d",
+      "module_name": "met",
+      "vermagic": "4.14.186 SMP preempt mod_unload modversions aarch64",
+      "depends": [],
+      "expected_dependencies": [],
+      "metadata_matches": true,
+      "versioned_imports": 157,
+      "missing_imports": [],
+      "crc_mismatches": [],
+      "dependency_tables": [],
+      "module_symvers_sha256": "9cd65a3dd5de59b69db49518a30b3ff7a115c29c87cf471bd5eb1181f0d73bbc",
+      "signature": {
+        "valid_with_run_certificate_only": true,
+        "digest": "sha512",
+        "signature_bytes": 681,
+        "payload_bytes": 6254016,
+        "payload_sha256": "ad9124786071ce873e5adbc219f04c73357803df21aa346d2a6b983ece68a009",
+        "embedded_cms_certificates_ignored": true,
+        "system_ca_chain_verification": false,
+        "digest_algorithms": [
+          "sha512"
+        ],
+        "signer_digest_algorithms": [
+          "sha512"
+        ]
+      },
+      "verified": true
+    }
+  ],
+  "stock_modules_static_comparison": [
+    {
+      "module": "bt_drv_6885.ko",
+      "sha256": "d0f866422f23f785d4dffbc4fbffdc4e3433ff0c2d410ee765fea0b061198a40",
+      "module_name": "bt_drv_6885",
+      "vermagic": "4.14.186+ SMP preempt mod_unload modversions aarch64",
+      "depends": [
+        "conninfra",
+        "connfem"
+      ],
+      "versioned_imports": 198,
+      "missing_from_kernel_and_completed_modules": [],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "connfem.ko",
+      "sha256": "a2f0caaad0331420549aee701bd5a30f792029fc1cf061a1c1e7f1c5e1465df2",
+      "module_name": "connfem",
+      "vermagic": "4.14.186+ SMP preempt mod_unload modversions aarch64",
+      "depends": [],
+      "versioned_imports": 50,
+      "missing_from_kernel_and_completed_modules": [],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "conninfra.ko",
+      "sha256": "e885a2797c387a45c4d261413e8397a228126552b8e12b83d442ccaa531172c7",
+      "module_name": "conninfra",
+      "vermagic": "4.14.186+ SMP preempt mod_unload modversions aarch64",
+      "depends": [],
+      "versioned_imports": 182,
+      "missing_from_kernel_and_completed_modules": [],
+      "crc_mismatches": [
+        {
+          "symbol": "alarm_cancel",
+          "module_crc": "0x93a4d852",
+          "candidate_crc": "0x6f13fc92",
+          "candidate_provider": "vmlinux"
+        },
+        {
+          "symbol": "alarm_init",
+          "module_crc": "0x1a98ba12",
+          "candidate_crc": "0x7fc40798",
+          "candidate_provider": "vmlinux"
+        },
+        {
+          "symbol": "alarm_start_relative",
+          "module_crc": "0x64223914",
+          "candidate_crc": "0x3f7cc77d",
+          "candidate_provider": "vmlinux"
+        }
+      ],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "fmradio_drv_connac2x.ko",
+      "sha256": "f5c765dcdfd1572c0c98f58f98f221711b251fc7c7057d22e6226f16fbff2bf2",
+      "module_name": "fmradio_drv_connac2x",
+      "vermagic": "4.14.186+ SMP preempt mod_unload modversions aarch64",
+      "depends": [
+        "conninfra"
+      ],
+      "versioned_imports": 108,
+      "missing_from_kernel_and_completed_modules": [],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "fpsgo.ko",
+      "sha256": "27a8d097ec7931d7dc78cb3d12d317eb61758efe0341d7ba33556f99947ad040",
+      "module_name": "fpsgo",
+      "vermagic": "4.14.186+ SMP preempt mod_unload modversions aarch64",
+      "depends": [],
+      "versioned_imports": 58,
+      "missing_from_kernel_and_completed_modules": [],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "gps_drv.ko",
+      "sha256": "0f71ce0950221e47037fb97fb6b2e7c09e096ab90537a08c179b1aee33463874",
+      "module_name": "gps_drv",
+      "vermagic": "4.14.186+ SMP preempt mod_unload modversions aarch64",
+      "depends": [
+        "conninfra"
+      ],
+      "versioned_imports": 113,
+      "missing_from_kernel_and_completed_modules": [],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "met.ko",
+      "sha256": "7908964d97ba6ecd68a6f86e7ad328f1951fd48770e8e47b1e9fce088a917c17",
+      "module_name": "met",
+      "vermagic": "4.14.186+ SMP preempt mod_unload modversions aarch64",
+      "depends": [],
+      "versioned_imports": 157,
+      "missing_from_kernel_and_completed_modules": [],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "wlan_drv_gen4m.ko",
+      "sha256": "a313e5f1b27bba9c22f38cf876184a39ab9feca00285749d923b6ff5afe893fb",
+      "module_name": "wlan_drv_gen4m",
+      "vermagic": "4.14.186+ SMP preempt mod_unload modversions aarch64",
+      "depends": [
+        "conninfra",
+        "wmt_chrdev_wifi",
+        "connfem"
+      ],
+      "versioned_imports": 345,
+      "missing_from_kernel_and_completed_modules": [
+        "wifi_fwlog_get_fw_ver_register"
+      ],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    },
+    {
+      "module": "wmt_chrdev_wifi.ko",
+      "sha256": "4c3a8738933fbed53695f1e3d91b34c1b880aefe6f7856667036751173b93887",
+      "module_name": "wmt_chrdev_wifi",
+      "vermagic": "4.14.186+ SMP preempt mod_unload modversions aarch64",
+      "depends": [
+        "conninfra"
+      ],
+      "versioned_imports": 65,
+      "missing_from_kernel_and_completed_modules": [],
+      "crc_mismatches": [],
+      "signature_or_runtime_compatibility_claimed": false
+    }
+  ],
+  "stock_comparison_influences_candidate_verification": false,
+  "verification_scope": "full",
+  "summary": {
+    "completed_modules": 8,
+    "verified_modules": 8,
+    "expected_modules": 8
+  },
+  "run": {
+    "id": 40710293358,
+    "url": "https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40710293358",
+    "head_sha": "5027163ed7d2443220dfc007ddeba59a88ea8041",
+    "conclusion": "success"
+  },
+  "candidate_vs_run2": {
+    "Image": {
+      "run2_sha256": "9b32a43468b81a4c13693da6d70530b38b8a171fd39a3109582de89b3643e47c",
+      "run5_sha256": "d7b9e1c4fba2e3fd992cc87d8aaac5868e2faeea01c8814ff8b1bce6ec7e9476",
+      "equal": false
+    },
+    "Image.gz": {
+      "run2_sha256": "08c1792e7c164287a4d94043b2506f09ae884e8fe33af261b0ad6daefa1768a4",
+      "run5_sha256": "7aec20d9da10deb6c4be6f7cc4ba9ae09b6654fef4ab205493a16029f0ebbf4f",
+      "equal": false
+    },
+    "Image.gz-dtb": {
+      "run2_sha256": "40e9c72ac324351b0391d018edd1ec320f029c4da3d4c1188fec8dff30590a38",
+      "run5_sha256": "5ae7caac367fee27bc47497a4f14dd38915f27869bf29b5ad52e030eba24f501",
+      "equal": false
+    },
+    "effective.config": {
+      "run2_sha256": "ab5f3832c509fa7fe113b70a16bb09ab52a1cca1ea55c20a6b9f71f7ad717305",
+      "run5_sha256": "ab5f3832c509fa7fe113b70a16bb09ab52a1cca1ea55c20a6b9f71f7ad717305",
+      "equal": true
+    },
+    "input.config": {
+      "run2_sha256": "2acc47a71f9ef2f94c12f7cd32134c3fbc88de476574a5806a8a1570817849b6",
+      "run5_sha256": "2acc47a71f9ef2f94c12f7cd32134c3fbc88de476574a5806a8a1570817849b6",
+      "equal": true
+    },
+    "Module.symvers": {
+      "run2_sha256": "e3094950c9da935ddaab37d9f3fa865088ede622b2be49a1e9d82b4631e2bf13",
+      "run5_sha256": "e3094950c9da935ddaab37d9f3fa865088ede622b2be49a1e9d82b4631e2bf13",
+      "equal": true
+    },
+    "kernelrelease.txt": {
+      "run2_sha256": "1abbdd64485b1af2b473954ff9acf6a422238e296a5543a03cb2f532a6c18a93",
+      "run5_sha256": "1abbdd64485b1af2b473954ff9acf6a422238e296a5543a03cb2f532a6c18a93",
+      "equal": true
+    },
+    "sources.lock.json": {
+      "run2_sha256": "56a6ea07a290529991e14e7bd9dcfec27e7a0445e90b7abd6bc222de22d22753",
+      "run5_sha256": "56a6ea07a290529991e14e7bd9dcfec27e7a0445e90b7abd6bc222de22d22753",
+      "equal": true
+    },
+    "nativefeatures.mk": {
+      "run2_sha256": "39e881e167f3eb3284b981d73f71ddf1942684e73e238ee43fc11a75b0afba24",
+      "run5_sha256": "39e881e167f3eb3284b981d73f71ddf1942684e73e238ee43fc11a75b0afba24",
+      "equal": true
+    },
+    "OplusKernelEnvConfig.mk": {
+      "run2_sha256": "36d4285cec79e50799fd1dd43121e0fa65a23ea779817fd593938d3d12a95322",
+      "run5_sha256": "36d4285cec79e50799fd1dd43121e0fa65a23ea779817fd593938d3d12a95322",
+      "equal": true
+    }
+  },
+  "signing_pairing": {
+    "sha256": "e41980f26ded3b743e9c11ec6876681c83deb2cf4fa82436163ab96809330cf9",
+    "occurrences_in_run5_Image": 1,
+    "occurrences_in_run2_Image": 0,
+    "pairing_rule": "Use the run 5 Image and run 5 modules as one set. Equal configuration and symbol CRCs do not make earlier kernel Images trust the new signing key."
+  },
+  "met_build_feature_observations": {
+    "platform_banner": "Start to build met_drv for mt6885",
+    "settings": {
+      "CPUPMU_VERSION": "V8_2",
+      "FEATURE_SPMTWAM": "n",
+      "SPMTWAM_VERSION": "sspm",
+      "SPMTWAM_IDLE_SIGNAL_SUPPORT": "multiple",
+      "FEATURE_SSPM_EMI": "y",
+      "FEATURE_GPU": "y",
+      "GPU_STALL_CNT_TYPE": "single",
+      "FEATURE_VCOREDVFS": "y",
+      "FEATURE_PTPOD": "y",
+      "FEATURE_THERMAL": "y",
+      "FEATURE_CPUDSU": "y",
+      "FEATURE_WALLTIME": "y",
+      "FEATURE_SMI": "y",
+      "FEATURE_MET_BACKLIGHT": "y",
+      "FEATURE_EVENT_POWER": "n",
+      "FEATURE_ONDIEMET": "y",
+      "FEATURE_ONDIEMET_WALLTIME": "y",
+      "CONFIG_MTK_TINYSYS_SSPM_SUPPORT": "y",
+      "SSPM_VERSION": "v2",
+      "FEATURE_TINYSYS": "n"
+    },
+    "build_log_sha256": "44021acff6d69f23a55a8fb4a52d6e3b0a4a78e1cdcdf86d2c78451cc5893208",
+    "factory_feature_equivalence": "not established",
+    "runtime_status": "not tested"
+  },
+  "device_load_tested": false
+}

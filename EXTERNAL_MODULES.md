@@ -1,8 +1,16 @@
 # RMX2121CN 4.14 外部模块补编译调查
 
-更新日期：2026-10-28。
+更新日期：2026-10-29。
 
-**状态：Actions 运行 40701676318 已完成 6 个外部模块的编译、CRC 检查与签名；补齐 EMI 参数后的运行 40706006165 推进至 Wi-Fi WFD 源码，在未声明的 `debug()` 调用处失败，第 8 个 MET 仍未执行。已准备最小日志调用修复，尚未重跑完整编译。运行 40205461469 的 4.14 内核已完成实机最小诊断启动，但这些外部模块均未进行实机加载验证。**
+**状态：Actions 运行 40710293358 已成功编译 8 个外部模块，下载后的哈希、签名、依赖和 1206 项版本化导入 CRC 全部通过离线检查。运行 40205461469 的 4.14 内核已完成实机最小诊断启动；本次配套内核和模块尚未进行实机验证。FPSGO 匹配源码仍缺失。**
+
+## 八模块完整构建结果
+
+[成功运行 40710293358](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40710293358) 对应提交 `5027163ed7d2443220dfc007ddeba59a88ea8041`。产物 `RMX2121CN-kernel414-5` 的 6 个核心文件和 82 个外部模块证据文件与校验清单一致；八模块均通过本轮公钥证书的 SHA-512 CMS 验签，全部导入 CRC 在内核或依赖模块符号表中匹配。完整结果见 [离线验证报告](reports/external-modules-run5-verification.json)。
+
+本轮配置、内核符号表与实测过的构建 #2 相同，但 `Image` 不同。本轮证书仅在本轮 `Image` 中找到，在构建 #2 的 `Image` 中没有找到；启用强制模块验签时必须保留同轮内核和模块配套关系。这里没有声称内核已成功初始化这把信任密钥或模块已实际装载。
+
+新增完成的 Wi-Fi 和 MET 分别核对 337、157 项版本化导入。MET 选择 MT6885，`SPMTWAM`、`EVENT_POWER`、`TINYSYS` 为 `n`，不代表原厂功能等价。后续仍需确认固件接口、初始化、外设行为与 FPSGO 源码缺口。
 
 源码基线为 [realme 官方 Android S 仓库固定提交](https://github.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/tree/f0c2afc4d8aa699bacae223bf7506d6912e08da6)，提交号 `f0c2afc4d8aa699bacae223bf7506d6912e08da6`。工具链版本见 [sources.lock.json](sources.lock.json)。内核主体成功编译证据来自 [Actions 运行 40205461469](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40205461469)。
 
@@ -27,7 +35,7 @@ Wi-Fi 在 `nic/nic_cmd_event.c` 编译失败：`WIFI_EMI_ADDR_MASK` 和 `gConEmi
 
 [Actions 运行 40706006165](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40706006165) 报告 `oplus_wfd/wlan_oplus_wfd.c:259` 隐式声明 `debug()`。固定官方源码在 `get_avoid_channels()` 发送固件查询后调用这个未声明的日志函数；同一文件已包含 `debug.h`，其中定义了 `DBGLOG`、`DBG_P2P_IDX` 与 `DBG_CLASS_TRACE`。
 
-[补丁 0002](patches/0002-fix-wlan-oplus-wfd-logging.patch) 仅把该日志调用改为 `DBGLOG(P2P, TRACE, ...)`，保留 WFD 功能、固件查询、完成等待与信道过滤流程；不关闭编译警告。现有 `build-4.14.sh` 会按名称应用并归档 `patches/*.patch`，无需调整工作流。补丁适用性在固定源码上离线检查；修复后的完整编译及模块运行仍待验证。
+[补丁 0002](patches/0002-fix-wlan-oplus-wfd-logging.patch) 仅把该日志调用改为 `DBGLOG(P2P, TRACE, ...)`，保留 WFD 功能、固件查询、完成等待与信道过滤流程；不关闭编译警告。现有 `build-4.14.sh` 会按名称应用并归档 `patches/*.patch`，无需调整工作流。补丁适用性在固定源码上离线检查；修复后的完整编译已在运行 40710293358 通过；模块运行仍待验证。
 
 ## 旧模块不能直接复用的已知原因
 
@@ -133,4 +141,29 @@ vendor/mediatek/kernel_modules/fpsgo_cus/src/fpsgo_main.c
 
 公开树中的 `drivers/misc/mediatek/performance/fpsgo_v3` 是另一层内核内建代码：其 Makefile 使用 `obj-y`，父级由 `CONFIG_MTK_FPSGO_V3=y` 接入，本次 `Module.symvers` 也将相关接口记为 `vmlinux` 导出。这不能证明独立 `fpsgo.ko` 的算法已被替代，也不能直接通过普通 `M=... modules` 命令生成等价模块。
 
-因此当前范围是“8 个有外部构建入口的模块可开展补编译调查，另有 1 个独立 FPSGO 模块的匹配源码待补齐”。即使八个全部编译通过，仍不能据此宣称九个原厂模块已复现或整机已经可启动。
+因此当前范围是“8 个有外部构建入口的模块已编译并完成离线核验，另有 1 个独立 FPSGO 模块的匹配源码待补齐”。不能据此宣称九个原厂模块已复现或整机已经可启动。
+
+## 下载产物的离线核验
+
+仓库提供 `scripts/verify-external-modules.py`，需要 Python 3.9+ 和 PATH 中的 OpenSSL。从仓库根目录执行，`--artifact-dir` 指向解压后含 `Image`、`Module.symvers` 和 `external-modules/` 的产物目录；报告必须写在输入目录之外：
+
+```bash
+python scripts/verify-external-modules.py \
+  --artifact-dir downloads/RMX2121CN-kernel414-RUN \
+  --output reports/external-modules-RUN.json
+```
+
+默认要求构建成功、8 个模块全部完成，且逐项通过产物哈希、内核符号表副本、模块名称/版本/依赖、导入 CRC、SHA-512 CMS 签名和本轮公钥证书嵌入 `Image` 的检查。它还扫描原始产物文件中的私钥 PEM 头；不会展开压缩归档，也不会解析、使用或输出私钥。
+
+对失败运行留下的部分产物，只在调查时显式增加 `--allow-partial`。该选项允许构建失败或模块数量不足，但所有已完成模块仍必须通过同样的哈希、CRC 和签名检查。JSON 的 `verification_scope` 会标记为 `partial`，不能当作八模块完整成功。
+
+```bash
+python scripts/verify-external-modules.py \
+  --artifact-dir downloads/RMX2121CN-kernel414-FAILED_RUN \
+  --output reports/external-modules-FAILED_RUN.json \
+  --allow-partial
+```
+
+可选 `--stock-module-dir downloads/stock-modules` 仅增加旧模块的静态 CRC 对照；旧模块对照结果不改变候选产物的核验结论，也不执行加载或重新签名。退出码 `0` 表示指定范围核验通过，`1` 表示检查未通过，`2` 表示输入、依赖或核验过程异常。
+
+离线核验不能证明设备已运行、固件接口兼容或内核已成功初始化签名信任密钥。`SHA256SUMS` 只证明文件与一同下载的清单一致；应另外核对下载来源、Actions run 身份、提交和预期构建参数。即使报告通过，也不等于下载发布者身份已获独立验证或九个原厂模块已复现。

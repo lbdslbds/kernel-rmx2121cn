@@ -1,0 +1,35 @@
+{
+  "status": "DTC_AND_EVIDENCE_ROUNDTRIP_PASSED",
+  "dtc_version": "Version: DTC 1.8.1",
+  "dtc_exit_code": 0,
+  "dtc_diagnostics": "",
+  "command": [
+    "dtc",
+    "-I",
+    "dts",
+    "-O",
+    "dtb",
+    "-o",
+    "rmx2121cn-minimal-draft.syntax-check.dtb",
+    "rmx2121cn-minimal-draft.dts"
+  ],
+  "working_directory": "bringup/mt6885",
+  "dts_sha256": "29880895c9c514ce10f55f7848e02236a922d196814ec49237c63155dcf7c929",
+  "dtb": {
+    "bytes": 5169,
+    "sha256": "8b484b1c688fc64686a7ec29357472f40dcb11d3cdd344f6192f9dbd23a168fd",
+    "version": 17,
+    "memreserve_table": []
+  },
+  "authored_model_description_checked": true,
+  "checked_cpu_nodes": 8,
+  "checked_fixed_reservations": 30,
+  "checked_dynamic_reservations": 13,
+  "fixed_reservations_within_ram_and_non_overlapping": true,
+  "schema_dtbs_check_performed": false,
+  "kernel_compilation_performed": false,
+  "boot_image_produced": false,
+  "device_boot_tested": false,
+  "local_generator_dts_sha256_before_lf_normalization": "2ede1190ed493036c94d4caf1f1c5d19f42a4b52aeff570f2b9d6bb945e3f000",
+  "source_line_endings": "LF in public repository; unchanged compiled DTB confirmed after normalization"
+}

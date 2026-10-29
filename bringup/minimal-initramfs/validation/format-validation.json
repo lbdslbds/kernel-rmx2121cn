@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "scope": "host-only format validation with deliberately non-executable fixture",
+  "arm64_compile": false,
+  "runtime_test": false,
+  "device_test": false,
+  "checks": [
+    "newc metadata and payload round-trip",
+    "gzip standard-library decompression",
+    "deterministic repeated generation",
+    "independent tar archive listing",
+    "independent tar init payload extraction to stdout",
+    "reject non-ELF inputs"
+  ],
+  "tar_version": "bsdtar 3.8.9 - libarchive 3.8.9 zlib/1.2.13.1-motley liblzma/5.8.3 bz2lib/1.0.8 libzstd/1.5.7 cng/2.0 libb2/bundled ",
+  "archive_sha256": "e4e89efad8abff80dc54df548c180bfa56b006482d5487c4c4daaa0569e7138c",
+  "gzip_sha256": "52748c4b955601166e66d6587023ff0af92a1ac9a6088429eeddf89de65c0ed7",
+  "entries": [
+    {
+      "name": "dev",
+      "mode": "0o40755",
+      "bytes": 0,
+      "major": 0,
+      "minor": 0,
+      "sha256": null
+    },
+    {
+      "name": "proc",
+      "mode": "0o40755",
+      "bytes": 0,
+      "major": 0,
+      "minor": 0,
+      "sha256": null
+    },
+    {
+      "name": "sys",
+      "mode": "0o40755",
+      "bytes": 0,
+      "major": 0,
+      "minor": 0,
+      "sha256": null
+    },
+    {
+      "name": "dev/console",
+      "mode": "0o20600",
+      "bytes": 0,
+      "major": 5,
+      "minor": 1,
+      "sha256": null
+    },
+    {
+      "name": "dev/kmsg",
+      "mode": "0o20600",
+      "bytes": 0,
+      "major": 1,
+      "minor": 11,
+      "sha256": null
+    },
+    {
+      "name": "dev/null",
+      "mode": "0o20666",
+      "bytes": 0,
+      "major": 1,
+      "minor": 3,
+      "sha256": null
+    },
+    {
+      "name": "init",
+      "mode": "0o100755",
+      "bytes": 37,
+      "major": 0,
+      "minor": 0,
+      "sha256": "b0c06c985ab4ca277d73e6ac09722c5bebcaf47ceb3d1dfba6950a094a923163"
+    }
+  ],
+  "rejected_inputs": [
+    "empty",
+    "text",
+    "PE"
+  ],
+  "limitations": [
+    "Fixture init is text, not an ARM64 executable.",
+    "No ARM64 code generation, linking, emulation or phone boot was performed."
+  ]
+}

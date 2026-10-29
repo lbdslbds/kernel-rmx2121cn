@@ -18,7 +18,9 @@ Kleaf 默认未启用 stamp，因此该镜像 banner 含 `maybe-dirty` 和 1970 
 
 早期构建 #2 未包含 vendor 的 9 个厂商模块，涉及无线、GPS、FPSGO 和 MET。旧模块与该内核的离线比较共 1276 项版本化导入：1162 匹配，`conninfra.ko` 的 3 个 `alarm_*` 符号 CRC 不匹配，111 项在内核符号表中缺少但能找到其他 vendor 模块中的可能提供者。后者尚未核对旧提供者 CRC，不能当作 111 个缺失内核 API。正常模块版本校验会拒绝上述 CRC 不匹配的旧 `conninfra.ko`；不能直接宣称旧模块可复用。见 [完整 CRC 报告](reports/vendor-module-crc-comparison.json) 与 [模块缺口记录](reports/vendor-module-gap.json)。
 
-公开源码包含 8 个外部模块的构建入口；首轮已编译并离线验证其中 6 个，Wi-Fi 参数修复正在重跑，MET 待验证。原厂 `fpsgo.ko` 所用的 `fpsgo_cus` 源码尚未找到。入口、参数依据、签名配套要求及依赖顺序见 [外部模块调查](EXTERNAL_MODULES.md)。目录中有模块文件、静态配置中有加载指令，均不代表新模块实际加载成功。构建还报告 `OPLUS_F2FS_DEBUG` 环境变量未定义；原厂值尚未核实。
+公开源码中的 **8 个外部模块已全部编译并通过离线核验**：[构建 #5](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40710293358) 的哈希、同轮证书签名、依赖与 1206 项版本化导入 CRC 全部通过，见 [验证报告](reports/external-modules-run5-verification.json)。模块必须配套本轮内核，尚未实际加载。原厂 `fpsgo.ko` 所用的 `fpsgo_cus` 源码仍未找到；MET 部分功能未启用，不代表完整原厂功能等价。入口、参数依据及签名要求见 [外部模块调查](EXTERNAL_MODULES.md)。`OPLUS_F2FS_DEBUG` 的原厂环境变量值也尚未核实。
+
+6.18 已加入经实机证据核对的 [最小设备树草案](bringup/mt6885/README.md) 和 [ARM64 诊断 initramfs](bringup/minimal-initramfs/README.md)。工作流 **ACK 6.18 bring-up checks - NO phone image** 分别检查设备树绑定和通用 ACK 的 QEMU 启动；模拟器使用自身设备树，不模拟 RMX2121 硬件。结果与未解决的启动条件见 [bringup 检查说明](bringup/README.md)。
 
 ## 当前边界
 

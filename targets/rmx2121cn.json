@@ -24,7 +24,7 @@
   },
   "target": {
     "android_kernel_branch": "android17-6.18",
-    "board_port_status": "not_started"
+    "board_port_status": "offline_minimal_dts_and_initramfs_draft"
   },
   "verification": {
     "hardware_evidence": "USB device observations and normal-boot diagnostic FDT, 2026-10-28",
@@ -46,6 +46,9 @@
     "generic_ack_device_boot_success": null,
     "original_boot_restored": true,
     "original_android_boot_completed": true,
-    "external_modules_run3_report": "reports/external-modules-run3-verification.json"
+    "external_modules_run3_report": "reports/external-modules-run3-verification.json",
+    "external_modules_run5_report": "reports/external-modules-run5-verification.json",
+    "external_modules_run5_offline_verified": true,
+    "external_modules_run5_loaded_on_device": null
   }
 }

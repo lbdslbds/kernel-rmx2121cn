@@ -1,0 +1,1655 @@
+{
+  "status": "OFFLINE_DRAFT_NOT_BOOT_READY",
+  "ack_commit": "846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef",
+  "sources": {
+    "normal_original_kernel": {
+      "path_relative_to_kernel_work": "device/20261028-current-kernel-diagnostic/running-device-tree.dtb",
+      "bytes": 298521,
+      "sha256": "2db8d54d4d6cc8b85bf087ae0d183e822851ba226da0aa1cf3dd4198b1416060",
+      "version": 17,
+      "memreserve_table": []
+    },
+    "normal_compiled_414_kernel": {
+      "path_relative_to_kernel_work": "device/20261028-compiled-414-diagnostic/running-device-tree.dtb",
+      "bytes": 298521,
+      "sha256": "341f7aacb85314a262296cdab26f97fe3c8b913df78cbedc01e56e1befb866b2",
+      "version": 17,
+      "memreserve_table": []
+    }
+  },
+  "selected_hardware_equal_between_normal_runs": true,
+  "authored_descriptive_properties": [
+    {
+      "draft_path": "/",
+      "property": "model",
+      "value": "realme X7 Pro RMX2121CN",
+      "origin": "Authored human-readable description of the identified device; not a property copied from either live FDT.",
+      "purpose": "Provide the board model required by the dtschema root-node schema without inventing a hardware compatible.",
+      "hardware_configuration_changed": false
+    }
+  ],
+  "normal_log_evidence": {
+    "normal_original_kernel": {
+      "path_relative_to_kernel_work": "device\\20261028-current-kernel-diagnostic\\dmesg.txt",
+      "sha256": "cf106e923573d6d8bc1c71a967969480506c4c1d03aabeda4eb4496f03200616",
+      "dynamic_reservation_observations": {
+        "reserve-memory-ssmr": {
+          "address": "0x23fffe000",
+          "size": "0x1000",
+          "evidence_line": 5
+        },
+        "reserve-memory-scp_share": {
+          "address": "0x8d000000",
+          "size": "0x300000",
+          "evidence_line": 8
+        },
+        "ion-carveout-heap": {
+          "address": "0xbff64000",
+          "size": "0xc000",
+          "evidence_line": 10
+        },
+        "zone-movable-cma-memory": {
+          "address": "0x20a000000",
+          "size": "0x35000000",
+          "evidence_line": 12
+        },
+        "gps-reserve-memory": {
+          "address": "0xbd600000",
+          "size": "0x100000",
+          "evidence_line": 35
+        },
+        "wifi-reserve-memory": {
+          "address": "0xbc000000",
+          "printed_size_mib_rounded_down": 15,
+          "size": "0xf20000",
+          "size_source": "FDT, not rounded log size",
+          "evidence_line": 37,
+          "mapping_basis": "the immediately following reserved-memory initializer identifies wifi-reserve-memory"
+        },
+        "consys-reserve-memory": {
+          "address": "0xbd100000",
+          "size": "0x450000",
+          "evidence_line": 39
+        },
+        "reserve-memory-adsp_share": {
+          "address": "0x76750000",
+          "size": "0x9c0000",
+          "evidence_line": 2184
+        }
+      },
+      "runtime_midr": {
+        "0": {
+          "midr": "0x412fd050",
+          "evidence_line": 3
+        },
+        "1": {
+          "midr": "0x412fd050",
+          "evidence_line": 231
+        },
+        "2": {
+          "midr": "0x412fd050",
+          "evidence_line": 234
+        },
+        "3": {
+          "midr": "0x412fd050",
+          "evidence_line": 237
+        },
+        "4": {
+          "midr": "0x411fd0d0",
+          "evidence_line": 248
+        },
+        "5": {
+          "midr": "0x411fd0d0",
+          "evidence_line": 257
+        },
+        "6": {
+          "midr": "0x411fd0d0",
+          "evidence_line": 266
+        },
+        "7": {
+          "midr": "0x411fd0d0",
+          "evidence_line": 275
+        }
+      },
+      "secondary_mpidr_in_log": false,
+      "cpu_log_limit": "Secondary lines contain MIDR core identification, not MPIDR; CPU reg is retained from both live FDTs."
+    },
+    "normal_compiled_414_kernel": {
+      "path_relative_to_kernel_work": "device\\20261028-compiled-414-diagnostic\\dmesg.txt",
+      "sha256": "4015fe1993529167d79ced3bff4760a45a45b51e8d1efd93c19a79a93cb7b5ec",
+      "dynamic_reservation_observations": {
+        "reserve-memory-ssmr": {
+          "address": "0x23fffe000",
+          "size": "0x1000",
+          "evidence_line": 5
+        },
+        "reserve-memory-scp_share": {
+          "address": "0x8d000000",
+          "size": "0x300000",
+          "evidence_line": 8
+        },
+        "ion-carveout-heap": {
+          "address": "0xbff64000",
+          "size": "0xc000",
+          "evidence_line": 10
+        },
+        "zone-movable-cma-memory": {
+          "address": "0x20a000000",
+          "size": "0x35000000",
+          "evidence_line": 12
+        },
+        "gps-reserve-memory": {
+          "address": "0xbd600000",
+          "size": "0x100000",
+          "evidence_line": 35
+        },
+        "wifi-reserve-memory": {
+          "address": "0xbc000000",
+          "printed_size_mib_rounded_down": 15,
+          "size": "0xf20000",
+          "size_source": "FDT, not rounded log size",
+          "evidence_line": 37,
+          "mapping_basis": "the immediately following reserved-memory initializer identifies wifi-reserve-memory"
+        },
+        "consys-reserve-memory": {
+          "address": "0xbd100000",
+          "size": "0x450000",
+          "evidence_line": 39
+        },
+        "reserve-memory-adsp_share": {
+          "address": "0x76750000",
+          "size": "0x9c0000",
+          "evidence_line": 2186
+        }
+      },
+      "runtime_midr": {
+        "0": {
+          "midr": "0x412fd050",
+          "evidence_line": 3
+        },
+        "1": {
+          "midr": "0x412fd050",
+          "evidence_line": 231
+        },
+        "2": {
+          "midr": "0x412fd050",
+          "evidence_line": 234
+        },
+        "3": {
+          "midr": "0x412fd050",
+          "evidence_line": 237
+        },
+        "4": {
+          "midr": "0x411fd0d0",
+          "evidence_line": 248
+        },
+        "5": {
+          "midr": "0x411fd0d0",
+          "evidence_line": 257
+        },
+        "6": {
+          "midr": "0x411fd0d0",
+          "evidence_line": 266
+        },
+        "7": {
+          "midr": "0x411fd0d0",
+          "evidence_line": 275
+        }
+      },
+      "secondary_mpidr_in_log": false,
+      "cpu_log_limit": "Secondary lines contain MIDR core identification, not MPIDR; CPU reg is retained from both live FDTs."
+    }
+  },
+  "dynamic_address_assessment": {
+    "observed_same_address_and_size_in_both_414_logs": 8,
+    "enabled_without_confirmed_allocation_address": [
+      "reserve-memory-dram_r1_dummy_read",
+      "reserve-memory-dram_r0_dummy_read",
+      "reserve-memory-sspm_share",
+      "reserve-memory-mcupm_share"
+    ],
+    "disabled_template": "zmc-default",
+    "all_dynamic_reservations_are_boot_blockers_until_reviewed": true,
+    "reason": "4.14 allocation observations do not establish the bootloader or coprocessor address contract, or 6.18 allocator equivalence. No observed address has been frozen into this draft."
+  },
+  "runtime_cpu_source": {
+    "path": "device\\20261028-android-cpu-identification.json",
+    "sha256": "0cf0df4ba87142ab101013ae6ea1df4d2112dbcac91cb8f79b2538d772b62280"
+  },
+  "cpu_mapping": [
+    {
+      "source_path": "/cpus/cpu@000",
+      "draft_path": "/cpus/cpu@0",
+      "dt_claim": {
+        "reg": [
+          "0x0"
+        ],
+        "clock-frequency": [
+          "0x65633340"
+        ],
+        "compatible": [
+          "arm,cortex-a55"
+        ],
+        "enable-method": [
+          "psci"
+        ],
+        "device_type": [
+          "cpu"
+        ]
+      },
+      "runtime_id": {
+        "CPU implementer": "0x41",
+        "CPU architecture": "8",
+        "CPU variant": "0x2",
+        "CPU part": "0xd05",
+        "CPU revision": "0"
+      },
+      "draft_compatible": "arm,cortex-a55",
+      "omitted": [
+        "clock-frequency",
+        "cache/topology/OPP/idle-state data not implemented"
+      ]
+    },
+    {
+      "source_path": "/cpus/cpu@001",
+      "draft_path": "/cpus/cpu@100",
+      "dt_claim": {
+        "reg": [
+          "0x100"
+        ],
+        "clock-frequency": [
+          "0x65633340"
+        ],
+        "compatible": [
+          "arm,cortex-a55"
+        ],
+        "enable-method": [
+          "psci"
+        ],
+        "device_type": [
+          "cpu"
+        ]
+      },
+      "runtime_id": {
+        "CPU implementer": "0x41",
+        "CPU architecture": "8",
+        "CPU variant": "0x2",
+        "CPU part": "0xd05",
+        "CPU revision": "0"
+      },
+      "draft_compatible": "arm,cortex-a55",
+      "omitted": [
+        "clock-frequency",
+        "cache/topology/OPP/idle-state data not implemented"
+      ]
+    },
+    {
+      "source_path": "/cpus/cpu@002",
+      "draft_path": "/cpus/cpu@200",
+      "dt_claim": {
+        "reg": [
+          "0x200"
+        ],
+        "clock-frequency": [
+          "0x65633340"
+        ],
+        "compatible": [
+          "arm,cortex-a55"
+        ],
+        "enable-method": [
+          "psci"
+        ],
+        "device_type": [
+          "cpu"
+        ]
+      },
+      "runtime_id": {
+        "CPU implementer": "0x41",
+        "CPU architecture": "8",
+        "CPU variant": "0x2",
+        "CPU part": "0xd05",
+        "CPU revision": "0"
+      },
+      "draft_compatible": "arm,cortex-a55",
+      "omitted": [
+        "clock-frequency",
+        "cache/topology/OPP/idle-state data not implemented"
+      ]
+    },
+    {
+      "source_path": "/cpus/cpu@003",
+      "draft_path": "/cpus/cpu@300",
+      "dt_claim": {
+        "reg": [
+          "0x300"
+        ],
+        "clock-frequency": [
+          "0x65633340"
+        ],
+        "compatible": [
+          "arm,cortex-a55"
+        ],
+        "enable-method": [
+          "psci"
+        ],
+        "device_type": [
+          "cpu"
+        ]
+      },
+      "runtime_id": {
+        "CPU implementer": "0x41",
+        "CPU architecture": "8",
+        "CPU variant": "0x2",
+        "CPU part": "0xd05",
+        "CPU revision": "0"
+      },
+      "draft_compatible": "arm,cortex-a55",
+      "omitted": [
+        "clock-frequency",
+        "cache/topology/OPP/idle-state data not implemented"
+      ]
+    },
+    {
+      "source_path": "/cpus/cpu@100",
+      "draft_path": "/cpus/cpu@400",
+      "dt_claim": {
+        "reg": [
+          "0x400"
+        ],
+        "clock-frequency": [
+          "0x8166d4c0"
+        ],
+        "compatible": [
+          "arm,cortex-a75"
+        ],
+        "enable-method": [
+          "psci"
+        ],
+        "device_type": [
+          "cpu"
+        ]
+      },
+      "runtime_id": {
+        "CPU implementer": "0x41",
+        "CPU architecture": "8",
+        "CPU variant": "0x1",
+        "CPU part": "0xd0d",
+        "CPU revision": "0"
+      },
+      "draft_compatible": "arm,cortex-a77",
+      "omitted": [
+        "clock-frequency",
+        "cache/topology/OPP/idle-state data not implemented"
+      ]
+    },
+    {
+      "source_path": "/cpus/cpu@101",
+      "draft_path": "/cpus/cpu@500",
+      "dt_claim": {
+        "reg": [
+          "0x500"
+        ],
+        "clock-frequency": [
+          "0x8166d4c0"
+        ],
+        "compatible": [
+          "arm,cortex-a75"
+        ],
+        "enable-method": [
+          "psci"
+        ],
+        "device_type": [
+          "cpu"
+        ]
+      },
+      "runtime_id": {
+        "CPU implementer": "0x41",
+        "CPU architecture": "8",
+        "CPU variant": "0x1",
+        "CPU part": "0xd0d",
+        "CPU revision": "0"
+      },
+      "draft_compatible": "arm,cortex-a77",
+      "omitted": [
+        "clock-frequency",
+        "cache/topology/OPP/idle-state data not implemented"
+      ]
+    },
+    {
+      "source_path": "/cpus/cpu@102",
+      "draft_path": "/cpus/cpu@600",
+      "dt_claim": {
+        "reg": [
+          "0x600"
+        ],
+        "clock-frequency": [
+          "0x8166d4c0"
+        ],
+        "compatible": [
+          "arm,cortex-a75"
+        ],
+        "enable-method": [
+          "psci"
+        ],
+        "device_type": [
+          "cpu"
+        ]
+      },
+      "runtime_id": {
+        "CPU implementer": "0x41",
+        "CPU architecture": "8",
+        "CPU variant": "0x1",
+        "CPU part": "0xd0d",
+        "CPU revision": "0"
+      },
+      "draft_compatible": "arm,cortex-a77",
+      "omitted": [
+        "clock-frequency",
+        "cache/topology/OPP/idle-state data not implemented"
+      ]
+    },
+    {
+      "source_path": "/cpus/cpu@103",
+      "draft_path": "/cpus/cpu@700",
+      "dt_claim": {
+        "reg": [
+          "0x700"
+        ],
+        "clock-frequency": [
+          "0x8166d4c0"
+        ],
+        "compatible": [
+          "arm,cortex-a75"
+        ],
+        "enable-method": [
+          "psci"
+        ],
+        "device_type": [
+          "cpu"
+        ]
+      },
+      "runtime_id": {
+        "CPU implementer": "0x41",
+        "CPU architecture": "8",
+        "CPU variant": "0x1",
+        "CPU part": "0xd0d",
+        "CPU revision": "0"
+      },
+      "draft_compatible": "arm,cortex-a77",
+      "omitted": [
+        "clock-frequency",
+        "cache/topology/OPP/idle-state data not implemented"
+      ]
+    }
+  ],
+  "core_hardware": {
+    "/": {
+      "compatible": [
+        "mediatek,MT6885"
+      ]
+    },
+    "/memory": {
+      "reg": [
+        "0x0",
+        "0x40000000",
+        "0x2",
+        "0x0"
+      ],
+      "device_type": [
+        "memory"
+      ]
+    },
+    "/psci": {
+      "compatible": [
+        "arm,psci-1.0"
+      ],
+      "method": [
+        "smc"
+      ]
+    },
+    "/interrupt-controller": {
+      "reg": [
+        "0x0",
+        "0xc000000",
+        "0x0",
+        "0x40000",
+        "0x0",
+        "0xc040000",
+        "0x0",
+        "0x200000"
+      ],
+      "interrupts": [
+        "0x1",
+        "0x9",
+        "0x4"
+      ],
+      "compatible": [
+        "arm,gic-v3"
+      ]
+    },
+    "/timer": {
+      "interrupts": [
+        "0x1",
+        "0xd",
+        "0x4",
+        "0x1",
+        "0xe",
+        "0x4",
+        "0x1",
+        "0xb",
+        "0x4",
+        "0x1",
+        "0xa",
+        "0x4"
+      ],
+      "clock-frequency": [
+        "0xc65d40"
+      ],
+      "compatible": [
+        "arm,armv8-timer"
+      ]
+    }
+  },
+  "reserved_memory_mapping": [
+    {
+      "source_path": "/reserved-memory/mblock-30-DPM-reserved",
+      "draft_path": "/reserved-memory/reserved@ffc70000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0xffc70000",
+          "0x0",
+          "0x190000"
+        ],
+        "compatible": [
+          "mediatek,DPM-reserved"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-29-mediatek,reserve-memory-adsp",
+      "draft_path": "/reserved-memory/reserved@74000000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x74000000",
+          "0x0",
+          "0xe30000"
+        ],
+        "compatible": [
+          "mediatek,mediatek,reserve-memory-adsp"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-28-ap_md_c_smem",
+      "draft_path": "/reserved-memory/reserved@88000000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x88000000",
+          "0x0",
+          "0x4960000"
+        ],
+        "compatible": [
+          "mediatek,ap_md_c_smem"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-27-ap_md_nc_smem",
+      "draft_path": "/reserved-memory/reserved@8e000000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x8e000000",
+          "0x0",
+          "0x1800000"
+        ],
+        "compatible": [
+          "mediatek,ap_md_nc_smem"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-26-md_mem_usage",
+      "draft_path": "/reserved-memory/reserved@f81d0000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0xf81d0000",
+          "0x0",
+          "0x3e30000"
+        ],
+        "compatible": [
+          "mediatek,md_mem_usage"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-25-md_mem_usage",
+      "draft_path": "/reserved-memory/reserved@e2000000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0xe2000000",
+          "0x0",
+          "0x6e50000"
+        ],
+        "compatible": [
+          "mediatek,md_mem_usage"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-24-md_mem_usage",
+      "draft_path": "/reserved-memory/reserved@e1000000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0xe1000000",
+          "0x0",
+          "0x150000"
+        ],
+        "compatible": [
+          "mediatek,md_mem_usage"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-23-md_mem_usage",
+      "draft_path": "/reserved-memory/reserved@de000000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0xde000000",
+          "0x0",
+          "0x2350000"
+        ],
+        "compatible": [
+          "mediatek,md_mem_usage"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-22-ccci_tag_mem",
+      "draft_path": "/reserved-memory/reserved@bff70000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0xbff70000",
+          "0x0",
+          "0x10000"
+        ],
+        "compatible": [
+          "mediatek,ccci_tag_mem"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-21-SCP-reserved",
+      "draft_path": "/reserved-memory/reserved@9fa00000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x9fa00000",
+          "0x0",
+          "0x500000"
+        ],
+        "compatible": [
+          "mediatek,SCP-reserved"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-20-SPM-reserved",
+      "draft_path": "/reserved-memory/reserved@75700000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x75700000",
+          "0x0",
+          "0x10000"
+        ],
+        "compatible": [
+          "mediatek,SPM-reserved"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-19-vpu_binary",
+      "draft_path": "/reserved-memory/reserved@bd740000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0xbd740000",
+          "0x0",
+          "0x26c0000"
+        ],
+        "compatible": [
+          "mediatek,vpu_binary"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-18-framebuffer",
+      "draft_path": "/reserved-memory/reserved@77110000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x77110000",
+          "0x0",
+          "0x1df0000"
+        ],
+        "compatible": [
+          "mediatek,framebuffer"
+        ]
+      },
+      "copied_properties": [
+        "reg"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-17-minirdump",
+      "draft_path": "/reserved-memory/reserved@4d0f0000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x4d0f0000",
+          "0x0",
+          "0x10000"
+        ],
+        "compatible": [
+          "mediatek,minirdump"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-16-pstore",
+      "draft_path": "/reserved-memory/reserved@4d010000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x4d010000",
+          "0x0",
+          "0xe0000"
+        ],
+        "compatible": [
+          "mediatek,pstore"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-15-aee_debug_kinfo",
+      "draft_path": "/reserved-memory/reserved@4d000000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x4d000000",
+          "0x0",
+          "0x10000"
+        ],
+        "compatible": [
+          "mediatek,aee_debug_kinfo"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-14-PICACHU",
+      "draft_path": "/reserved-memory/reserved@ffe00000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0xffe00000",
+          "0x0",
+          "0x80000"
+        ],
+        "compatible": [
+          "mediatek,PICACHU"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-13-MCUPM-reserved",
+      "draft_path": "/reserved-memory/reserved@7e900000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x7e900000",
+          "0x0",
+          "0x100000"
+        ],
+        "compatible": [
+          "mediatek,MCUPM-reserved"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-12-tee-reserved",
+      "draft_path": "/reserved-memory/reserved@78f00000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x78f00000",
+          "0x0",
+          "0x5500000"
+        ],
+        "compatible": [
+          "mediatek,tee-reserved"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-11-SSPM-reserved",
+      "draft_path": "/reserved-memory/reserved@7feb0000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x7feb0000",
+          "0x0",
+          "0x100000"
+        ],
+        "compatible": [
+          "mediatek,SSPM-reserved"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-10-tee-secmem",
+      "draft_path": "/reserved-memory/reserved@7e400000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x7e400000",
+          "0x0",
+          "0x400000"
+        ],
+        "compatible": [
+          "mediatek,tee-secmem"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-9-atf-log-reserved",
+      "draft_path": "/reserved-memory/reserved@bfe00000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0xbfe00000",
+          "0x0",
+          "0x40000"
+        ],
+        "compatible": [
+          "mediatek,atf-log-reserved"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-8-atf-ramdump-reserved",
+      "draft_path": "/reserved-memory/reserved@bff80000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0xbff80000",
+          "0x0",
+          "0x80000"
+        ],
+        "compatible": [
+          "mediatek,atf-ramdump-reserved"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-7-atf-reserved",
+      "draft_path": "/reserved-memory/reserved@4ce00000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x4ce00000",
+          "0x0",
+          "0x200000"
+        ],
+        "compatible": [
+          "mediatek,atf-reserved"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-6-log_store",
+      "draft_path": "/reserved-memory/reserved@7ffbf000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x7ffbf000",
+          "0x0",
+          "0x40000"
+        ],
+        "compatible": [
+          "mediatek,log_store"
+        ]
+      },
+      "copied_properties": [
+        "reg"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-5-gz-log",
+      "draft_path": "/reserved-memory/reserved@7e800000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x7e800000",
+          "0x0",
+          "0x41000"
+        ],
+        "compatible": [
+          "mediatek,gz-log"
+        ]
+      },
+      "copied_properties": [
+        "reg"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-4-gz",
+      "draft_path": "/reserved-memory/reserved@7ea00000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x7ea00000",
+          "0x0",
+          "0x1400000"
+        ],
+        "compatible": [
+          "mediatek,gz"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-3-emi_mbist_buf",
+      "draft_path": "/reserved-memory/reserved@7ffff000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x0",
+          "0x7ffff000",
+          "0x0",
+          "0x1000"
+        ],
+        "compatible": [
+          "mediatek,emi_mbist_buf"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-2-dramc-rk1",
+      "draft_path": "/reserved-memory/reserved@23ffff000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x2",
+          "0x3ffff000",
+          "0x0",
+          "0x1000"
+        ],
+        "compatible": [
+          "mediatek,dramc-rk1"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/mblock-1-dramc-rk0",
+      "draft_path": "/reserved-memory/reserved@13ffff000",
+      "source_hardware_properties": {
+        "reg": [
+          "0x1",
+          "0x3ffff000",
+          "0x0",
+          "0x1000"
+        ],
+        "compatible": [
+          "mediatek,dramc-rk0"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "reg",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/zone-movable-cma-memory",
+      "draft_path": "/reserved-memory/dynamic-reservation-0",
+      "source_hardware_properties": {
+        "size": [
+          "0x0",
+          "0x35000000"
+        ],
+        "alignment": [
+          "0x0",
+          "0x1000000"
+        ],
+        "alloc-ranges": [
+          "0x0",
+          "0xc0000000",
+          "0x4",
+          "0x0"
+        ],
+        "compatible": [
+          "mediatek,zone_movable_cma"
+        ]
+      },
+      "copied_properties": [
+        "size",
+        "alignment",
+        "alloc-ranges"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/reserve-memory-dram_r1_dummy_read",
+      "draft_path": "/reserved-memory/dynamic-reservation-1",
+      "source_hardware_properties": {
+        "size": [
+          "0x0",
+          "0x1000"
+        ],
+        "alignment": [
+          "0x0",
+          "0x1000"
+        ],
+        "alloc-ranges": [
+          "0x1",
+          "0x40000000",
+          "0x0",
+          "0xfffff000"
+        ],
+        "compatible": [
+          "reserve-memory-dram_r1_dummy_read"
+        ]
+      },
+      "copied_properties": [
+        "size",
+        "alignment",
+        "alloc-ranges"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/reserve-memory-dram_r0_dummy_read",
+      "draft_path": "/reserved-memory/dynamic-reservation-2",
+      "source_hardware_properties": {
+        "size": [
+          "0x0",
+          "0x1000"
+        ],
+        "alignment": [
+          "0x0",
+          "0x1000"
+        ],
+        "alloc-ranges": [
+          "0x0",
+          "0x56000000",
+          "0x0",
+          "0x1e000000"
+        ],
+        "compatible": [
+          "reserve-memory-dram_r0_dummy_read"
+        ]
+      },
+      "copied_properties": [
+        "size",
+        "alignment",
+        "alloc-ranges"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/reserve-memory-ssmr",
+      "draft_path": "/reserved-memory/dynamic-reservation-3",
+      "source_hardware_properties": {
+        "size": [
+          "0x0",
+          "0x1000"
+        ],
+        "alignment": [
+          "0x0",
+          "0x1000"
+        ],
+        "alloc-ranges": [
+          "0x0",
+          "0xc0000000",
+          "0x4",
+          "0x0"
+        ],
+        "compatible": [
+          "mediatek,reserve-memory-ssmr"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "size",
+        "alignment",
+        "alloc-ranges",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/zmc-default",
+      "draft_path": "/reserved-memory/dynamic-reservation-4",
+      "source_hardware_properties": {
+        "size": [
+          "0x0",
+          "0x35000000"
+        ],
+        "alignment": [
+          "0x0",
+          "0x1000000"
+        ],
+        "alloc-ranges": [
+          "0x0",
+          "0xc0000000",
+          "0x4",
+          "0x0"
+        ],
+        "compatible": [
+          "mediatek,zone_movable_cma"
+        ],
+        "status": [
+          "disabled"
+        ]
+      },
+      "copied_properties": [
+        "size",
+        "alignment",
+        "alloc-ranges",
+        "status"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/ion-carveout-heap",
+      "draft_path": "/reserved-memory/dynamic-reservation-5",
+      "source_hardware_properties": {
+        "size": [
+          "0x0",
+          "0xc000"
+        ],
+        "alignment": [
+          "0x0",
+          "0x1000"
+        ],
+        "alloc-ranges": [
+          "0x0",
+          "0x40000000",
+          "0x0",
+          "0x80000000"
+        ],
+        "compatible": [
+          "mediatek,ion-carveout-heap"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "size",
+        "alignment",
+        "alloc-ranges",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/consys-reserve-memory",
+      "draft_path": "/reserved-memory/dynamic-reservation-6",
+      "source_hardware_properties": {
+        "size": [
+          "0x0",
+          "0x450000"
+        ],
+        "alignment": [
+          "0x0",
+          "0x100000"
+        ],
+        "alloc-ranges": [
+          "0x0",
+          "0x40000000",
+          "0x0",
+          "0x80000000"
+        ],
+        "compatible": [
+          "mediatek,consys-reserve-memory"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "size",
+        "alignment",
+        "alloc-ranges",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/wifi-reserve-memory",
+      "draft_path": "/reserved-memory/dynamic-reservation-7",
+      "source_hardware_properties": {
+        "size": [
+          "0x0",
+          "0xf20000"
+        ],
+        "alignment": [
+          "0x0",
+          "0x1000000"
+        ],
+        "alloc-ranges": [
+          "0x0",
+          "0x40000000",
+          "0x0",
+          "0x80000000"
+        ],
+        "compatible": [
+          "shared-dma-pool"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "size",
+        "alignment",
+        "alloc-ranges",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/gps-reserve-memory",
+      "draft_path": "/reserved-memory/dynamic-reservation-8",
+      "source_hardware_properties": {
+        "size": [
+          "0x0",
+          "0x100000"
+        ],
+        "alignment": [
+          "0x0",
+          "0x100000"
+        ],
+        "alloc-ranges": [
+          "0x0",
+          "0x40000000",
+          "0x0",
+          "0x80000000"
+        ],
+        "compatible": [
+          "mediatek,gps-reserve-memory"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "size",
+        "alignment",
+        "alloc-ranges",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/reserve-memory-sspm_share",
+      "draft_path": "/reserved-memory/dynamic-reservation-9",
+      "source_hardware_properties": {
+        "size": [
+          "0x0",
+          "0x910000"
+        ],
+        "alignment": [
+          "0x0",
+          "0x10000"
+        ],
+        "alloc-ranges": [
+          "0x0",
+          "0x40000000",
+          "0x0",
+          "0x60000000"
+        ],
+        "compatible": [
+          "mediatek,reserve-memory-sspm_share"
+        ],
+        "status": [
+          "okay"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "size",
+        "alignment",
+        "alloc-ranges",
+        "no-map",
+        "status"
+      ],
+      "status_encoding_normalized": true,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/reserve-memory-adsp_share",
+      "draft_path": "/reserved-memory/dynamic-reservation-10",
+      "source_hardware_properties": {
+        "size": [
+          "0x0",
+          "0x9c0000"
+        ],
+        "alignment": [
+          "0x0",
+          "0x10000"
+        ],
+        "alloc-ranges": [
+          "0x0",
+          "0x40000000",
+          "0x0",
+          "0x40000000"
+        ],
+        "compatible": [
+          "mediatek,reserve-memory-adsp_share"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "size",
+        "alignment",
+        "alloc-ranges",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/reserve-memory-scp_share",
+      "draft_path": "/reserved-memory/dynamic-reservation-11",
+      "source_hardware_properties": {
+        "size": [
+          "0x0",
+          "0x300000"
+        ],
+        "alignment": [
+          "0x0",
+          "0x1000000"
+        ],
+        "alloc-ranges": [
+          "0x0",
+          "0x50000000",
+          "0x0",
+          "0x40000000"
+        ],
+        "compatible": [
+          "mediatek,reserve-memory-scp_share"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "size",
+        "alignment",
+        "alloc-ranges",
+        "no-map"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    },
+    {
+      "source_path": "/reserved-memory/reserve-memory-mcupm_share",
+      "draft_path": "/reserved-memory/dynamic-reservation-12",
+      "source_hardware_properties": {
+        "size": [
+          "0x0",
+          "0x200000"
+        ],
+        "alignment": [
+          "0x0",
+          "0x10000"
+        ],
+        "alloc-ranges": [
+          "0x0",
+          "0x40000000",
+          "0x0",
+          "0x60000000"
+        ],
+        "compatible": [
+          "mediatek,reserve-memory-mcupm_share"
+        ],
+        "status": [
+          "okay"
+        ],
+        "no-map": true
+      },
+      "copied_properties": [
+        "size",
+        "alignment",
+        "alloc-ranges",
+        "no-map",
+        "status"
+      ],
+      "status_encoding_normalized": false,
+      "compatible_policy": "omitted; generic reservation only, no vendor consumer implementation"
+    }
+  ],
+  "fixed_reservations": 30,
+  "dynamic_reservations": 13,
+  "binding_references": {
+    "cpu": "https://android.googlesource.com/kernel/common/+/846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef/Documentation/devicetree/bindings/arm/cpus.yaml",
+    "psci": "https://android.googlesource.com/kernel/common/+/846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef/Documentation/devicetree/bindings/arm/psci.yaml",
+    "gic_v3": "https://android.googlesource.com/kernel/common/+/846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef/Documentation/devicetree/bindings/interrupt-controller/arm,gic-v3.yaml",
+    "timer": "https://android.googlesource.com/kernel/common/+/846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef/Documentation/devicetree/bindings/timer/arm,arch_timer.yaml",
+    "reserved_memory_schema_location": "https://android.googlesource.com/kernel/common/+/846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef/Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt",
+    "reserved_memory_implementation": "https://android.googlesource.com/kernel/common/+/846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef/drivers/of/of_reserved_mem.c",
+    "ramoops": "https://android.googlesource.com/kernel/common/+/846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef/Documentation/devicetree/bindings/reserved-memory/ramoops.yaml",
+    "cpu_part_ids": "https://android.googlesource.com/kernel/common/+/846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef/arch/arm64/include/asm/cputype.h"
+  },
+  "excluded": {
+    "chosen": "No bootargs, entropy seeds, identifiers or initrd addresses copied.",
+    "uart": "No stdout-path; mux, usable console and baud have not been established.",
+    "ramoops": "Only reservation copied. Both normal logs confirm address=0x4d010000, size=0xe0000, console_size=0x40000, pmsg_size=0x10000; full layout/mem-type/persistence not proven.",
+    "clock_pmic_usb_ufs_iommu": "No device nodes or driver support implemented."
+  },
+  "unresolved": [
+    "Bootloader mutation/injection of chosen, RAM and reserved-memory must be observed for a new DT.",
+    "Snapshot mblocks may move between boots or firmware versions; do not package this DT unchanged.",
+    "Generic dynamic allocation retains space but may choose different addresses and does not implement vendor CMA/DMA consumers.",
+    "Static/dynamic firmware-use overlap is not resolved; allocator avoidance does not establish firmware correctness.",
+    "No usable early UART/ramoops/USB log channel is configured.",
+    "No target ACK configuration, boot packaging, schema validation or phone boot test has been done."
+  ]
+}

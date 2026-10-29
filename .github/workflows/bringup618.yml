@@ -1,0 +1,77 @@
+name: ACK 6.18 bring-up checks - NO phone image
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: bringup618-checks-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  device-tree:
+    name: MT6885 draft / generic DT schemas
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Install host tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y device-tree-compiler libfdt-dev swig python3-dev python3-venv
+          python3 -m venv "$RUNNER_TEMP/dtschema"
+          "$RUNNER_TEMP/dtschema/bin/pip" install dtschema==2026.9
+          echo "$RUNNER_TEMP/dtschema/bin" >> "$GITHUB_PATH"
+      - name: Compile and check the draft against pinned ACK bindings
+        run: python3 scripts/check-bringup-dt.py --out artifacts/bringup618/dt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: bringup618-dt-NOT-FOR-FLASHING-${{ github.run_id }}
+          path: artifacts/bringup618/dt/
+          retention-days: 14
+          if-no-files-found: warn
+
+  initramfs:
+    name: Minimal init / generic ACK QEMU execution
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Install host compiler and emulator
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y clang lld qemu-system-arm
+      - name: Compile and verify deterministic initramfs
+        run: python3 bringup/minimal-initramfs/build.py --out artifacts/bringup618/initramfs --clang clang --lld ld.lld
+      - name: Download and verify the existing generic ACK build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p artifacts/bringup618/qemu
+          gh run view 40206193209 --repo lbdslbds/kernel-rmx2121cn --json status,conclusion,headSha,url > artifacts/bringup618/qemu/kernel-run.json
+          python3 -c 'import json; r=json.load(open("artifacts/bringup618/qemu/kernel-run.json")); assert r["status"]=="completed" and r["conclusion"]=="success" and r["headSha"]=="af6bf3a3af2a1fb77fcc43aa0c5ad2a6ff2beaff"'
+          gh run download 40206193209 --repo lbdslbds/kernel-rmx2121cn --name android17-ack-diagnostics-40206193209-1 --dir "$RUNNER_TEMP/ack-diagnostics"
+          gh run download 40206193209 --repo lbdslbds/kernel-rmx2121cn --name android17-ack-generic-NOT-FOR-RMX2121-40206193209-1 --dir "$RUNNER_TEMP/ack-generic"
+          python3 scripts/verify-android17-artifacts.py "$RUNNER_TEMP/ack-diagnostics" "$RUNNER_TEMP/ack-generic" \
+            --run-url https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40206193209 \
+            --expected-build-commit af6bf3a3af2a1fb77fcc43aa0c5ad2a6ff2beaff \
+            --output artifacts/bringup618/qemu/kernel-verification.json
+      - name: Boot generic ACK with minimal init in QEMU virt
+        run: |
+          python3 scripts/check-initramfs-qemu.py --kernel "$RUNNER_TEMP/ack-generic/Image" \
+            --initrd artifacts/bringup618/initramfs/initramfs.cpio.gz --out artifacts/bringup618/qemu
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: bringup618-init-QEMU-ONLY-${{ github.run_id }}
+          path: artifacts/bringup618/
+          retention-days: 14
+          if-no-files-found: warn
