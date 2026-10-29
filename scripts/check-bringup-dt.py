@@ -75,6 +75,14 @@ def main():
         report["dtb_sha256"] = digest(dtb)
         schema = out / "processed-schema.json"
         run("mk-schema", ["dt-mk-schema", "-j", "-o", str(schema), str(bindings)])
+        loaded = json.loads(schema.read_text())
+        required = ["arm/cpus.yaml", "arm/psci.yaml", "interrupt-controller/arm,gic-v3.yaml",
+                    "timer/arm,arch_timer.yaml", "reserved-memory/reserved-memory.yaml",
+                    "root-node.yaml", "memory.yaml"]
+        report["required_binding_ids"] = ["http://devicetree.org/schemas/" + name for name in required]
+        if not set(report["required_binding_ids"]) <= loaded.keys():
+            raise ValueError("one or more bindings required by this draft were not loaded")
+        report["schema_compilation_diagnostics"] = (out / "mk-schema.log").read_text()
         # dt-validate may exit zero despite findings. Any diagnostic fails this check.
         run("validate", ["dt-validate", "-s", str(schema), str(dtb)], True)
         run("unmatched-compatibles", ["dt-validate", "-m", "-s", str(schema), str(dtb)])

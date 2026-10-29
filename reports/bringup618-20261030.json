@@ -1,0 +1,616 @@
+{
+  "schema_version": 1,
+  "verification_date": "2026-10-30",
+  "run_url": "https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40907518385",
+  "build_commit": "1ec51fbf1dec14a3e371e08141dff17ec23e2090",
+  "actions_conclusion": "success",
+  "phone_accessed": false,
+  "phone_boot_tested": false,
+  "boot_image_produced": false,
+  "dt": {
+    "schema_version": 1,
+    "passed": true,
+    "device_boot_tested": false,
+    "scope": "DTC plus generic/core and matching ACK bindings; no MT6885 board binding",
+    "full_kernel_dtbs_check": false,
+    "flashable": false,
+    "ack_commit": "846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef",
+    "dts_sha256": "29880895c9c514ce10f55f7848e02236a922d196814ec49237c63155dcf7c929",
+    "dtschema_version": "2026.9",
+    "dtc_version": "Version: DTC 1.7.0",
+    "bindings_archive_sha256": "5211558fcab4ed94756bb68a3224a31a15d199d1d9dac5dfc9e0369d90c0d5ae",
+    "dtb_sha256": "8b484b1c688fc64686a7ec29357472f40dcb11d3cdd344f6192f9dbd23a168fd",
+    "coverage_limitations": [
+      "mediatek,MT6885 is retained from hardware evidence and has no supported board binding",
+      "Vendor reserve consumers, clocks, PMIC, watchdog, USB and UFS have not been ported",
+      "Schema validity cannot establish bootloader memory contracts or physical functionality"
+    ],
+    "required_binding_ids_loaded": [
+      "http://devicetree.org/schemas/arm/cpus.yaml",
+      "http://devicetree.org/schemas/arm/psci.yaml",
+      "http://devicetree.org/schemas/interrupt-controller/arm,gic-v3.yaml",
+      "http://devicetree.org/schemas/timer/arm,arch_timer.yaml",
+      "http://devicetree.org/schemas/reserved-memory/reserved-memory.yaml",
+      "http://devicetree.org/schemas/root-node.yaml",
+      "http://devicetree.org/schemas/memory.yaml"
+    ],
+    "schema_compilation_diagnostics": [
+      "firmware/gunyah-cma-mem.yaml: ignoring, error parsing file"
+    ],
+    "dtc_log_bytes": 0,
+    "validation_log_bytes": 0
+  },
+  "qemu": {
+    "passed": true,
+    "platform": "QEMU virt only",
+    "phone_boot_tested": false,
+    "rmx2121_dtb_used": false,
+    "storage_devices_attached": false,
+    "network_devices_attached": false,
+    "kernel_sha256": "f6c881edb063bd55d4ae7319a62a05b9c4f5b7960e5fe30bb5bc0a4d50e7373e",
+    "initramfs_sha256": "e6f197e02c742aab55b634e20e0fd99c61de305b8a73904ab481c0e73c53ec74",
+    "qemu_version": "QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)\nCopyright (c) 2003-2023 Fabrice Bellard and the QEMU Project developers",
+    "elapsed_seconds": 9.51,
+    "required_markers": [
+      "stage=entered",
+      "pid=1",
+      "mount-proc=0",
+      "mount-sysfs=0",
+      "mount-devtmpfs=-19",
+      "devtmpfs=fallback-to-archive-character-nodes",
+      "uname=0",
+      "machine=aarch64",
+      "stage=idle; persistent-storage=untouched-by-init"
+    ],
+    "idle_observation_seconds": 5,
+    "qemu_exit_code_after_host_stop": 0,
+    "console_sha256": "b8ee02a4de3023391201e3774598db1374163be2d65b455cfd8100a770066557"
+  },
+  "initramfs": {
+    "schema": 1,
+    "artifact_kind": "minimal-diagnostic-initramfs",
+    "flash_ready": false,
+    "device_tested": false,
+    "runtime_tested": false,
+    "sources": {
+      "init.c": "0fd2a90731861d67d980667675873db1baff603268e5285f21163bbf9a64bec0",
+      "start.S": "848f51fca92fdb1fb94773a98774e619a2f1b7662da3038869833f9b3441d56e",
+      "build.py": "b13521da306e685e8ac9e0ffc091131cab2ea50754309355df32929480e2a471"
+    },
+    "build": {
+      "mode": "compile-twice",
+      "identical_rebuild": true,
+      "compiler": {
+        "version": "Ubuntu clang version 18.1.3 (1ubuntu1)",
+        "sha256": "8ef402d453d1ba4902e4ee0f0f847f6cfa01400c95aa43c24e97818b9c0e3f45"
+      },
+      "linker": {
+        "version": "Ubuntu LLD 18.1.3 (compatible with GNU linkers)",
+        "sha256": "7ad9a0e8fe6d0e79b71172d731e33872c0274e49fceb7b516d774876d5a58ade"
+      },
+      "command": [
+        "clang",
+        "--target=aarch64-linux-gnu",
+        "-Os",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fno-stack-protector",
+        "-fno-pie",
+        "-fno-unwind-tables",
+        "-fno-asynchronous-unwind-tables",
+        "-mno-outline-atomics",
+        "-mgeneral-regs-only",
+        "-g0",
+        "-nostdlib",
+        "-static",
+        "-fuse-ld=lld",
+        "--ld-path=<ld.lld>",
+        "-Wl,-e,_start,--build-id=none,--no-undefined",
+        "-Wl,-z,max-page-size=4096,-z,noexecstack",
+        "init.c",
+        "start.S",
+        "-o",
+        "<output>/init"
+      ]
+    },
+    "elf": {
+      "machine": "AArch64",
+      "type": "ET_EXEC",
+      "static": true,
+      "entry": "0x201810",
+      "load_segments": [
+        {
+          "vaddr": "0x200000",
+          "file_size": 677,
+          "memory_size": 677,
+          "flags": 4,
+          "alignment": 4096
+        },
+        {
+          "vaddr": "0x2012a8",
+          "file_size": 1400,
+          "memory_size": 1400,
+          "flags": 5,
+          "alignment": 4096
+        },
+        {
+          "vaddr": "0x202820",
+          "file_size": 16,
+          "memory_size": 16,
+          "flags": 6,
+          "alignment": 4096
+        }
+      ],
+      "sha256": "a61dc4edb2594c2d8c3bf3214dede5460ddc4fe0ac743617d5d127b3623f756b",
+      "bytes": 3208
+    },
+    "archive_entries": [
+      {
+        "name": "dev",
+        "mode": "0o40755",
+        "bytes": 0,
+        "major": 0,
+        "minor": 0,
+        "sha256": null
+      },
+      {
+        "name": "proc",
+        "mode": "0o40755",
+        "bytes": 0,
+        "major": 0,
+        "minor": 0,
+        "sha256": null
+      },
+      {
+        "name": "sys",
+        "mode": "0o40755",
+        "bytes": 0,
+        "major": 0,
+        "minor": 0,
+        "sha256": null
+      },
+      {
+        "name": "dev/console",
+        "mode": "0o20600",
+        "bytes": 0,
+        "major": 5,
+        "minor": 1,
+        "sha256": null
+      },
+      {
+        "name": "dev/kmsg",
+        "mode": "0o20600",
+        "bytes": 0,
+        "major": 1,
+        "minor": 11,
+        "sha256": null
+      },
+      {
+        "name": "dev/null",
+        "mode": "0o20666",
+        "bytes": 0,
+        "major": 1,
+        "minor": 3,
+        "sha256": null
+      },
+      {
+        "name": "init",
+        "mode": "0o100755",
+        "bytes": 3208,
+        "major": 0,
+        "minor": 0,
+        "sha256": "a61dc4edb2594c2d8c3bf3214dede5460ddc4fe0ac743617d5d127b3623f756b"
+      }
+    ],
+    "artifacts": {
+      "init": {
+        "bytes": 3208,
+        "sha256": "a61dc4edb2594c2d8c3bf3214dede5460ddc4fe0ac743617d5d127b3623f756b"
+      },
+      "initramfs.cpio": {
+        "bytes": 4608,
+        "sha256": "06d533c5f5fae5fb65c6ba0285e58893a8237c2c0b37acb8f3924838e7e3e743"
+      },
+      "initramfs.cpio.gz": {
+        "bytes": 4631,
+        "sha256": "e6f197e02c742aab55b634e20e0fd99c61de305b8a73904ab481c0e73c53ec74"
+      }
+    },
+    "checks": [
+      "static ELF64 AArch64",
+      "entry in executable segment",
+      "no PT_INTERP or PT_DYNAMIC",
+      "no writable executable load segment",
+      "newc entry and metadata round-trip",
+      "gzip round-trip",
+      "deterministic archive bytes"
+    ]
+  },
+  "independent_download_review": {
+    "schema": 1,
+    "review_date": "2026-10-30",
+    "passed": true,
+    "review_type": "independent offline artifact cross-check; no execution or phone operation",
+    "run_url": "https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40907518385",
+    "build_commit": "1ec51fbf1dec14a3e371e08141dff17ec23e2090",
+    "cloud_run_status_source": "parent-provided successful job identity; no fresh network query in this offline review",
+    "source_sha256_matched_git": {
+      "init.c": "0fd2a90731861d67d980667675873db1baff603268e5285f21163bbf9a64bec0",
+      "start.S": "848f51fca92fdb1fb94773a98774e619a2f1b7662da3038869833f9b3441d56e",
+      "build.py": "b13521da306e685e8ac9e0ffc091131cab2ea50754309355df32929480e2a471"
+    },
+    "ci_verifier_sha256": "b4515901a2ba8ae2f7a6948636913a06c5a9a695bd57955c0b779c6507831116",
+    "ci_workflow_sha256": "43edfde306b4e22658464530e797b65f651e7f1a34c4439be64fbbc0273088bd",
+    "downloaded_file_hashes": {
+      "initramfs/init": {
+        "bytes": 3208,
+        "sha256": "a61dc4edb2594c2d8c3bf3214dede5460ddc4fe0ac743617d5d127b3623f756b"
+      },
+      "initramfs/init.rebuild": {
+        "bytes": 3208,
+        "sha256": "a61dc4edb2594c2d8c3bf3214dede5460ddc4fe0ac743617d5d127b3623f756b"
+      },
+      "initramfs/initramfs.cpio": {
+        "bytes": 4608,
+        "sha256": "06d533c5f5fae5fb65c6ba0285e58893a8237c2c0b37acb8f3924838e7e3e743"
+      },
+      "initramfs/initramfs.cpio.gz": {
+        "bytes": 4631,
+        "sha256": "e6f197e02c742aab55b634e20e0fd99c61de305b8a73904ab481c0e73c53ec74"
+      },
+      "initramfs/manifest.json": {
+        "bytes": 3885,
+        "sha256": "acb4952ed8709734d0b5d304e0c6ae0efdb05cad58699ccf8ba1bbc87b6edb23"
+      },
+      "initramfs/SHA256SUMS": {
+        "bytes": 236,
+        "sha256": "f564293775c9307465003591fd3b1b9025b9c1c9b8d0b3ea5e80b384250fb366"
+      },
+      "qemu/console.log": {
+        "bytes": 21942,
+        "sha256": "b8ee02a4de3023391201e3774598db1374163be2d65b455cfd8100a770066557"
+      },
+      "qemu/kernel-run.json": {
+        "bytes": 177,
+        "sha256": "5f8c82cfe0dd5f677342404fec79e12e966c5e0e3b65bea924151cb819bcb1ac"
+      },
+      "qemu/kernel-verification.json": {
+        "bytes": 2017,
+        "sha256": "a94d738ffe66ee46de1368f8028cdd6f93e58300d1a0bf7c68a57df1e96f2d0d"
+      },
+      "qemu/verification.json": {
+        "bytes": 1587,
+        "sha256": "3494b2ea96e3462a934dcc1b8d0114c6efaf158b4ee8bb5c3eef9a32537b1638"
+      }
+    },
+    "init_bytes": 3208,
+    "init_sha256": "a61dc4edb2594c2d8c3bf3214dede5460ddc4fe0ac743617d5d127b3623f756b",
+    "init_rebuild_byte_identical": true,
+    "initramfs_cpio_sha256": "06d533c5f5fae5fb65c6ba0285e58893a8237c2c0b37acb8f3924838e7e3e743",
+    "initramfs_gzip_sha256": "e6f197e02c742aab55b634e20e0fd99c61de305b8a73904ab481c0e73c53ec74",
+    "elf": {
+      "machine": "AArch64",
+      "type": "ET_EXEC",
+      "static": true,
+      "entry": "0x201810",
+      "load_segments": [
+        {
+          "vaddr": "0x200000",
+          "file_size": 677,
+          "memory_size": 677,
+          "flags": 4,
+          "alignment": 4096
+        },
+        {
+          "vaddr": "0x2012a8",
+          "file_size": 1400,
+          "memory_size": 1400,
+          "flags": 5,
+          "alignment": 4096
+        },
+        {
+          "vaddr": "0x202820",
+          "file_size": 16,
+          "memory_size": 16,
+          "flags": 6,
+          "alignment": 4096
+        }
+      ],
+      "sha256": "a61dc4edb2594c2d8c3bf3214dede5460ddc4fe0ac743617d5d127b3623f756b",
+      "bytes": 3208
+    },
+    "archive_entries": [
+      {
+        "name": "dev",
+        "mode": "0o40755",
+        "bytes": 0,
+        "major": 0,
+        "minor": 0,
+        "sha256": null
+      },
+      {
+        "name": "proc",
+        "mode": "0o40755",
+        "bytes": 0,
+        "major": 0,
+        "minor": 0,
+        "sha256": null
+      },
+      {
+        "name": "sys",
+        "mode": "0o40755",
+        "bytes": 0,
+        "major": 0,
+        "minor": 0,
+        "sha256": null
+      },
+      {
+        "name": "dev/console",
+        "mode": "0o20600",
+        "bytes": 0,
+        "major": 5,
+        "minor": 1,
+        "sha256": null
+      },
+      {
+        "name": "dev/kmsg",
+        "mode": "0o20600",
+        "bytes": 0,
+        "major": 1,
+        "minor": 11,
+        "sha256": null
+      },
+      {
+        "name": "dev/null",
+        "mode": "0o20666",
+        "bytes": 0,
+        "major": 1,
+        "minor": 3,
+        "sha256": null
+      },
+      {
+        "name": "init",
+        "mode": "0o100755",
+        "bytes": 3208,
+        "major": 0,
+        "minor": 0,
+        "sha256": "a61dc4edb2594c2d8c3bf3214dede5460ddc4fe0ac743617d5d127b3623f756b"
+      }
+    ],
+    "console_markers": {
+      "stage=entered": {
+        "count": 1,
+        "first_line": 275
+      },
+      "pid=1": {
+        "count": 2,
+        "first_line": 276
+      },
+      "mount-proc=0": {
+        "count": 1,
+        "first_line": 279
+      },
+      "mount-sysfs=0": {
+        "count": 2,
+        "first_line": 281
+      },
+      "mount-devtmpfs=-19": {
+        "count": 2,
+        "first_line": 284
+      },
+      "devtmpfs=fallback-to-archive-character-nodes": {
+        "count": 1,
+        "first_line": 286
+      },
+      "uname=0": {
+        "count": 2,
+        "first_line": 288
+      },
+      "sysname=Linux": {
+        "count": 2,
+        "first_line": 290
+      },
+      "release=6.18.33-android17-5-maybe-dirty-4k": {
+        "count": 1,
+        "first_line": 292
+      },
+      "machine=aarch64": {
+        "count": 1,
+        "first_line": 294
+      },
+      "stage=idle; persistent-storage=untouched-by-init": {
+        "count": 1,
+        "first_line": 296
+      }
+    },
+    "console_sha256": "b8ee02a4de3023391201e3774598db1374163be2d65b455cfd8100a770066557",
+    "kernel_sha256": "f6c881edb063bd55d4ae7319a62a05b9c4f5b7960e5fe30bb5bc0a4d50e7373e",
+    "kernel_release": "6.18.33-android17-5-maybe-dirty-4k",
+    "runtime_evidence": {
+      "qemu_version_reported": "QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)",
+      "elapsed_seconds_reported": 9.51,
+      "idle_observation_seconds_reported": 5,
+      "final_log_fault_pattern": "Kernel panic|Oops:|BUG:|Unable to handle kernel|WARNING:|Call trace:",
+      "matched_faults": false,
+      "host_sigterm_observed": true
+    },
+    "compiler_linker_recorded": {
+      "mode": "compile-twice",
+      "identical_rebuild": true,
+      "compiler": {
+        "version": "Ubuntu clang version 18.1.3 (1ubuntu1)",
+        "sha256": "8ef402d453d1ba4902e4ee0f0f847f6cfa01400c95aa43c24e97818b9c0e3f45"
+      },
+      "linker": {
+        "version": "Ubuntu LLD 18.1.3 (compatible with GNU linkers)",
+        "sha256": "7ad9a0e8fe6d0e79b71172d731e33872c0274e49fceb7b516d774876d5a58ade"
+      },
+      "command": [
+        "clang",
+        "--target=aarch64-linux-gnu",
+        "-Os",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fno-stack-protector",
+        "-fno-pie",
+        "-fno-unwind-tables",
+        "-fno-asynchronous-unwind-tables",
+        "-mno-outline-atomics",
+        "-mgeneral-regs-only",
+        "-g0",
+        "-nostdlib",
+        "-static",
+        "-fuse-ld=lld",
+        "--ld-path=<ld.lld>",
+        "-Wl,-e,_start,--build-id=none,--no-undefined",
+        "-Wl,-z,max-page-size=4096,-z,noexecstack",
+        "init.c",
+        "start.S",
+        "-o",
+        "<output>/init"
+      ]
+    },
+    "independent_tools": {
+      "readelf": "GNU readelf (GNU Binutils) 2.46",
+      "tar": "bsdtar 3.8.9 - libarchive 3.8.9 zlib/1.2.13.1-motley liblzma/5.8.3 bz2lib/1.0.8 libzstd/1.5.7 cng/2.0 libb2/bundled "
+    },
+    "checks": [
+      "valid SHA256SUMS syntax: 617d5d127b3623f756b  init",
+      "unique expected checksum file: init",
+      "SHA256SUMS matches init",
+      "manifest artifact matches init",
+      "valid SHA256SUMS syntax: 8e7e3e743  initramfs.cpio",
+      "unique expected checksum file: initramfs.cpio",
+      "SHA256SUMS matches initramfs.cpio",
+      "manifest artifact matches initramfs.cpio",
+      "valid SHA256SUMS syntax: 53ec74  initramfs.cpio.gz",
+      "unique expected checksum file: initramfs.cpio.gz",
+      "SHA256SUMS matches initramfs.cpio.gz",
+      "manifest artifact matches initramfs.cpio.gz",
+      "SHA256SUMS covers all three declared payloads",
+      "manifest source inventory is exact",
+      "source hash equals Git blob at CI commit: init.c",
+      "source hash equals Git blob at CI commit: start.S",
+      "source hash equals Git blob at CI commit: build.py",
+      "init and init.rebuild are byte-identical",
+      "manifest describes double build",
+      "ELF64 little endian",
+      "AArch64 static executable header",
+      "ELF segment bounds 1",
+      "no writable executable segment 1",
+      "ELF segment bounds 2",
+      "no writable executable segment 2",
+      "ELF segment bounds 3",
+      "no writable executable segment 3",
+      "GNU stack is non-executable",
+      "ELF has no PT_DYNAMIC or PT_INTERP",
+      "ELF entry is mapped executable",
+      "ELF metadata equals manifest",
+      "independent GNU readelf confirms target and static linking",
+      "GNU readelf finds no named undefined symbols",
+      "stdlib gzip decompresses to exact cpio bytes",
+      "gzip header has zero mtime and no filename",
+      "newc magic entry 0",
+      "NUL terminated newc name 0",
+      "zero newc alignment padding dev",
+      "deterministic newc ownership/time/device/checksum dev",
+      "exact cpio entry and payload dev",
+      "newc link count dev",
+      "newc magic entry 1",
+      "NUL terminated newc name 1",
+      "zero newc alignment padding proc",
+      "deterministic newc ownership/time/device/checksum proc",
+      "exact cpio entry and payload proc",
+      "newc link count proc",
+      "newc magic entry 2",
+      "NUL terminated newc name 2",
+      "zero newc alignment padding sys",
+      "deterministic newc ownership/time/device/checksum sys",
+      "exact cpio entry and payload sys",
+      "newc link count sys",
+      "newc magic entry 3",
+      "NUL terminated newc name 3",
+      "zero newc alignment padding dev/console",
+      "deterministic newc ownership/time/device/checksum dev/console",
+      "exact cpio entry and payload dev/console",
+      "newc link count dev/console",
+      "newc magic entry 4",
+      "NUL terminated newc name 4",
+      "zero newc alignment padding dev/kmsg",
+      "deterministic newc ownership/time/device/checksum dev/kmsg",
+      "exact cpio entry and payload dev/kmsg",
+      "newc link count dev/kmsg",
+      "newc magic entry 5",
+      "NUL terminated newc name 5",
+      "zero newc alignment padding dev/null",
+      "deterministic newc ownership/time/device/checksum dev/null",
+      "exact cpio entry and payload dev/null",
+      "newc link count dev/null",
+      "newc magic entry 6",
+      "NUL terminated newc name 6",
+      "zero newc alignment padding init",
+      "deterministic newc ownership/time/device/checksum init",
+      "exact cpio entry and payload init",
+      "newc link count init",
+      "newc magic entry 7",
+      "NUL terminated newc name 7",
+      "zero newc alignment padding TRAILER!!!",
+      "deterministic newc ownership/time/device/checksum TRAILER!!!",
+      "valid trailer and zero 512-byte padding",
+      "all seven newc entries equal manifest",
+      "independent bsdtar lists exact seven entries",
+      "independent bsdtar reads exact ELF payload",
+      "console SHA256 matches runtime report",
+      "QEMU initramfs hash equals checked gzip",
+      "console exact-ended marker stage=entered",
+      "console exact-ended marker pid=1",
+      "console exact-ended marker mount-proc=0",
+      "console exact-ended marker mount-sysfs=0",
+      "console exact-ended marker mount-devtmpfs=-19",
+      "console exact-ended marker devtmpfs=fallback-to-archive-character-nodes",
+      "console exact-ended marker uname=0",
+      "console exact-ended marker sysname=Linux",
+      "console exact-ended marker release=6.18.33-android17-5-maybe-dirty-4k",
+      "console exact-ended marker machine=aarch64",
+      "console exact-ended marker stage=idle; persistent-storage=untouched-by-init",
+      "kernel reports launching /init",
+      "console identifies QEMU virt platform",
+      "no matched panic/Oops/BUG/fault/WARNING/call trace in final console",
+      "console ends with host-requested QEMU termination",
+      "runner report records success after five second observation",
+      "runtime command uses QEMU virt GICv3",
+      "runtime command disables default devices and NIC",
+      "runtime command attaches no custom DT, block device or passthrough device",
+      "runtime scope flags remain emulator only",
+      "saved kernel run metadata identifies successful baseline build",
+      "runtime kernel hash matches independently retained baseline Image",
+      "baseline configuration explains ENODEV devtmpfs fallback"
+    ],
+    "public_summary": "The downloaded static AArch64 init and deterministic initramfs match the CI source commit and checksum manifests. The saved QEMU virt log shows ACK 6.18.33 executing /init as PID 1, successful proc/sysfs mounts, expected static-node fallback without devtmpfs, correct uname and the idle marker. The runner recorded five seconds of observation and host termination; no selected fault signatures occur in the complete log. This establishes a generic emulator smoke test, not RMX2121CN boot or Android support.",
+    "limitations": [
+      "This review did not execute init, rebuild ARM64 code, rerun QEMU, access a phone, or freshly query GitHub status.",
+      "Compiler/linker version and binary hashes are recorded CI claims; their binaries are not included and were not independently re-fetched.",
+      "Byte-identical init/init.rebuild proves consistency of the two supplied outputs; no independent cross-host source rebuild was performed.",
+      "Five-second observation and total elapsed time are runner-recorded values; the console alone cannot independently reconstruct wall-clock timing.",
+      "The manifest runtime_tested=false describes build-time status; the separate QEMU verification supplies later emulator evidence.",
+      "No RMX2121CN device tree, MT6885 hardware, physical phone boot, Android userspace, external modules, or long-term stability was tested."
+    ],
+    "phone_boot_tested": false,
+    "flash_ready": false
+  },
+  "limitations": [
+    "Generic QEMU virt only, not an MT6885 simulation or Android boot test.",
+    "Board compatible mediatek,MT6885 has no matching schema.",
+    "Full kernel dtbs_check and platform drivers not implemented.",
+    "Fixed ACK bindings firmware/gunyah-cma-mem.yaml was ignored by dt-mk-schema due to parsing error; it is unrelated to every node in this draft.",
+    "Existing ACK kernel reused after source/run/hash verification; this run compiled the initramfs and DTS, not a new kernel."
+  ]
+}

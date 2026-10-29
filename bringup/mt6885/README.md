@@ -10,6 +10,8 @@
 - [evidence-map.json](evidence-map.json)：白名单硬件字段、来源哈希与绑定参考。
 - [offline-validation.json](offline-validation.json)：本地 DTC 1.8.1 语法和结构回读结果，未做完整 dt-schema / dtbs_check、ACK 编译或实机启动。
 
+后续云端检查已通过通用与匹配 ACK 绑定，范围和未覆盖项见 [2026-10-30 报告](../../reports/bringup618-20261030.json)。这没有改变 `offline-validation.json` 的本地历史检查范围，也不是完整内核 `dtbs_check`。持久日志的源码推导与布局差异见 [RAMOOPS.md](RAMOOPS.md)。
+
 8 个 CPU、30 个固定区和 13 个动态区已逐项回读核对。30 个固定区均位于声明的 RAM 内、彼此不重叠。原始 FDT 和本地提取工具未随公共草案发布，不能将这些校验等同于独立确认全部硬件约定。
 
 ## 实机来源和关键决策

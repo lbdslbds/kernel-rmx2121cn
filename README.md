@@ -20,7 +20,7 @@ Kleaf 默认未启用 stamp，因此该镜像 banner 含 `maybe-dirty` 和 1970 
 
 公开源码中的 **8 个外部模块已全部编译并通过离线核验**：[构建 #5](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40710293358) 的哈希、同轮证书签名、依赖与 1206 项版本化导入 CRC 全部通过，见 [验证报告](reports/external-modules-run5-verification.json)。模块必须配套本轮内核，尚未实际加载。原厂 `fpsgo.ko` 所用的 `fpsgo_cus` 源码仍未找到；MET 部分功能未启用，不代表完整原厂功能等价。入口、参数依据及签名要求见 [外部模块调查](EXTERNAL_MODULES.md)。`OPLUS_F2FS_DEBUG` 的原厂环境变量值也尚未核实。
 
-6.18 已加入经实机证据核对的 [最小设备树草案](bringup/mt6885/README.md) 和 [ARM64 诊断 initramfs](bringup/minimal-initramfs/README.md)。工作流 **ACK 6.18 bring-up checks - NO phone image** 分别检查设备树绑定和通用 ACK 的 QEMU 启动；模拟器使用自身设备树，不模拟 RMX2121 硬件。结果与未解决的启动条件见 [bringup 检查说明](bringup/README.md)。
+6.18 已加入经实机证据核对的 [最小设备树草案](bringup/mt6885/README.md) 和 [ARM64 诊断 initramfs](bringup/minimal-initramfs/README.md)。[2026-10-30 检查](reports/bringup618-20261030.json) 已通过设备树通用绑定校验，并在通用 ACK 6.18.33 / QEMU 中执行诊断程序至 PID 1 等待阶段；模拟器使用自身设备树，不模拟 RMX2121 硬件。结果与未解决的启动条件见 [bringup 检查说明](bringup/README.md)。
 
 ## 当前边界
 
