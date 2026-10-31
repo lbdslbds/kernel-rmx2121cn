@@ -19,6 +19,10 @@ is the independent `init/Kconfig` switch enabling external initramfs handling,
 not a request for a block-storage driver. ELF/gzip/proc/sysfs prerequisites are
 explicitly enabled and checked. CPU fixes are preserved separately from driver
 selection; disabling peripheral drivers must not discard normal CPU safeguards.
+`MISC_FILESYSTEMS=y` is also required: `fs/Kconfig` includes the pstore options
+inside that menu. The parent option adds no code on its own; block storage
+remains disabled. The first CI attempt caught this missing parent dependency
+before kernel compilation, and the final configuration gate remains mandatory.
 
 ## Configuration gate
 
