@@ -2,6 +2,8 @@
 
 2026-10-30 的离线调查说明：不能直接把原厂 ramoops 参数视作 6.18 与 recovery 的兼容日志通道。这里是下一阶段的设计依据，尚未添加 ramoops 设备树节点或生成测试镜像。
 
+2026-10-31 已补充 [受控真机证据](../../DEVICE_TEST_20261031.md)：run5 的 4.14 诊断环境写入唯一 kmsg 标记，经 bootloader 回到原 recovery 后成功取回。recovery 的 record/ftrace/console/pmsg/base/total/mem_type/ECC 实际参数与下述推导值一致。这个结果仍不证明 6.18 布局兼容、强制复位或更早阶段的日志可用。
+
 固定 [OEM 4.14 ram.c](https://github.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/blob/f0c2afc4d8aa699bacae223bf7506d6912e08da6/fs/pstore/ram.c) 与 [ACK 6.18 ram.c](https://android.googlesource.com/kernel/common/+/846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef/fs/pstore/ram.c) 的分区顺序不同。OEM 多一个 `bconsole`，并把 ftrace 放在 pmsg 前面。
 
 实机 probe 日志确认总区间为 `0x4d010000 / 0xe0000`，console 为 `0x40000`，pmsg 为 `0x10000`。根据固定 OEM 源码默认值和捕获的参数路径，复现内核的 record/ftrace 大小推导为各 `0x1000`、mem_type 为 0、ECC 为 0；这不等于直接读回原 Android/recovery 二进制中的全部驱动变量。

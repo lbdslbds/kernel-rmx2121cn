@@ -1,0 +1,672 @@
+{
+  "schema_version": 1,
+  "test_date": "2026-10-31",
+  "scope": "run40710293358 kernel4.14.186 diagnostic boot and warm-reboot log retention; no external module loading",
+  "source_build_url": "https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40710293358",
+  "source_build_commit": "5027163ed7d2443220dfc007ddeba59a88ea8041",
+  "candidate_sha256": "c8d7ba1298678c285c934af21f8c9ecbd0042b6d6dc804ac6b8c03a895f1d28f",
+  "candidate_partition_sha256": "6f211fe2486ba016f97d859da6027e2dca327e391f2ed50952c0fd7f191ac914",
+  "diagnostic_marker_confirmed": true,
+  "marker_sha256": "18488f7c25d8cba3425358763aea4c346cfc5e28b4801798d40cb64e6cf8daa6",
+  "marker_retrieved_from": "console-ramoops",
+  "marker_retrieved": true,
+  "measured_recovery_ramoops_parameters": {
+    "console_size": "262144",
+    "dump_oops": "1",
+    "ecc": "0",
+    "ftrace_size": "4096",
+    "mem_address": "1291911168",
+    "mem_size": "917504",
+    "mem_type": "0",
+    "pmsg_size": "65536",
+    "record_size": "4096"
+  },
+  "saved_console_sha256": "d0f8956fc9120d084fb344d1c158b0a0c6ff7d720855ebc49e63bd354301e73f",
+  "saved_console_phone_host_hashes_match": true,
+  "original_boot_restored_and_readback_verified": true,
+  "original_android_final_check": {
+    "checked_utc": "2026-10-31T03:28:27.421227+00:00",
+    "boot_completed": true,
+    "android": "17",
+    "sdk": "37",
+    "kernel": "4.14.186+",
+    "battery": "38",
+    "status": "Charging"
+  },
+  "independent_offline_review": {
+    "schema_version": 1,
+    "review_date_client": "2026-10-31",
+    "scope": "Independent offline review of run5 4.14 diagnostic and warm-reboot pstore marker evidence. No reviewer device commands.",
+    "passed": true,
+    "reviewer_device_accessed": false,
+    "phone_kernel_scope": "4.14.186 run40710293358 diagnostic only",
+    "original_android_boot_completion_rechecked_by_reviewer": false,
+    "source_evidence": {
+      "probe_json_sha256": "531227c448516dc4a038acda6368acaef97fad70e0d77894c0b3e07fdae153bf",
+      "capture_json_sha256": "a8b4f02f36d0d25b4e53527be5557c0ad14f042956b901e8aa8ebf974f9de3e7",
+      "pstore_after_report_sha256": "3b8ba693f591d88c0ec8df84e6385a64bdcac80fbf425645e62cfc81542d5f42",
+      "pstore_before_report_sha256": "6f0847b973938feb5e7764808a1c9a03c42e70d8a4ffad88603087aed1bc53b5",
+      "successful_baseline_reads_hash_verified": [
+        "identity.txt",
+        "kernel.txt",
+        "proc-version.txt",
+        "proc-modules.txt",
+        "proc-iomem.txt",
+        "proc-interrupts.txt",
+        "proc-meminfo.txt",
+        "mounts.txt",
+        "mountinfo.txt",
+        "processes.txt",
+        "cpu-online.txt",
+        "running-config.gz",
+        "running-device-tree.dtb",
+        "dmesg.txt",
+        "battery-capacity.txt",
+        "battery-temp.txt",
+        "battery-status.txt",
+        "pstore-list.txt",
+        "partitions-list.txt"
+      ],
+      "text_handling": "Original bytes retained for SHA; CRLF normalized only for parsing/comparison. Raw pstore uses exact bytes."
+    },
+    "candidate": {
+      "full_partition_sha256": "6f211fe2486ba016f97d859da6027e2dca327e391f2ed50952c0fd7f191ac914",
+      "full_partition_bytes": 33554432,
+      "kernel_gzip_matches_verified_run5": true,
+      "kernel_raw_matches_run5_Image": true,
+      "installed_and_restored_hash_chain_matches": true
+    },
+    "runtime": {
+      "root_uid_confirmed": true,
+      "kernel": "Linux (none) 4.14.186 #1 SMP PREEMPT Tue Oct 31 02:15:05 UTC 2023 aarch64",
+      "running_config_bytes": 164915,
+      "running_config_sha256": "ab5f3832c509fa7fe113b70a16bb09ab52a1cca1ea55c20a6b9f71f7ad717305",
+      "config_exactly_equals_run5_effective_config": true,
+      "online_cpus": "0-7",
+      "online_cpu_count": 8,
+      "loaded_external_module_count": 0,
+      "mount_count": 20,
+      "all_mount_device_majors_zero": true,
+      "only_ram_or_virtual_filesystem_types": true,
+      "mount_filesystem_counts": {
+        "rootfs": 1,
+        "tmpfs": 7,
+        "devpts": 1,
+        "proc": 1,
+        "sysfs": 1,
+        "selinuxfs": 1,
+        "cgroup2": 1,
+        "cgroup": 5,
+        "configfs": 1,
+        "functionfs": 1
+      },
+      "mounts": [
+        {
+          "mountpoint": "/",
+          "major": 0,
+          "minor": 1,
+          "filesystem": "rootfs",
+          "source": "rootfs"
+        },
+        {
+          "mountpoint": "/dev",
+          "major": 0,
+          "minor": 17,
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "mountpoint": "/dev/pts",
+          "major": 0,
+          "minor": 18,
+          "filesystem": "devpts",
+          "source": "devpts"
+        },
+        {
+          "mountpoint": "/proc",
+          "major": 0,
+          "minor": 4,
+          "filesystem": "proc",
+          "source": "proc"
+        },
+        {
+          "mountpoint": "/sys",
+          "major": 0,
+          "minor": 19,
+          "filesystem": "sysfs",
+          "source": "sysfs"
+        },
+        {
+          "mountpoint": "/sys/fs/selinux",
+          "major": 0,
+          "minor": 15,
+          "filesystem": "selinuxfs",
+          "source": "selinuxfs"
+        },
+        {
+          "mountpoint": "/mnt",
+          "major": 0,
+          "minor": 20,
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "mountpoint": "/apex",
+          "major": 0,
+          "minor": 21,
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "mountpoint": "/linkerconfig",
+          "major": 0,
+          "minor": 22,
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "mountpoint": "/mnt/installer",
+          "major": 0,
+          "minor": 20,
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "mountpoint": "/mnt/androidwritable",
+          "major": 0,
+          "minor": 20,
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "mountpoint": "/dev/cg2_bpf",
+          "major": 0,
+          "minor": 23,
+          "filesystem": "cgroup2",
+          "source": "none"
+        },
+        {
+          "mountpoint": "/dev/cpuctl",
+          "major": 0,
+          "minor": 24,
+          "filesystem": "cgroup",
+          "source": "none"
+        },
+        {
+          "mountpoint": "/acct",
+          "major": 0,
+          "minor": 25,
+          "filesystem": "cgroup",
+          "source": "none"
+        },
+        {
+          "mountpoint": "/dev/cpuset",
+          "major": 0,
+          "minor": 26,
+          "filesystem": "cgroup",
+          "source": "none"
+        },
+        {
+          "mountpoint": "/dev/memcg",
+          "major": 0,
+          "minor": 27,
+          "filesystem": "cgroup",
+          "source": "none"
+        },
+        {
+          "mountpoint": "/dev/stune",
+          "major": 0,
+          "minor": 28,
+          "filesystem": "cgroup",
+          "source": "none"
+        },
+        {
+          "mountpoint": "/tmp",
+          "major": 0,
+          "minor": 29,
+          "filesystem": "tmpfs",
+          "source": "tmpfs"
+        },
+        {
+          "mountpoint": "/config",
+          "major": 0,
+          "minor": 14,
+          "filesystem": "configfs",
+          "source": "none"
+        },
+        {
+          "mountpoint": "/dev/usb-ffs/adb",
+          "major": 0,
+          "minor": 30,
+          "filesystem": "functionfs",
+          "source": "adb"
+        }
+      ],
+      "uptime_before_marker": "15.78 120.98",
+      "uptime_before_exit": "21.76 165.18",
+      "host_probe_elapsed_seconds": 35.17,
+      "host_connect_seconds": 28.74,
+      "capture_exit_code": 0
+    },
+    "marker": {
+      "value": "RMX618_PSTORE_9E349873FEC04D4D9F2C880232486B3C",
+      "prior_capture_utc": "2026-10-31T03:23:35.921517+00:00",
+      "probe_started_utc": "2026-10-31T03:25:30.947353+00:00",
+      "probe_completed_utc": "2026-10-31T03:26:06.446581+00:00",
+      "post_recovery_capture_utc": "2026-10-31T03:26:53.223552+00:00",
+      "absent_from_pretest_pstore": true,
+      "live_dmesg": [
+        {
+          "line": 5956,
+          "text": "[   15.870429] (1)[502:sh]RMX618_PSTORE_9E349873FEC04D4D9F2C880232486B3C"
+        }
+      ],
+      "diagnostic_baseline_dmesg": [
+        {
+          "line": 5956,
+          "text": "[   15.870429] (1)[502:sh]RMX618_PSTORE_9E349873FEC04D4D9F2C880232486B3C"
+        }
+      ],
+      "recovered_console": [
+        {
+          "line": 2793,
+          "text": "[   15.870429]  (1)[502:sh]RMX618_PSTORE_9E349873FEC04D4D9F2C880232486B3C"
+        }
+      ],
+      "same_marker_uptime_in_live_and_saved_logs": true,
+      "reboot_to_bootloader_line": [
+        {
+          "line": 2909,
+          "text": "[   22.038799]  (0)[1:init]reboot: Restarting system with command 'bootloader'"
+        }
+      ],
+      "after_pstore_mounted": true,
+      "prior_files": {
+        "console-ramoops": {
+          "bytes": 262132,
+          "sha256": "d4d827fea03c9ce1b42a18c451223418956dff487c908e7fb253a9adf8679c78",
+          "local_remote_before_remote_after_all_equal": true,
+          "marker_occurrences": 0
+        },
+        "pmsg-ramoops-0": {
+          "bytes": 937,
+          "sha256": "b3562e60f70b763b7bea3d7462715d8d6561814b2410e0c1ecded513810573da",
+          "local_remote_before_remote_after_all_equal": true,
+          "marker_occurrences": 0
+        }
+      },
+      "after_files": {
+        "console-ramoops": {
+          "bytes": 262132,
+          "sha256": "d0f8956fc9120d084fb344d1c158b0a0c6ff7d720855ebc49e63bd354301e73f",
+          "local_remote_before_remote_after_all_equal": true,
+          "marker_occurrences": 1
+        },
+        "pmsg-ramoops-0": {
+          "bytes": 771,
+          "sha256": "765431557e0d946aa1b9ab91556ff5baee2066987be7349c2ffa6fa10b5421f3",
+          "local_remote_before_remote_after_all_equal": true,
+          "marker_occurrences": 0
+        }
+      },
+      "conclusion": "A newly generated marker absent from pretest saved files appears once in diagnostic dmesg and once in the hash-verified saved console after the recorded bootloader/recovery transition; the saved console also contains the later reboot-to-bootloader line."
+    },
+    "ramoops_parameters_read_in_recovery": {
+      "console_size": "262144",
+      "dump_oops": "1",
+      "ecc": "0",
+      "ftrace_size": "4096",
+      "mem_address": "1291911168",
+      "mem_size": "917504",
+      "mem_type": "0",
+      "pmsg_size": "65536",
+      "record_size": "4096"
+    },
+    "diagnostic_log_scan": {
+      "searched_fault_lines": {
+        "kernel_panic": [],
+        "oops": [],
+        "bug": [],
+        "unhandled_kernel_fault": [],
+        "io_error": []
+      },
+      "warnings": [
+        {
+          "line": 939,
+          "signature": "net/wireless/reg.c:517 regulatory_init+0x1e8/0x210"
+        },
+        {
+          "line": 2361,
+          "signature": "fs/proc/generic.c:330 proc_register+0x144/0x188"
+        },
+        {
+          "line": 2612,
+          "signature": "drivers/gpio/gpiolib.c:112 gpio_to_desc+0x68/0xc4"
+        },
+        {
+          "line": 3649,
+          "signature": "fs/proc/generic.c:330 proc_register+0x144/0x188"
+        },
+        {
+          "line": 4717,
+          "signature": "fs/proc/generic.c:330 proc_register+0x144/0x188"
+        },
+        {
+          "line": 5410,
+          "signature": "fs/proc/generic.c:330 proc_register+0x144/0x188"
+        }
+      ],
+      "warning_count": 6,
+      "call_trace_count": 7,
+      "log_uptime_range_seconds": [
+        0.0,
+        19.810574
+      ]
+    },
+    "earlier_compiled_414_comparison": {
+      "warning_signatures_and_multiplicity_identical": true,
+      "earlier_warning_count": 6,
+      "earlier_call_trace_count": 7,
+      "unprefixed_driver_stack": "cmdq_mbox_create channel request failure / mtk_drm path has a baseline counterpart"
+    },
+    "saved_console_log_scan": {
+      "searched_fault_lines": {
+        "kernel_panic": [],
+        "oops": [],
+        "bug": [],
+        "unhandled_kernel_fault": [],
+        "io_error": []
+      },
+      "warnings": [
+        {
+          "line": 136,
+          "signature": "fs/proc/generic.c:330 proc_register+0x144/0x188"
+        },
+        {
+          "line": 1196,
+          "signature": "fs/proc/generic.c:330 proc_register+0x144/0x188"
+        },
+        {
+          "line": 1977,
+          "signature": "fs/proc/generic.c:330 proc_register+0x144/0x188"
+        }
+      ],
+      "warning_count": 3,
+      "call_trace_count": 5,
+      "log_uptime_range_seconds": [
+        1.618321,
+        22.042233
+      ]
+    },
+    "restoration_write_evidence": {
+      "completed_utc": "2026-10-31T03:27:06.103512+00:00",
+      "partition": "boot",
+      "bytes": 33554432,
+      "previous_sha256": "6f211fe2486ba016f97d859da6027e2dca327e391f2ed50952c0fd7f191ac914",
+      "written_sha256": "72a42c948b0d570ccdc009fdacc50523e8766dedc251270c44c96233a633e7d2",
+      "readback_verified": true,
+      "support_partitions_unchanged": [
+        "dtbo",
+        "vbmeta",
+        "recovery"
+      ],
+      "reboot_performed": false
+    },
+    "limitations": [
+      "The reviewer relied on saved command reports for the host transition; no independently captured boot_id or post-return uname is present in the pstore-only folder.",
+      "Successful marker retrieval proves the tested4.14->bootloader->recovery warm-reboot chain, not ACK6.18 or hard-reset/cold-boot behavior.",
+      "Genericno-fault pattern scans are not proof of bug-free operation. Six warnings and seven diagnostic call traces remain; recovery saved console also includes an expected reboot stack trace.",
+      "Only a short diagnostic run was observed; complete Android startup, vendor module loading and hardware features were not tested.",
+      "Virtual-only mounts describe the diagnostic userspace; recovery/bootloader/kernel and explicit boot restoration can write persistent state.",
+      "The restoration report establishes boot readback and unchanged support hashes; final originalAndroid boot completion must be established separately by the parent."
+    ]
+  },
+  "test_exclusions": [
+    "No ACK6.18 was written or booted on the phone.",
+    "No external modules loaded; run5 signatures/CRCs verified offline previously.",
+    "No Android startup with the newly compiled kernel or peripheral/long-term validation.",
+    "No DTBO, vbmeta or recovery partition modification.",
+    "No cold boot, watchdog reset, panic recovery or cross-6.18 persistence validation."
+  ],
+  "three_normal_boot_fdt_comparison": {
+    "schema_version": 1,
+    "comparison_date_client": "2026-10-31",
+    "status": "THREE_NORMAL_414_FDT_HARDWARE_SNAPSHOTS_MATCH",
+    "device_accessed_by_this_comparison": false,
+    "inputs": {
+      "normal_original_414": {
+        "path_relative_to_kernel_work": "device/20261028-current-kernel-diagnostic/running-device-tree.dtb",
+        "bytes": 298521,
+        "sha256": "2db8d54d4d6cc8b85bf087ae0d183e822851ba226da0aa1cf3dd4198b1416060",
+        "version": 17,
+        "memreserve_table": [],
+        "node_count": 1250,
+        "property_count": 6672
+      },
+      "normal_compiled_run2_414": {
+        "path_relative_to_kernel_work": "device/20261028-compiled-414-diagnostic/running-device-tree.dtb",
+        "bytes": 298521,
+        "sha256": "341f7aacb85314a262296cdab26f97fe3c8b913df78cbedc01e56e1befb866b2",
+        "version": 17,
+        "memreserve_table": [],
+        "node_count": 1250,
+        "property_count": 6672
+      },
+      "normal_compiled_run5_414": {
+        "path_relative_to_kernel_work": "device/20261031-run5-marker/baseline/running-device-tree.dtb",
+        "bytes": 298521,
+        "sha256": "ab49805ad3ca635c648c2ef94135ace7090aa33f110782124b567f6aeae1a63c",
+        "version": 17,
+        "memreserve_table": [],
+        "node_count": 1250,
+        "property_count": 6672
+      }
+    },
+    "full_tree_node_and_property_counts_identical": true,
+    "root_compatible_byte_identical": true,
+    "hardware_scopes": {
+      "ram": {
+        "root_paths": [
+          "/memory"
+        ],
+        "node_count": 1,
+        "property_count": 6,
+        "all_properties_byte_identical_across_three_captures": true
+      },
+      "cpu": {
+        "root_paths": [
+          "/cpus"
+        ],
+        "node_count": 28,
+        "property_count": 104,
+        "all_properties_byte_identical_across_three_captures": true
+      },
+      "psci": {
+        "root_paths": [
+          "/psci"
+        ],
+        "node_count": 1,
+        "property_count": 2,
+        "all_properties_byte_identical_across_three_captures": true
+      },
+      "gic": {
+        "root_paths": [
+          "/interrupt-controller"
+        ],
+        "node_count": 1,
+        "property_count": 10,
+        "all_properties_byte_identical_across_three_captures": true
+      },
+      "timer": {
+        "root_paths": [
+          "/timer"
+        ],
+        "node_count": 1,
+        "property_count": 5,
+        "all_properties_byte_identical_across_three_captures": true
+      },
+      "reserved_memory": {
+        "root_paths": [
+          "/reserved-memory"
+        ],
+        "node_count": 44,
+        "property_count": 157,
+        "all_properties_byte_identical_across_three_captures": true
+      },
+      "memory_ssmr_features": {
+        "root_paths": [
+          "/memory-ssmr-features"
+        ],
+        "node_count": 1,
+        "property_count": 12,
+        "all_properties_byte_identical_across_three_captures": true
+      }
+    },
+    "reserved_memory_counts": {
+      "total_child_nodes": 43,
+      "fixed_reg_nodes": 30,
+      "dynamic_size_nodes": 13,
+      "disabled_nodes": 1
+    },
+    "memreserve_tables_identical": true,
+    "dtbo_index": {
+      "source": "/chosen:bootargs token androidboot.dtbo_idx",
+      "single_occurrence_in_each_capture": true,
+      "byte_identical_across_three_captures": true,
+      "value_exported": false
+    },
+    "pairwise_comparisons": [
+      {
+        "left": "normal_original_414",
+        "right": "normal_compiled_run2_414",
+        "node_sets_identical": true,
+        "property_name_sets_identical": true,
+        "changed_property_count": 5,
+        "changed_properties": [
+          {
+            "node": "/bootprof",
+            "property": "lk_logo_t",
+            "category": "bootloader-timing"
+          },
+          {
+            "node": "/bootprof",
+            "property": "lk_t",
+            "category": "bootloader-timing"
+          },
+          {
+            "node": "/bootprof",
+            "property": "pl_t",
+            "category": "bootloader-timing"
+          },
+          {
+            "node": "/chosen",
+            "property": "atag,videolfb",
+            "category": "bootloader-video-tag"
+          },
+          {
+            "node": "/chosen",
+            "property": "bootargs",
+            "category": "boot-command-line"
+          }
+        ],
+        "changed_boot_argument_names_only": [
+          "lcm",
+          "ogauge_auth"
+        ],
+        "raw_chosen_values_exported": false
+      },
+      {
+        "left": "normal_original_414",
+        "right": "normal_compiled_run5_414",
+        "node_sets_identical": true,
+        "property_name_sets_identical": true,
+        "changed_property_count": 5,
+        "changed_properties": [
+          {
+            "node": "/bootprof",
+            "property": "lk_logo_t",
+            "category": "bootloader-timing"
+          },
+          {
+            "node": "/bootprof",
+            "property": "lk_t",
+            "category": "bootloader-timing"
+          },
+          {
+            "node": "/bootprof",
+            "property": "pl_t",
+            "category": "bootloader-timing"
+          },
+          {
+            "node": "/chosen",
+            "property": "atag,videolfb",
+            "category": "bootloader-video-tag"
+          },
+          {
+            "node": "/chosen",
+            "property": "bootargs",
+            "category": "boot-command-line"
+          }
+        ],
+        "changed_boot_argument_names_only": [
+          "lcm",
+          "ogauge_auth"
+        ],
+        "raw_chosen_values_exported": false
+      },
+      {
+        "left": "normal_compiled_run2_414",
+        "right": "normal_compiled_run5_414",
+        "node_sets_identical": true,
+        "property_name_sets_identical": true,
+        "changed_property_count": 5,
+        "changed_properties": [
+          {
+            "node": "/bootprof",
+            "property": "lk_logo_t",
+            "category": "bootloader-timing"
+          },
+          {
+            "node": "/bootprof",
+            "property": "lk_t",
+            "category": "bootloader-timing"
+          },
+          {
+            "node": "/bootprof",
+            "property": "pl_t",
+            "category": "bootloader-timing"
+          },
+          {
+            "node": "/chosen",
+            "property": "atag,videolfb",
+            "category": "bootloader-video-tag"
+          },
+          {
+            "node": "/chosen",
+            "property": "bootargs",
+            "category": "boot-command-line"
+          }
+        ],
+        "changed_boot_argument_names_only": [
+          "lcm",
+          "ogauge_auth"
+        ],
+        "raw_chosen_values_exported": false
+      }
+    ],
+    "privacy": {
+      "raw_chosen_values_exported": false,
+      "raw_bootargs_exported": false,
+      "device_identifiers_exported": false,
+      "other_differences_reported_as_field_names_and_categories_only": true
+    },
+    "interpretation": "The RAM, every reserved-memory node/property, CPU subtree, PSCI, GIC, timer and DTBO index are stable across these three observed normal 4.14 diagnostic boots. This is an observation of identical OEM boot/DT inputs on one device, not a guarantee about replacement DTs.",
+    "limitations": [
+      "No ACK 6.18 kernel was booted or measured by this comparison.",
+      "Original and both source-built kernels used the original boot DT table and dtbo partition; this does not test bootloader behavior with a new minimal DT.",
+      "Stable dynamic size/alignment/alloc-ranges templates do not prove actual allocation addresses or firmware shared-memory contracts.",
+      "CPU compatible values are compared verbatim; the known old-DT A75 versus runtime A77 discrepancy is not resolved by repeated FDT equality.",
+      "Bootloader timing/video-tag/bootargs differences are classified without publishing their raw chosen values."
+    ]
+  }
+}

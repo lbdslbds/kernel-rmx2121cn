@@ -24,7 +24,7 @@
   },
   "target": {
     "android_kernel_branch": "android17-6.18",
-    "board_port_status": "minimal_dts_generic_schema_passed_initramfs_qemu_passed_no_phone_boot"
+    "board_port_status": "minimal_ack_draft_blocked_by_oem_dtbo_dependencies"
   },
   "verification": {
     "hardware_evidence": "USB device observations and normal-boot diagnostic FDT, 2026-10-28",
@@ -52,6 +52,12 @@
     "external_modules_run5_loaded_on_device": null,
     "bringup_checks_report": "reports/bringup618-20261030.json",
     "generic_ack_qemu_initramfs_success": true,
-    "mt6885_draft_generic_schema_success": true
+    "mt6885_draft_generic_schema_success": true,
+    "run5_kernel_diagnostic_boot_success": true,
+    "run5_kernel_diagnostic_report": "reports/device-diagnostic-20261031.json",
+    "warm_reboot_pstore_marker_retrieval_success": true,
+    "warm_reboot_pstore_scope": "run5 kernel4.14.186 to bootloader to original recovery",
+    "bootloader_dt_report": "reports/bootloader-dt-20261031.json",
+    "original_android_last_checked_utc": "2026-10-31T03:28:27.421227+00:00"
   }
 }

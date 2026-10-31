@@ -9,6 +9,9 @@
 
 ## 已核对的机型输入
 
+- 2026-10-31，run5 的 4.14 内核也已完成最小诊断启动，且唯一 pstore 标记经 bootloader→recovery 被取回；原系统已恢复，见 [本轮实机报告](DEVICE_TEST_20261031.md)。该证据不覆盖 6.18、模块装载或冷启动日志留存。
+- 当前正常/recovery 启动均选择旧 DTBO index 5；它需要的 58 个外部符号在最小 ACK 草案中全部缺失，主机 overlay 应用失败。该草案不能直接放入现有启动路径。保留 OEM base＋原 overlay 再逐步迁移仍是可调查的另一条路线；不能仅在 base 写 `status=disabled`，因为 overlay 会重写部分状态。见 [DTBO 证据](reports/bootloader-dt-20261031.json)。
+
 - 2026-10-28 已完成原内核与源码重编 4.14 的最小诊断启动、root ADB 采集及原 boot 恢复；见 [实机报告](DEVICE_TEST_20261028.md)。完整 Android/vendor 功能未验证，6.18 尚未进行设备启动测试。
 - 项目 20601；平台 MT6885，Android 工程 k6889v1_64。
 - 实机 CPU 为 4 × Cortex-A55 + 4 × Cortex-A77，旧 DT 中的 A75 声明不正确。普通启动与 recovery 的协处理器、保留内存配置有差异，应使用普通启动 FDT 交叉核对；原始 FDT 仅保存在本地。

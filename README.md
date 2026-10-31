@@ -4,6 +4,8 @@
 
 ## 已完成的验证
 
+2026-10-31，包含八模块配套签名密钥的 run5 **4.14.186 内核再次通过真机最小诊断启动**。唯一内核日志标记经 bootloader 返回原 recovery 后成功取回；原 boot 已恢复，Android 17 正常开机。模块仍未加载，6.18 仍未在手机启动，详见 [本次实机报告](DEVICE_TEST_20261031.md)。另已确认旧 DTBO 需要的 58 个外部符号在最小 ACK 草案中缺失，这是下一步必须解决的 [启动接入阻断](reports/bootloader-dt-20261031.json)。
+
 2026-10-28，源码重编的 **4.14.186 在 RMX2121CN 上启动到 root ADB，8 个 CPU 在线**。运行 config 与编译产物一致，诊断环境没有挂载块设备文件系统或加载外部模块。测试后恢复原 boot 并验证原 Android 17 正常启动。此次为约 40 秒日志覆盖的最小诊断验证，尚未验证完整 Android、厂商模块和长期稳定性；详情见 [实机报告](DEVICE_TEST_20261028.md)。
 
 [4.14.186 构建 #2](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40205461469) 已成功。产出 `Image`、15,400,133 字节的 `Image.gz-dtb`、基础 DTB、符号表、调试内核与 5 个可构建模块；下载后校验 SHA-256，并确认 gzip 载荷等于单独 `Image`、附加 DTB 等于归档中的 `mediatek/mt6885.dtb`。详见 [验证报告](reports/kernel414-verified-build.json)。

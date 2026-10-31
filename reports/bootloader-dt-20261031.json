@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "status": "MINIMAL_ACK_DT_BLOCKED_BY_CURRENT_OVERLAY_PATH",
+  "phone_writes_by_this_analysis": false,
+  "boot_image_generated": false,
+  "summary": "The captured normal and recovery boot paths select existing DTBO index5. Its58 external symbols all exist in the OEM base DT and are all absent from the minimal ACK draft. Host libfdt applies it successfully to the OEM base, but fails on the minimal draft. The DTBO/bootloader integration path must be designed before a6.18 phone test.",
+  "base_table": {
+    "version": 0,
+    "page_size": 2048,
+    "entries": 1,
+    "entry_offset": 64,
+    "entry_id": 0,
+    "entry_revision": 0,
+    "entry_custom": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "source_hashes": {
+    "original_boot_sha256": "72a42c948b0d570ccdc009fdacc50523e8766dedc251270c44c96233a633e7d2",
+    "independent_DT_component_sha256": "11c7a94d35c97a9c6c69c4462c87e3e5195520c46747f36137f2cfc8152695ae",
+    "base_fdt_sha256": "103e1c3ae438b3de042c48d18c55408f411cbdba5861557bd9a8c9bd66f8d85a",
+    "original_dtbo_partition_sha256": "89c4f7dae24b0838f278ae658553e465b11aabb296091ecb20b4f807114d5ef2",
+    "selected_overlay_sha256": "0f7472ae52de8684d9759c524df7f590f41407fe6de3864ccae327fa6225136d"
+  },
+  "selected_overlay": {
+    "index": 5,
+    "bytes": 93825,
+    "required_external_symbols": 58,
+    "missing_symbols_in_OEM_base": 0,
+    "missing_symbols_in_minimal_ACK_draft": 58
+  },
+  "host_overlay_test": {
+    "libfdt_version": "1.8.1",
+    "OEM_base_return_code": 0,
+    "OEM_base_plus_overlay_nodes": 1212,
+    "OEM_base_plus_overlay_properties": 6632,
+    "minimal_ACK_return_code": -4,
+    "minimal_ACK_error": "FDT_ERR_BADOFFSET",
+    "minimal_ACK_DTB_sha256": "8b484b1c688fc64686a7ec29357472f40dcb11d3cdd344f6192f9dbd23a168fd",
+    "exact_LK_failure_behavior_tested": false
+  },
+  "normal_boot_comparison": {
+    "runtime_nodes": 1250,
+    "runtime_properties": 6672,
+    "additional_nodes_beyond_host_overlay": 38,
+    "additional_reserved_nodes": 33,
+    "additional_fixed_reservations": 30,
+    "additional_dynamic_reservations": 3,
+    "non_symbol_property_differences": 99,
+    "symbol_metadata_differences": 164,
+    "RAM_reg_before_or_after_host_overlay": [
+      "0x0",
+      "0x40000000",
+      "0x0",
+      "0x3e605000"
+    ],
+    "RAM_reg_in_captured_boot": [
+      "0x0",
+      "0x40000000",
+      "0x2",
+      "0x0"
+    ],
+    "both_normal_boot_hardware_properties_equal": true,
+    "attribution": "Post-overlay differences are boot-chain/runtime fixup candidates, not proof of precise LK ownership for every property."
+  },
+  "recovery_comparison": {
+    "old_sha256": "34bc86fa65bb9f18ca69bc4c4cad9307926fe128cb6c0134521feae536581cb7",
+    "new_sha256": "e9947e732f86c497ec8e8b2912e1fef6fd681f6056911df570139001dff6a9ad",
+    "fixed_reservations": 19,
+    "fixed_reservation_properties_byte_identical": true,
+    "RAM_reg_byte_identical": true,
+    "dtbo_index": 5,
+    "differing_property_count": 5,
+    "difference_categories": [
+      "three boot timing values",
+      "video framebuffer metadata",
+      "boot arguments"
+    ],
+    "does_not_replace_normal_boot_memory_evidence": true
+  },
+  "canary_proposal": {
+    "status": "offline-only, deferred; current physical test keeps original DT unchanged",
+    "property": "realme,diagnostic-dt-marker",
+    "location": "root",
+    "original_nodes_preserved": 919,
+    "original_properties_byte_identical": 5112,
+    "selection_metadata_preserved": true,
+    "offline_overlay5_preserves_marker": true,
+    "all_other_post_overlay_properties_byte_identical": 6632,
+    "no_boot_image_generated": true,
+    "result_scope_if_later_tested": "Would demonstrate acceptance of the original DT with an inert extra property only; not acceptance of a minimal ACK board tree."
+  },
+  "required_next_design": [
+    "Resolve old overlay selection and its58 OEM symbol dependencies without modifying current dtbo partition during diagnostic baseline work.",
+    "Establish how the bootloader modifies RAM/chosen/reserved-memory when presented with the eventual6.18 board tree.",
+    "Keep known-good recovery and full original boot restore verified before any new tree is tested."
+  ],
+  "excluded": [
+    "raw chosen/bootargs",
+    "serial/IMEI/MAC",
+    "full FDTs and partition backup bytes",
+    "raw device logs"
+  ],
+  "limitations": [
+    "Host libfdt1.8.1 is not the device bootloader implementation.",
+    "Two normal4.14 boots and two recovery boots do not establish a6.18 firmware-memory contract.",
+    "Matching DTC/schema output does not resolve overlay selection or platform driver support."
+  ]
+}
