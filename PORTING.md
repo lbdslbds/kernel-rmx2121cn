@@ -2,15 +2,17 @@
 
 目标内核为 AOSP ACK `android17-6.18`。`targets/android17.json` 固定本次内核、manifest、Kleaf 与 repo 工具提交；每次云端同步导出 `resolved-manifest.xml`，它才是包含全部工具链依赖的完整快照。
 
-## 当前工程的两条构建
+## 当前工程的构建目标
 
 1. **4.14 官方源码复现**：以本机导出的配置编译 realme Android S 源码，验证编译、基础 DTB 和可构建模块。不能由编译成功推断模块 ABI 与原厂完全一致，也不包含既有移植系统的二进制 BPF/bpffs/LPM 补丁。
 2. **6.18 通用 ACK 基线**：验证新构建系统及 4 KiB 配置。尚未添加 RMX2121 的设备树和驱动，不是可用的 X7 Pro 内核。
+3. **6.18 最小执行内核**：另设严格配置目标，保留 CPU 修复、initramfs、日志和 QEMU 所需功能，排除块存储、网络、USB 与厂商驱动。它用于缩小启动路径，既不满足 Android 运行需求，也不生成手机镜像。见 [配置与工作流](bringup/minimal-core/README.md)。
 
 ## 已核对的机型输入
 
 - 2026-10-31，run5 的 4.14 内核也已完成最小诊断启动，且唯一 pstore 标记经 bootloader→recovery 被取回；原系统已恢复，见 [本轮实机报告](DEVICE_TEST_20261031.md)。该证据不覆盖 6.18、模块装载或冷启动日志留存。
 - 当前正常/recovery 启动均选择旧 DTBO index 5；它需要的 58 个外部符号在最小 ACK 草案中全部缺失，主机 overlay 应用失败。该草案不能直接放入现有启动路径。保留 OEM base＋原 overlay 再逐步迁移仍是可调查的另一条路线；不能仅在 base 写 `status=disabled`，因为 overlay 会重写部分状态。见 [DTBO 证据](reports/bootloader-dt-20261031.json)。
+- [动态保留内存核验](reports/reserved-memory-contract-20261031.json) 确认三次 4.14 启动中的 8 个动态区起址一致，另外 4 个起址仍未分别观察到。旧 ZMC 回调将 848 MiB 请求缩为 576 MiB CMA，并释放前部 272 MiB；最小 ACK 缺少该回调。两版 OF 分配顺序、no-map 处理也不同，不能把同一 FDT 当成内存布局等价的证据。下一步离线模型须先复现旧内核已知结果，未掌握的前置 memblock 状态应保留为未知；模型也不能替代固件 DMA 与看门狗核验。
 
 - 2026-10-28 已完成原内核与源码重编 4.14 的最小诊断启动、root ADB 采集及原 boot 恢复；见 [实机报告](DEVICE_TEST_20261028.md)。完整 Android/vendor 功能未验证，6.18 尚未进行设备启动测试。
 - 项目 20601；平台 MT6885，Android 工程 k6889v1_64。

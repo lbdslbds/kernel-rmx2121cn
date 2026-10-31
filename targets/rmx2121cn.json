@@ -58,6 +58,13 @@
     "warm_reboot_pstore_marker_retrieval_success": true,
     "warm_reboot_pstore_scope": "run5 kernel4.14.186 to bootloader to original recovery",
     "bootloader_dt_report": "reports/bootloader-dt-20261031.json",
-    "original_android_last_checked_utc": "2026-10-31T03:28:27.421227+00:00"
+    "original_android_last_checked_utc": "2026-10-31T03:28:27.421227+00:00",
+    "minimal_ack_build_success": true,
+    "minimal_ack_qemu_success": true,
+    "minimal_ack_kernel_release": "6.18.33-rmx2121-minimal-core",
+    "minimal_ack_build_run": "https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/41166304335",
+    "minimal_ack_report": "reports/minimal-ack-20261031.json",
+    "minimal_ack_device_boot_success": null,
+    "reserved_memory_contract_report": "reports/reserved-memory-contract-20261031.json"
   }
 }

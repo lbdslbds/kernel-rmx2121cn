@@ -119,6 +119,11 @@ and uploaded alongside the kernel and build diagnostics. QEMU uses its own
 compilation or QEMU execution cannot validate phone memory contracts, overlay
 effects, ramoops retention, PMIC state or watchdog behavior.
 
-At preparation time, Python/Bash syntax and fixed-source declarations have been
-reviewed locally. **No full Kconfig resolution, kernel compile, QEMU run or phone
-test of this new configuration is claimed until CI actually completes.**
+On 2026-10-31, [run 41166304335](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/41166304335)
+passed full configuration resolution, compilation, the before/after source and
+configuration checks, deterministic initramfs construction, and QEMU execution.
+The release is `6.18.33-rmx2121-minimal-core`; Image is 3,975,176 bytes with SHA-256
+`8cbfd916d8f8978fd008d7c5972faa5f2ea13fd8aebb4cf59242e521de9d6d2e`.
+The diagnostic program reached PID 1 idle, followed by five seconds of host
+observation and host termination. See the [artifact review](../../reports/minimal-ack-20261031.json).
+No phone execution, Android compatibility or long-term stability is established.

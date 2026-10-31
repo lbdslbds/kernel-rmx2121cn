@@ -6,6 +6,10 @@
 
 2026-10-31，包含八模块配套签名密钥的 run5 **4.14.186 内核再次通过真机最小诊断启动**。唯一内核日志标记经 bootloader 返回原 recovery 后成功取回；原 boot 已恢复，Android 17 正常开机。模块仍未加载，6.18 仍未在手机启动，详见 [本次实机报告](DEVICE_TEST_20261031.md)。另已确认旧 DTBO 需要的 58 个外部符号在最小 ACK 草案中缺失，这是下一步必须解决的 [启动接入阻断](reports/bootloader-dt-20261031.json)。
 
+同日新增的 **6.18.33 最小执行内核已编译并在 QEMU 启动至诊断 PID 1**：[成功运行](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/41166304335)。`Image` 为 3,975,176 字节，保留 CPU 修复和日志功能，关闭块存储、网络、USB、模块及厂商驱动；固定 ACK 上的两处条件编译修复有完整补丁与摘要核验。这是独立实验配置，不是 Android 可用内核或手机镜像，详见 [产物核验](reports/minimal-ack-20261031.json) 和 [构建说明](bringup/minimal-core/README.md)。
+
+动态保留内存也已进一步核对：8 个实际起址在三次 4.14 启动中一致，但旧 ZMC 会释放请求区中的 272 MiB，最小 ACK 不会执行该厂商回调，且两版分配顺序不同。保留原设备树仍需解决这些内存约定，见 [证据与缺口](reports/reserved-memory-contract-20261031.json)。
+
 2026-10-28，源码重编的 **4.14.186 在 RMX2121CN 上启动到 root ADB，8 个 CPU 在线**。运行 config 与编译产物一致，诊断环境没有挂载块设备文件系统或加载外部模块。测试后恢复原 boot 并验证原 Android 17 正常启动。此次为约 40 秒日志覆盖的最小诊断验证，尚未验证完整 Android、厂商模块和长期稳定性；详情见 [实机报告](DEVICE_TEST_20261028.md)。
 
 [4.14.186 构建 #2](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40205461469) 已成功。产出 `Image`、15,400,133 字节的 `Image.gz-dtb`、基础 DTB、符号表、调试内核与 5 个可构建模块；下载后校验 SHA-256，并确认 gzip 载荷等于单独 `Image`、附加 DTB 等于归档中的 `mediatek/mt6885.dtb`。详见 [验证报告](reports/kernel414-verified-build.json)。
@@ -39,6 +43,8 @@ Kleaf 默认未启用 stamp，因此该镜像 banner 含 `maybe-dirty` 和 1970 
 在 Actions 选择 **Reproduce RMX2121CN kernel 4.14**，手动运行。工作流只在 `workflow_dispatch` 时执行，权限为 `contents: read`。
 
 6.18 选择 **Android 17 ACK 6.18 baseline - NOT for flashing**。完整机型移植步骤、可复用上游框架和验收条件见 [PORTING.md](PORTING.md)。
+
+最小执行内核选择 **Minimal ACK 6.18 execution core - QEMU only**。它从固定源码编译自身的 `Image`，随后构建诊断 initramfs 并运行 QEMU，不依赖早期通用内核的 Actions 产物。
 
 产物保留 14 天。4.14 产物包含日志、输入/实际配置及差异、源码与工具链引用、下载校验、内核映像、符号和可构建模块；6.18 分别上传 diagnostics 和 generic 两个产物，包含依赖快照、最终配置及通用映像。失败时也上传已经收集到的诊断材料。
 

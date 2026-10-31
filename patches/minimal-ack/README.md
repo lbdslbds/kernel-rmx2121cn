@@ -35,7 +35,9 @@ not be reported as pristine ACK.
 These are source-level reasons that intended execution paths are unchanged.
 The original minimal configuration failed to compile, so there is no original
 minimal-config executable for a binary or runtime equivalence claim. Full
-compilation and QEMU execution of the patched kernel remain CI validation work.
+compilation and diagnostic PID 1 execution on QEMU passed in
+[run 41166304335](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/41166304335).
+This does not establish execution on the phone.
 
 ## Fixed-source evidence
 

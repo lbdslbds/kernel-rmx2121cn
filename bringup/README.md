@@ -2,6 +2,8 @@
 
 这里把 RMX2121 的硬件证据和最小诊断程序接入云端检查，尚未实现 MT6885 平台驱动，也不生成手机 boot.img。
 
+2026-10-31，另设的 [最小执行内核工作流](minimal-core/README.md) 已从固定 ACK 及两处明确记录的条件编译修复构建 `6.18.33-rmx2121-minimal-core`，并在 QEMU 启动诊断 PID 1，见 [核验结果](../reports/minimal-ack-20261031.json)。该工作流不依赖旧通用 Image 的下载，禁用了块存储、网络、USB 与模块；它用于缩小启动路径，不满足 Android 系统需求。
+
 2026-10-30，[运行 40907518385](https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/40907518385) 的两项检查均通过。设备树 DTC / dt-validate 没有诊断；7 个相关绑定均已载入，`mediatek,MT6885` 仍无机型绑定。完整绑定集中的无关 `firmware/gunyah-cma-mem.yaml` 因格式错误被工具忽略，此限制已记录。诊断程序在 ACK 6.18.33 / QEMU virt 中实际进入 PID 1 并到达空闲阶段。完整范围和下载核验见 [报告](../reports/bringup618-20261030.json)。
 
 手动运行 **ACK 6.18 bring-up checks - NO phone image**，会并行执行两项检查：

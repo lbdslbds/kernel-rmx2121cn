@@ -1,0 +1,685 @@
+{
+  "schema": 1,
+  "date": "2026-10-31",
+  "old414_commit": "f0c2afc4d8aa699bacae223bf7506d6912e08da6",
+  "ack_commit": "846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef",
+  "invariants": {
+    "all_three_memory_and_reserved_memory_properties_identical": true,
+    "all_three_system_ram_intervals_identical": true,
+    "fixed_reg_nodes": 30,
+    "enabled_dynamic_size_nodes": 12,
+    "enabled_dynamic_request_bytes": 935653376,
+    "dynamic_nodes_with_runtime_reg": 0
+  },
+  "unassigned_no_map_union": {
+    "start": "0x9eef0000",
+    "end_exclusive": "0x9fa00000",
+    "size_bytes": 11599872,
+    "derivation": "RAM minus System RAM intervals, minus all fixed no-map ranges, minus seven observed dynamic no-map regions (including source-confirmed ADSP).",
+    "matching_request_sizes": {
+      "reserve-memory-sspm_share": "0x910000",
+      "reserve-memory-mcupm_share": "0x200000"
+    },
+    "limitation": "Unique residual union, not an independently observed assignment of either node or their internal boundary. No individual address is claimed."
+  },
+  "dummy_read_gap": {
+    "nodes": [
+      "/reserved-memory/reserve-memory-dram_r0_dummy_read",
+      "/reserved-memory/reserve-memory-dram_r1_dummy_read"
+    ],
+    "actual_bases": null,
+    "why_iomem_is_insufficient": "Both are mapped 4 KiB reservations without no-map. Reserved RAM may still appear under System RAM, and current iomem has no separate labels for these reservations.",
+    "why_callback_logs_are_missing": "The mt6885 legacy DRAMC callbacks print addresses, but their Makefile is gated by CONFIG_MTK_DRAMC/CONFIG_MTK_DRAMC_WA; both are disabled. The running config instead enables CONFIG_MEDIATEK_DRAMC. The generic OF allocator still allocates size nodes regardless of a compatible callback.",
+    "source_refs": [
+      "drivers/misc/mediatek/dramc/mt6885/mtk_dramc.c:1384",
+      "drivers/misc/mediatek/dramc/Makefile:17",
+      "drivers/memory/mediatek/Makefile:4",
+      "drivers/of/of_reserved_mem.c:291"
+    ]
+  },
+  "allocation_order_replay": {
+    "old414_order": [
+      "/reserved-memory/reserve-memory-ssmr",
+      "/reserved-memory/reserve-memory-dram_r1_dummy_read",
+      "/reserved-memory/reserve-memory-sspm_share",
+      "/reserved-memory/reserve-memory-dram_r0_dummy_read",
+      "/reserved-memory/reserve-memory-scp_share",
+      "/reserved-memory/ion-carveout-heap",
+      "/reserved-memory/zone-movable-cma-memory",
+      "/reserved-memory/reserve-memory-mcupm_share",
+      "/reserved-memory/gps-reserve-memory",
+      "/reserved-memory/wifi-reserve-memory",
+      "/reserved-memory/consys-reserve-memory",
+      "/reserved-memory/reserve-memory-adsp_share"
+    ],
+    "ack618_order": [
+      "/reserved-memory/zone-movable-cma-memory",
+      "/reserved-memory/reserve-memory-dram_r1_dummy_read",
+      "/reserved-memory/reserve-memory-dram_r0_dummy_read",
+      "/reserved-memory/reserve-memory-ssmr",
+      "/reserved-memory/ion-carveout-heap",
+      "/reserved-memory/consys-reserve-memory",
+      "/reserved-memory/wifi-reserve-memory",
+      "/reserved-memory/gps-reserve-memory",
+      "/reserved-memory/reserve-memory-sspm_share",
+      "/reserved-memory/reserve-memory-adsp_share",
+      "/reserved-memory/reserve-memory-scp_share",
+      "/reserved-memory/reserve-memory-mcupm_share"
+    ],
+    "old414_callback_order_matches_all_three_logs": true,
+    "physical_allocator_replayed": false,
+    "method": "Exact index-unit transcription of pinned lib/sort.c heapsort with old of_reserved_mem base-only comparator; 42 enabled records, dynamic bases initially zero. ACK order is pinned fdt_scan_reserved_mem DT child iteration.",
+    "source_refs": [
+      "old414:lib/sort.c:78",
+      "old414:drivers/of/of_reserved_mem.c:227",
+      "old414:drivers/of/of_reserved_mem.c:271",
+      "ack618:drivers/of/of_reserved_mem.c:291"
+    ]
+  },
+  "zmc_contract_change": {
+    "original_request": {
+      "start": "0x20a000000",
+      "end_exclusive": "0x23f000000",
+      "size_bytes": 889192448
+    },
+    "old414_cma_subregion": {
+      "start": "0x21b000000",
+      "end_exclusive": "0x23f000000",
+      "size_bytes": 603979776
+    },
+    "old414_released_prefix": {
+      "start": "0x20a000000",
+      "end_exclusive": "0x21b000000",
+      "size_bytes": 285212672
+    },
+    "evidence": {
+      "all_three_dmesg_lines": [
+        12,
+        28,
+        30,
+        31
+      ],
+      "source_refs": [
+        "drivers/misc/mediatek/zone_movable_cma/single_cma.c:209",
+        "drivers/misc/mediatek/zone_movable_cma/single_cma.c:225",
+        "drivers/misc/mediatek/zone_movable_cma/single_cma.c:244"
+      ]
+    },
+    "ack_effect": "With no matching vendor callback, ACK leaves the entire successfully allocated 848 MiB request reserved. The address and final allocator outcome are not yet established for the new Image. The old 576 MiB CMA area is reclaimable under CMA policy; it is not equivalent to an ordinary permanent reservation.",
+    "request_total_warning": "892.31 MiB is the sum of dynamic requests, not old 4.14 permanently unavailable RAM. At least the observed 272 MiB ZMC prefix is explicitly returned; CMA has different runtime reclaim behavior."
+  },
+  "other_algorithm_differences": [
+    {
+      "difference": "Old 4.14 sorts before dynamic allocation and immediately invokes callbacks after each allocation. ACK reserves fixed reg nodes then allocates dynamic nodes in DT order. Old equal-zero base ordering is not stable DT order.",
+      "source_refs": [
+        "old414:drivers/of/of_reserved_mem.c:247",
+        "old414:drivers/of/of_reserved_mem.c:291",
+        "ack618:drivers/of/of_reserved_mem.c:307"
+      ]
+    },
+    {
+      "difference": "Old no-map path removes memory using memblock_remove. ACK reserves/marks nomap instead; accounting and iteration assumptions differ.",
+      "source_refs": [
+        "old414:drivers/of/of_reserved_mem.c:67",
+        "old414:drivers/of/fdt.c:1236",
+        "ack618:drivers/of/of_reserved_mem.c:37",
+        "ack618:drivers/of/of_reserved_mem.c:133"
+      ]
+    },
+    {
+      "difference": "ACK allocation-in-range can temporarily select bottom-up or top-down according to previously stored adjacent reservations. A blanket top-down allocator is not a faithful ACK simulator.",
+      "source_refs": [
+        "ack618:drivers/of/of_reserved_mem.c:350"
+      ]
+    },
+    {
+      "difference": "Neither the old allocation routine nor the available runtime FDT records adds reg to these size-only dynamic nodes. Identical FDT captures cannot reveal or prove allocated physical addresses.",
+      "source_refs": [
+        "old414:drivers/of/of_reserved_mem.c:194",
+        "ack618:drivers/of/of_reserved_mem.c:489"
+      ]
+    }
+  ],
+  "minimal_next_offline_step": {
+    "already_completed": "Replay allocation order only; old replay matches all ten named callback events in all three normal logs.",
+    "proposed": "Create a pure offline memblock allocation model for the pinned 4.14 and ACK implementations, with explicit ranges and no device side effects. First reproduce the eight observed old addresses and ZMC split; only then compare ACK outcomes.",
+    "required_inputs": [
+      "RAM and all fixed no-map/reg reservations from the normal FDT",
+      "Actual pre-reserved Image extent, initrd and FDT physical extents for the build being modeled",
+      "Any early memblock reservations and current_limit/bottom_up/mirror flags before OF allocation",
+      "Exact source iteration order, alignment and alloc-ranges semantics",
+      "All old callbacks that reserve/free memory, including ZMC CMA initialization and the 272 MiB prefix release",
+      "ACK dynamic adjacency heuristic, nomap and handler failure semantics"
+    ],
+    "acceptance": [
+      "All model assumptions must be explicit; missing initial state must produce unknown rather than a claimed physical address",
+      "Model old callback order and eight observed addresses across three snapshots, plus resulting no-map union",
+      "Record new-build outcomes as model predictions, not hardware observations",
+      "No DT edits, boot images or device execution required for this stage"
+    ]
+  },
+  "firmware_gate": [
+    "Three stable old allocations do not establish that every dynamic address is a fixed firmware ABI. Conversely, disabling the Linux consumer does not prove firmware/DMA no longer accesses its shared region.",
+    "The ADSP source explicitly copies the selected shared address/size to firmware. SSPM/MCUPM code also records dynamically chosen rmem bases. Determine handoff ownership and active firmware state before relocating or omitting these areas.",
+    "Even a perfect allocator replay cannot prove running firmware DMA containment, watchdog behavior, or actual LK fixups for a different Image. The conservative OEM DT route remains blocked from a phone trial until these contracts and observations are reviewed."
+  ],
+  "source_manifest": {
+    "commit": "f0c2afc4d8aa699bacae223bf7506d6912e08da6",
+    "sources": [
+      {
+        "path": "drivers/of/of_reserved_mem.c",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/of/of_reserved_mem.c",
+        "bytes": 11562,
+        "sha256": "ab8b91254418ada471927b9a87409ec7209f3cfb325de03fe82d9b147f26e108"
+      },
+      {
+        "path": "drivers/of/fdt.c",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/of/fdt.c",
+        "bytes": 35227,
+        "sha256": "41815c02e41423e3c50eedb3c63534af75475eb401477b58370e40bdcff3cf3b"
+      },
+      {
+        "path": "arch/arm64/mm/init.c",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/arch/arm64/mm/init.c",
+        "bytes": 21103,
+        "sha256": "b7e763c4cba6e93617be1c98e77a3a248509bdd663c57231fdc1b282ebb7de28"
+      },
+      {
+        "path": "mm/memblock.c",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/mm/memblock.c",
+        "bytes": 51493,
+        "sha256": "a453607d1ad1a3d83835e1011ca5bb3b827c4ae491cdb7fb29e99d258bd54e8d"
+      },
+      {
+        "path": "drivers/misc/mediatek/zone_movable_cma/single_cma.c",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/misc/mediatek/zone_movable_cma/single_cma.c",
+        "bytes": 11143,
+        "sha256": "acf1d576ef2171b676ef9457340eae931b8a821923354d838e555a2c997a37ea"
+      },
+      {
+        "path": "drivers/misc/mediatek/zone_movable_cma/single_cma.h",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/misc/mediatek/zone_movable_cma/single_cma.h",
+        "bytes": 764,
+        "sha256": "04c1196aa0910789772a83725640ae90ba80945470a634f4ec9f2a6fc9d7372a"
+      },
+      {
+        "path": "drivers/misc/mediatek/memory-ssmr/memory_ssmr.c",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/misc/mediatek/memory-ssmr/memory_ssmr.c",
+        "bytes": 36221,
+        "sha256": "937eda7c487e7dfeb7a31aeee9d33e105d3c4fa222835d3a43adeac05d39b74e"
+      },
+      {
+        "path": "drivers/misc/mediatek/sspm/v2/sspm_reservedmem.c",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/misc/mediatek/sspm/v2/sspm_reservedmem.c",
+        "bytes": 5833,
+        "sha256": "2e34f5149920392b5415d1089b3af7adf45927811452ffbf42dc12d930557c99"
+      },
+      {
+        "path": "drivers/misc/mediatek/hifi_dsp/common/adsp_helper.c",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/misc/mediatek/hifi_dsp/common/adsp_helper.c",
+        "bytes": 4911,
+        "sha256": "a1231401e0d85efa6904a6af3922b1500f0dd9037aa3df4e471ed68320d17318"
+      },
+      {
+        "path": "drivers/misc/mediatek/dramc/mt6885/mtk_dramc.c",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/misc/mediatek/dramc/mt6885/mtk_dramc.c",
+        "bytes": 54510,
+        "sha256": "49fd5e5b7c297e0371f92b3c1b3411f726e992387787b8d76452e53d58649c39"
+      },
+      {
+        "path": "lib/sort.c",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/lib/sort.c",
+        "bytes": 2531,
+        "sha256": "ef008d6798afeb281ec4d0aaf5568f7cf6671c0423bbdf2d2aa23c7bf1ea5e77"
+      },
+      {
+        "path": "drivers/misc/mediatek/adsp/mt6885/adsp_reserved_mem.c",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/misc/mediatek/adsp/mt6885/adsp_reserved_mem.c",
+        "bytes": 5797,
+        "sha256": "0d209fb5ad5ea7cebc9ba546401d1a6ea571d7dfa1dcd7c4030d99186832f6e8"
+      },
+      {
+        "path": "drivers/misc/mediatek/adsp/mt6885/adsp_plat.c",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/misc/mediatek/adsp/mt6885/adsp_plat.c",
+        "bytes": 4304,
+        "sha256": "b3b57215ced0250846b79c6380459680b6b966f179b9b10abe34291a7c3de50c"
+      },
+      {
+        "path": "drivers/misc/mediatek/adsp/mt6885/adsp_platform.c",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/misc/mediatek/adsp/mt6885/adsp_platform.c",
+        "bytes": 4600,
+        "sha256": "4b09eb05837a65ee69b4609b289a0d9cd1c27857de442ad7b8f7aa82b796cb3c"
+      },
+      {
+        "path": "drivers/misc/mediatek/mcupm/v2/mcupm_driver.c",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/misc/mediatek/mcupm/v2/mcupm_driver.c",
+        "bytes": 21452,
+        "sha256": "f229acc03cd0d1673afb3cdcb7f5b077b6c1cd419447bed44dacffc84165cfc2"
+      },
+      {
+        "path": "drivers/memory/mediatek/dramc.c",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/memory/mediatek/dramc.c",
+        "bytes": 18722,
+        "sha256": "0d4e8837b5e4d28019925084772840262d5402d5b14df1cec8dc3d126b54bd4a"
+      },
+      {
+        "path": "drivers/misc/mediatek/dramc/Makefile",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/misc/mediatek/dramc/Makefile",
+        "bytes": 800,
+        "sha256": "6d65057b7370b39a8483841029bfbca53f3defd952b4c636da209f5c0feaf3e5"
+      },
+      {
+        "path": "drivers/memory/mediatek/Makefile",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/memory/mediatek/Makefile",
+        "bytes": 293,
+        "sha256": "b9db31e1302b6b272b3523248d79428a9cef33deb4d30e657eb23ca41bafc4a9"
+      },
+      {
+        "path": "drivers/memory/mediatek/Kconfig",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/memory/mediatek/Kconfig",
+        "bytes": 911,
+        "sha256": "89c953d03d4a6d9a9546864904caf2d45b449636862399a28a9afe0335f7b0a8"
+      },
+      {
+        "path": "drivers/misc/mediatek/dramc/Kconfig",
+        "url": "https://raw.githubusercontent.com/realme-kernel-opensource/realme_X7_X7Pro_X7ProExtreme_X7-5G_Q2Pro_V15_V5_Q2_Narzo30pro-5G_7-5G-AndroidS-kernel-source/f0c2afc4d8aa699bacae223bf7506d6912e08da6/drivers/misc/mediatek/dramc/Kconfig",
+        "bytes": 379,
+        "sha256": "7d6ceb14cb2e4280d65cfcedea654cc0a97766eee8a548fabcece50d2007678c"
+      }
+    ]
+  },
+  "ack_source_evidence": [
+    {
+      "path": "drivers/of/of_reserved_mem.c",
+      "sha256": "f644535a7799553f28f769042b7ada695991f2fe7dc00161520924df616c59fe",
+      "url": "https://android.googlesource.com/kernel/common/+/846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef/drivers/of/of_reserved_mem.c"
+    },
+    {
+      "path": "drivers/of/fdt.c",
+      "sha256": "45e6943870c8bf294270ebf050a6bc4441020c0efbde66acc23c42dac5883adb",
+      "url": "https://android.googlesource.com/kernel/common/+/846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef/drivers/of/fdt.c"
+    },
+    {
+      "path": "arch/arm64/mm/init.c",
+      "sha256": "0aec937956d6b6424afe1ac68a8f9dc243495f847fab0bd90cc0e170f4e503bf",
+      "url": "https://android.googlesource.com/kernel/common/+/846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef/arch/arm64/mm/init.c"
+    },
+    {
+      "path": "kernel/dma/coherent.c",
+      "sha256": "f342a01fe7bc1f9a5861b6dd0d08e2441a57099bd9c9a7dca1ae10b417406481",
+      "url": "https://android.googlesource.com/kernel/common/+/846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef/kernel/dma/coherent.c"
+    }
+  ],
+  "scope": "Sanitized offline evidence summary. Hardware addresses, source paths and hashes only; no raw bootargs, serials, personal paths, DT binaries or kernel logs.",
+  "capture_sha256": {
+    "normal_original_414": {
+      "running-device-tree.dtb": "2db8d54d4d6cc8b85bf087ae0d183e822851ba226da0aa1cf3dd4198b1416060",
+      "dmesg.txt": "cf106e923573d6d8bc1c71a967969480506c4c1d03aabeda4eb4496f03200616",
+      "proc-iomem.txt": "0141826710dba04e3965f7eb4769ed30c4e7c92fad5a3240ee5e18de9cb29a15",
+      "running-config.gz": "893bbc176590d1f40d71ba8a4d9e6dfd98239abbac749688679230bb77363669"
+    },
+    "normal_compiled_run2_414": {
+      "running-device-tree.dtb": "341f7aacb85314a262296cdab26f97fe3c8b913df78cbedc01e56e1befb866b2",
+      "dmesg.txt": "4015fe1993529167d79ced3bff4760a45a45b51e8d1efd93c19a79a93cb7b5ec",
+      "proc-iomem.txt": "17120d8b334c6339245650e51d05162a20f9bdc6d4bbd41581e0b9a36bb9e14f",
+      "running-config.gz": "d9a9622239c863e5480af937a37b43610e73d0433856d969805501303615c1a3"
+    },
+    "normal_compiled_run5_414": {
+      "running-device-tree.dtb": "ab49805ad3ca635c648c2ef94135ace7090aa33f110782124b567f6aeae1a63c",
+      "dmesg.txt": "c31d5596a1b7967bbd578e6a93bc68d49f693813438ccef80cdc11378d3123b7",
+      "proc-iomem.txt": "17120d8b334c6339245650e51d05162a20f9bdc6d4bbd41581e0b9a36bb9e14f",
+      "running-config.gz": "d9a9622239c863e5480af937a37b43610e73d0433856d969805501303615c1a3"
+    }
+  },
+  "dynamic_regions": [
+    {
+      "node": "/reserved-memory/zone-movable-cma-memory",
+      "requested_size_bytes": 889192448,
+      "no_map": false,
+      "alignment_bytes": 16777216,
+      "allocation_windows": [
+        {
+          "start": "0xc0000000",
+          "end_exclusive": "0x4c0000000",
+          "size_bytes": 17179869184
+        }
+      ],
+      "actual_base": "0x20a000000",
+      "evidence": [
+        {
+          "capture": "normal_original_414",
+          "source": "dmesg.txt",
+          "line": 12
+        },
+        {
+          "capture": "normal_compiled_run2_414",
+          "source": "dmesg.txt",
+          "line": 12
+        },
+        {
+          "capture": "normal_compiled_run5_414",
+          "source": "dmesg.txt",
+          "line": 12
+        }
+      ],
+      "actual_end_exclusive": "0x23f000000",
+      "classification": "observed-in-three-normal-boots"
+    },
+    {
+      "node": "/reserved-memory/reserve-memory-dram_r1_dummy_read",
+      "requested_size_bytes": 4096,
+      "no_map": false,
+      "alignment_bytes": 4096,
+      "allocation_windows": [
+        {
+          "start": "0x140000000",
+          "end_exclusive": "0x23ffff000",
+          "size_bytes": 4294963200
+        }
+      ],
+      "actual_base": null,
+      "evidence": [],
+      "classification": "not-independently-observed"
+    },
+    {
+      "node": "/reserved-memory/reserve-memory-dram_r0_dummy_read",
+      "requested_size_bytes": 4096,
+      "no_map": false,
+      "alignment_bytes": 4096,
+      "allocation_windows": [
+        {
+          "start": "0x56000000",
+          "end_exclusive": "0x74000000",
+          "size_bytes": 503316480
+        }
+      ],
+      "actual_base": null,
+      "evidence": [],
+      "classification": "not-independently-observed"
+    },
+    {
+      "node": "/reserved-memory/reserve-memory-ssmr",
+      "requested_size_bytes": 4096,
+      "no_map": true,
+      "alignment_bytes": 4096,
+      "allocation_windows": [
+        {
+          "start": "0xc0000000",
+          "end_exclusive": "0x4c0000000",
+          "size_bytes": 17179869184
+        }
+      ],
+      "actual_base": "0x23fffe000",
+      "evidence": [
+        {
+          "capture": "normal_original_414",
+          "source": "dmesg.txt",
+          "line": 5
+        },
+        {
+          "capture": "normal_compiled_run2_414",
+          "source": "dmesg.txt",
+          "line": 5
+        },
+        {
+          "capture": "normal_compiled_run5_414",
+          "source": "dmesg.txt",
+          "line": 5
+        }
+      ],
+      "actual_end_exclusive": "0x23ffff000",
+      "classification": "observed-in-three-normal-boots"
+    },
+    {
+      "node": "/reserved-memory/ion-carveout-heap",
+      "requested_size_bytes": 49152,
+      "no_map": true,
+      "alignment_bytes": 4096,
+      "allocation_windows": [
+        {
+          "start": "0x40000000",
+          "end_exclusive": "0xc0000000",
+          "size_bytes": 2147483648
+        }
+      ],
+      "actual_base": "0xbff64000",
+      "evidence": [
+        {
+          "capture": "normal_original_414",
+          "source": "dmesg.txt",
+          "line": 10
+        },
+        {
+          "capture": "normal_compiled_run2_414",
+          "source": "dmesg.txt",
+          "line": 10
+        },
+        {
+          "capture": "normal_compiled_run5_414",
+          "source": "dmesg.txt",
+          "line": 10
+        }
+      ],
+      "actual_end_exclusive": "0xbff70000",
+      "classification": "observed-in-three-normal-boots"
+    },
+    {
+      "node": "/reserved-memory/consys-reserve-memory",
+      "requested_size_bytes": 4521984,
+      "no_map": true,
+      "alignment_bytes": 1048576,
+      "allocation_windows": [
+        {
+          "start": "0x40000000",
+          "end_exclusive": "0xc0000000",
+          "size_bytes": 2147483648
+        }
+      ],
+      "actual_base": "0xbd100000",
+      "evidence": [
+        {
+          "capture": "normal_original_414",
+          "source": "dmesg.txt",
+          "line": 39
+        },
+        {
+          "capture": "normal_compiled_run2_414",
+          "source": "dmesg.txt",
+          "line": 39
+        },
+        {
+          "capture": "normal_compiled_run5_414",
+          "source": "dmesg.txt",
+          "line": 39
+        }
+      ],
+      "actual_end_exclusive": "0xbd550000",
+      "classification": "observed-in-three-normal-boots"
+    },
+    {
+      "node": "/reserved-memory/wifi-reserve-memory",
+      "requested_size_bytes": 15859712,
+      "no_map": true,
+      "alignment_bytes": 16777216,
+      "allocation_windows": [
+        {
+          "start": "0x40000000",
+          "end_exclusive": "0xc0000000",
+          "size_bytes": 2147483648
+        }
+      ],
+      "actual_base": "0xbc000000",
+      "evidence": [
+        {
+          "capture": "normal_original_414",
+          "source": "dmesg.txt",
+          "line": 37,
+          "node_confirmation_line": 38
+        },
+        {
+          "capture": "normal_compiled_run2_414",
+          "source": "dmesg.txt",
+          "line": 37,
+          "node_confirmation_line": 38
+        },
+        {
+          "capture": "normal_compiled_run5_414",
+          "source": "dmesg.txt",
+          "line": 37,
+          "node_confirmation_line": 38
+        }
+      ],
+      "actual_end_exclusive": "0xbcf20000",
+      "classification": "observed-in-three-normal-boots",
+      "size_evidence": "Exact size is from all three identical FDTs; DMA log MiB value is truncated. Adjacent OF initialization line names the node; System RAM hole agrees."
+    },
+    {
+      "node": "/reserved-memory/gps-reserve-memory",
+      "requested_size_bytes": 1048576,
+      "no_map": true,
+      "alignment_bytes": 1048576,
+      "allocation_windows": [
+        {
+          "start": "0x40000000",
+          "end_exclusive": "0xc0000000",
+          "size_bytes": 2147483648
+        }
+      ],
+      "actual_base": "0xbd600000",
+      "evidence": [
+        {
+          "capture": "normal_original_414",
+          "source": "dmesg.txt",
+          "line": 35
+        },
+        {
+          "capture": "normal_compiled_run2_414",
+          "source": "dmesg.txt",
+          "line": 35
+        },
+        {
+          "capture": "normal_compiled_run5_414",
+          "source": "dmesg.txt",
+          "line": 35
+        }
+      ],
+      "actual_end_exclusive": "0xbd700000",
+      "classification": "observed-in-three-normal-boots"
+    },
+    {
+      "node": "/reserved-memory/reserve-memory-sspm_share",
+      "requested_size_bytes": 9502720,
+      "no_map": true,
+      "alignment_bytes": 65536,
+      "allocation_windows": [
+        {
+          "start": "0x40000000",
+          "end_exclusive": "0xa0000000",
+          "size_bytes": 1610612736
+        }
+      ],
+      "actual_base": null,
+      "evidence": [],
+      "classification": "not-independently-observed"
+    },
+    {
+      "node": "/reserved-memory/reserve-memory-adsp_share",
+      "requested_size_bytes": 10223616,
+      "no_map": true,
+      "alignment_bytes": 65536,
+      "allocation_windows": [
+        {
+          "start": "0x40000000",
+          "end_exclusive": "0x80000000",
+          "size_bytes": 1073741824
+        }
+      ],
+      "actual_base": "0x76750000",
+      "evidence": [
+        {
+          "capture": "normal_original_414",
+          "source": "dmesg.txt",
+          "line": 2184
+        },
+        {
+          "capture": "normal_original_414",
+          "source": "dmesg.txt",
+          "line": 2185
+        },
+        {
+          "capture": "normal_compiled_run2_414",
+          "source": "dmesg.txt",
+          "line": 2186
+        },
+        {
+          "capture": "normal_compiled_run2_414",
+          "source": "dmesg.txt",
+          "line": 2187
+        },
+        {
+          "capture": "normal_compiled_run5_414",
+          "source": "dmesg.txt",
+          "line": 2186
+        },
+        {
+          "capture": "normal_compiled_run5_414",
+          "source": "dmesg.txt",
+          "line": 2187
+        }
+      ],
+      "actual_end_exclusive": "0x77110000",
+      "classification": "observed-in-three-normal-boots",
+      "source_binding": "drivers/misc/mediatek/adsp/mt6885/adsp_reserved_mem.c:182-206 binds the node to the exact MPU log fields; no other assignment to the saved base/size occurs in that file."
+    },
+    {
+      "node": "/reserved-memory/reserve-memory-scp_share",
+      "requested_size_bytes": 3145728,
+      "no_map": true,
+      "alignment_bytes": 16777216,
+      "allocation_windows": [
+        {
+          "start": "0x50000000",
+          "end_exclusive": "0x90000000",
+          "size_bytes": 1073741824
+        }
+      ],
+      "actual_base": "0x8d000000",
+      "evidence": [
+        {
+          "capture": "normal_original_414",
+          "source": "dmesg.txt",
+          "line": 8
+        },
+        {
+          "capture": "normal_compiled_run2_414",
+          "source": "dmesg.txt",
+          "line": 8
+        },
+        {
+          "capture": "normal_compiled_run5_414",
+          "source": "dmesg.txt",
+          "line": 8
+        }
+      ],
+      "actual_end_exclusive": "0x8d300000",
+      "classification": "observed-in-three-normal-boots"
+    },
+    {
+      "node": "/reserved-memory/reserve-memory-mcupm_share",
+      "requested_size_bytes": 2097152,
+      "no_map": true,
+      "alignment_bytes": 65536,
+      "allocation_windows": [
+        {
+          "start": "0x40000000",
+          "end_exclusive": "0xa0000000",
+          "size_bytes": 1610612736
+        }
+      ],
+      "actual_base": null,
+      "evidence": [],
+      "classification": "not-independently-observed"
+    }
+  ],
+  "limitation": "Eight dynamic bases confirmed; four individual bases remain unobserved. No 6.18 physical allocator or device execution result is claimed."
+}

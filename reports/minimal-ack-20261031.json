@@ -1,0 +1,371 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-10-31",
+  "status": "independently_verified_ci_artifacts",
+  "run": {
+    "id": 41166304335,
+    "url": "https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/41166304335",
+    "build_commit": "fa816e558e2b099a55f25922b18ec8b1d77c1457",
+    "source_url": "https://android.googlesource.com/kernel/common",
+    "source_commit": "846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef",
+    "actions_metadata_sha256": "2afb04b001601753cacd5baa67008a8746123618de36aa7f3b1db3ac08fa40fb",
+    "actions_conclusion": "success",
+    "created_at_utc": "2026-10-31T03:53:53Z",
+    "updated_at_utc": "2026-10-31T03:57:46Z",
+    "job_id": 124434513552,
+    "job_url": "https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/41166304335/job/124434513552",
+    "build_initramfs_qemu_steps": [
+      {
+        "completedAt": "2026-10-31T03:57:32Z",
+        "conclusion": "success",
+        "name": "Build and verify the minimal core",
+        "number": 4,
+        "startedAt": "2026-10-31T03:54:09Z",
+        "status": "completed"
+      },
+      {
+        "completedAt": "2026-10-31T03:57:32Z",
+        "conclusion": "success",
+        "name": "Build the deterministic diagnostic initramfs",
+        "number": 5,
+        "startedAt": "2026-10-31T03:57:32Z",
+        "status": "completed"
+      },
+      {
+        "completedAt": "2026-10-31T03:57:38Z",
+        "conclusion": "success",
+        "name": "Execute this Image and initramfs on QEMU virt",
+        "number": 6,
+        "startedAt": "2026-10-31T03:57:32Z",
+        "status": "completed"
+      }
+    ],
+    "all_job_steps_successful": true
+  },
+  "review": {
+    "method": "Offline recomputation of artifact hashes, formats, exact source changes, configuration values and raw QEMU console semantics; no device access or independent kernel re-execution.",
+    "checks_passed": 405,
+    "errors": [],
+    "source_cleanliness_evidence": "Saved pristine pre-patch Git status, fixed source commit, two-file source diff independently applied to known fixed-source bytes, and matching before/after patch verification reports.",
+    "all_artifact_checksums_and_manifests_match": true,
+    "review_script_sha256": "85761f96baba99f76fd859bd311f90e21e7948ce507fce2eeb3a3194b627e021"
+  },
+  "kernel": {
+    "release": "6.18.33-rmx2121-minimal-core",
+    "artifacts": {
+      "Image": {
+        "bytes": 3975176,
+        "sha256": "8cbfd916d8f8978fd008d7c5972faa5f2ea13fd8aebb4cf59242e521de9d6d2e"
+      },
+      "Image.gz": {
+        "bytes": 1298684,
+        "sha256": "f08c84b80f6972e078cf92ab159421375e9d46baed4b160fcd659af18bf2fa02"
+      },
+      "System.map": {
+        "bytes": 560521,
+        "sha256": "dfd17a6822dbe4161d73da4bc70a977f23e556b2a304fb865cd5ae12212ed72d"
+      },
+      "final.config": {
+        "bytes": 43055,
+        "sha256": "c4a20dc687f2937d036314f37b1fdb42731fd4ab041304a92ac79fac61df44e7"
+      },
+      "kernelrelease.txt": {
+        "bytes": 29,
+        "sha256": "adf5cae49b96725c85e17eb19bc87d3b39e0da0a2ed3f789448c801928815449"
+      }
+    },
+    "image_gzip_matches_image": true,
+    "image_header": {
+      "architecture": "AArch64",
+      "little_endian": true,
+      "page_size_bytes": 4096,
+      "flags": 10,
+      "text_offset": 0,
+      "in_memory_image_size_bytes": 4390912
+    },
+    "android_compatible_kernel_claimed": false,
+    "not_for_flashing": true,
+    "phone_boot_tested": false
+  },
+  "configuration": {
+    "final_sha256": "c4a20dc687f2937d036314f37b1fdb42731fd4ab041304a92ac79fac61df44e7",
+    "identical_to_second_build_config": true,
+    "cpu_limit": 8,
+    "va_bits": 39,
+    "pa_bits": 48,
+    "all_requested_values_retained": true,
+    "excluded_subsystems_actual": {
+      "CONFIG_MODULES": "n",
+      "CONFIG_BLOCK": "n",
+      "CONFIG_NET": "n",
+      "CONFIG_NETDEVICES": "n",
+      "CONFIG_USB_SUPPORT": "n",
+      "CONFIG_USB": "n",
+      "CONFIG_USB_GADGET": "n",
+      "CONFIG_MMC": "n",
+      "CONFIG_SCSI": "n",
+      "CONFIG_SCSI_UFSHCD": "n",
+      "CONFIG_ATA": "n",
+      "CONFIG_MD": "n",
+      "CONFIG_BLK_DEV": "n",
+      "CONFIG_MTD": "n",
+      "CONFIG_NVMEM": "n",
+      "CONFIG_NVME_CORE": "n",
+      "CONFIG_PCI": "n",
+      "CONFIG_I2C": "n",
+      "CONFIG_I3C": "n",
+      "CONFIG_SPI": "n",
+      "CONFIG_SPMI": "n",
+      "CONFIG_PINCTRL": "n",
+      "CONFIG_GPIOLIB": "n",
+      "CONFIG_REGULATOR": "n",
+      "CONFIG_IOMMU_SUPPORT": "n",
+      "CONFIG_WATCHDOG": "n",
+      "CONFIG_CPU_IDLE": "n",
+      "CONFIG_CPU_FREQ": "n",
+      "CONFIG_PM": "n",
+      "CONFIG_ACPI": "n",
+      "CONFIG_EFI": "n",
+      "CONFIG_DRM": "n",
+      "CONFIG_FB": "n",
+      "CONFIG_SOUND": "n",
+      "CONFIG_INPUT": "n",
+      "CONFIG_HID": "n",
+      "CONFIG_MEDIA_SUPPORT": "n",
+      "CONFIG_REMOTEPROC": "n",
+      "CONFIG_RPMSG": "n",
+      "CONFIG_DEVMEM": "n",
+      "CONFIG_PROC_KCORE": "n",
+      "CONFIG_ARCH_MEDIATEK": "n",
+      "CONFIG_COMPILE_TEST": "n",
+      "CONFIG_RUST": "n",
+      "CONFIG_COMPAT": "n",
+      "CONFIG_CORESIGHT": "n",
+      "CONFIG_CORESIGHT_TRBE": "n",
+      "CONFIG_ARM64_AMU_EXTN": "n",
+      "CONFIG_ARM64_SVE": "n",
+      "CONFIG_ARM64_SME": "n",
+      "CONFIG_NUMA": "n",
+      "CONFIG_KVM": "n",
+      "CONFIG_VIRTUALIZATION": "n",
+      "CONFIG_DEVTMPFS": "n",
+      "CONFIG_COREDUMP": "n"
+    },
+    "required_diagnostic_values": {
+      "CONFIG_MISC_FILESYSTEMS": "y",
+      "CONFIG_PSTORE": "y",
+      "CONFIG_PSTORE_RAM": "y",
+      "CONFIG_PSTORE_CONSOLE": "y",
+      "CONFIG_WERROR": "y",
+      "CONFIG_COREDUMP": "n"
+    },
+    "module_valued_symbols": [],
+    "all_arm64_platform_families_disabled": true,
+    "enabled_mediatek_named_symbols": [],
+    "architecture_frameworks_retained": {
+      "CONFIG_ARM_GIC": "y",
+      "CONFIG_ARM_GIC_V3": "y",
+      "CONFIG_ARM_GIC_V3_ITS": "y",
+      "CONFIG_ARM_GIC_V5": "y",
+      "CONFIG_ARM_AMBA": "y",
+      "CONFIG_ARM_PSCI_FW": "y",
+      "CONFIG_ARM_ARCH_TIMER": "y",
+      "CONFIG_OF": "y",
+      "CONFIG_OF_EARLY_FLATTREE": "y",
+      "CONFIG_OF_RESERVED_MEM": "y",
+      "CONFIG_DMA_DECLARE_COHERENT": "y",
+      "CONFIG_COMMON_CLK": "y",
+      "CONFIG_POWER_RESET": "y",
+      "CONFIG_POWER_SUPPLY": "y",
+      "CONFIG_SMP": "y",
+      "CONFIG_MMU": "y"
+    },
+    "linked_pstore_ramoops_symbols_independently_observed": [
+      "pstore_register",
+      "pstore_console_write",
+      "ramoops_probe",
+      "ramoops_init",
+      "ramoops_driver"
+    ]
+  },
+  "cpu_safeguards": {
+    "baseline_candidates": 57,
+    "preserved_count": 51,
+    "inactive_dependency_count": 6,
+    "policy_independently_rederived_from_fixed_kconfig": true,
+    "required_enabled": {
+      "CONFIG_ARM64_ERRATUM_1024718": "y",
+      "CONFIG_ARM64_ERRATUM_1530923": "y",
+      "CONFIG_ARM64_ERRATUM_1508412": "y",
+      "CONFIG_ARM64_ERRATUM_3194386": "y",
+      "CONFIG_ARM64_ERRATUM_4118414": "y",
+      "CONFIG_UNMAP_KERNEL_AT_EL0": "y",
+      "CONFIG_MITIGATE_SPECTRE_BRANCH_HISTORY": "y"
+    },
+    "inactive_dependencies": [
+      {
+        "symbol": "CONFIG_ARM64_ERRATUM_1418040",
+        "disabled_feature": "CONFIG_COMPAT",
+        "actual_symbol_value": "n",
+        "actual_feature_value": "n"
+      },
+      {
+        "symbol": "CONFIG_ARM64_ERRATUM_1742098",
+        "disabled_feature": "CONFIG_COMPAT",
+        "actual_symbol_value": "n",
+        "actual_feature_value": "n"
+      },
+      {
+        "symbol": "CONFIG_ARM64_ERRATUM_2457168",
+        "disabled_feature": "CONFIG_ARM64_AMU_EXTN",
+        "actual_symbol_value": "n",
+        "actual_feature_value": "n"
+      },
+      {
+        "symbol": "CONFIG_ARM64_ERRATUM_4193714",
+        "disabled_feature": "CONFIG_ARM64_SME",
+        "actual_symbol_value": "n",
+        "actual_feature_value": "n"
+      },
+      {
+        "symbol": "CONFIG_ARM64_ERRATUM_845719",
+        "disabled_feature": "CONFIG_COMPAT",
+        "actual_symbol_value": "n",
+        "actual_feature_value": "n"
+      },
+      {
+        "symbol": "CONFIG_CAVIUM_ERRATUM_23144",
+        "disabled_feature": "CONFIG_NUMA",
+        "actual_symbol_value": "n",
+        "actual_feature_value": "n"
+      }
+    ],
+    "policy_sha256": "cef811ab8ead4247f76827639c68ca38e7fd04672673e2953d7151b6031f059a",
+    "source_kconfig_sha256": {
+      "arch/arm64/Kconfig": "ec6b9fcc7e36dc834c153f11946b332b9d57803631b6d104a05254ab62c0816b",
+      "drivers/clocksource/Kconfig": "27ee7578a0a4474edd4c9335eefb0809398ae2d08fed7ccfd0a4f548a717fd47"
+    }
+  },
+  "source_changes": {
+    "count": 2,
+    "manifest_sha256": "59f8ce590c7833612defb9c2a6793f1a9bfae7859a51484d7b8c29b251b4de44",
+    "diff_sha256": "b6715e9069660a5850f9a3379d5621483aa2ee36a8bb6fac0d4112331ae616fc",
+    "patch_files": [
+      {
+        "file": "0001-irqchip-gic-v3-drop-unused-no-pm-suspend-stub.patch",
+        "sha256": "cf2567063a202b34c2e0745b12863ebde344fa8e420fe85a29016de3cdfc8b62"
+      },
+      {
+        "file": "0002-binfmt-elf-guard-min-coredump-initialization.patch",
+        "sha256": "39dcfbd9d2a8428847dba57ce7ed4b90588a0b338124bee393e3e9efe1b84bf3"
+      }
+    ],
+    "source_files": [
+      {
+        "path": "drivers/irqchip/irq-gic-v3.c",
+        "original_sha256": "b3f5c2cded671dd60dbb3da99d990e51090cdac97f81af79bb5c570eacd95b3d",
+        "patched_sha256": "8541e2ff3168f686f69727d960eb6fe4f5471183f49b390e6d48826ee5b057cb"
+      },
+      {
+        "path": "fs/binfmt_elf.c",
+        "original_sha256": "166859bf82b432b92d25d1f032a223e8e32ae9f14202cdefa646e334c8ecea66",
+        "patched_sha256": "615e560d7ed0c6d4178eb8ce06e8fbc625c3c5533dffc3e10bb170df9097689f"
+      }
+    ],
+    "descriptions": [
+      "Remove unused gic_v3_suspend stub only from the CONFIG_PM=n branch.",
+      "Guard the min_coredump assignment with CONFIG_COREDUMP, matching the existing field and initializer guards."
+    ],
+    "before_after_diff_report_identical": true,
+    "no_unexpected_tracked_or_nonignored_untracked_source_changes_reported": true
+  },
+  "initramfs": {
+    "artifacts": {
+      "init": {
+        "bytes": 3208,
+        "sha256": "a61dc4edb2594c2d8c3bf3214dede5460ddc4fe0ac743617d5d127b3623f756b"
+      },
+      "initramfs.cpio": {
+        "bytes": 4608,
+        "sha256": "06d533c5f5fae5fb65c6ba0285e58893a8237c2c0b37acb8f3924838e7e3e743"
+      },
+      "initramfs.cpio.gz": {
+        "bytes": 4631,
+        "sha256": "e6f197e02c742aab55b634e20e0fd99c61de305b8a73904ab481c0e73c53ec74"
+      }
+    },
+    "compiled_twice_byte_identical": true,
+    "elf": "Static AArch64 ET_EXEC with no interpreter, dynamic segment or writable executable load segment.",
+    "cpio": "Exactly seven entries: init, dev, proc, sys, dev/console, dev/kmsg and dev/null.",
+    "archive_gzip_matches_cpio": true
+  },
+  "qemu": {
+    "platform": "virt,gic-version=3",
+    "acceleration": "tcg",
+    "cpu": "max",
+    "vcpu_count_configured": 2,
+    "vcpu_count_activated_in_console": 2,
+    "ram_mib": 1024,
+    "version": "QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)",
+    "kernel_sha256": "8cbfd916d8f8978fd008d7c5972faa5f2ea13fd8aebb4cf59242e521de9d6d2e",
+    "initramfs_sha256": "e6f197e02c742aab55b634e20e0fd99c61de305b8a73904ab481c0e73c53ec74",
+    "console_sha256": "1bc59630bbae8d3ef03ec69ddb33feb62e4aa538a55269dbde98c35a063d9990",
+    "expected_release_observed": "6.18.33-rmx2121-minimal-core",
+    "pid1_observed": true,
+    "entered_and_idle_markers_observed": true,
+    "proc_and_sysfs_mount_results": 0,
+    "devtmpfs_mount_result": -19,
+    "static_character_node_fallback_observed": true,
+    "host_monotonic_observation_after_required_markers_seconds_reported": 5,
+    "total_elapsed_seconds_reported": 6.01,
+    "observation_independently_wallclock_retimed": false,
+    "termination": "Host sent SIGTERM after observation; QEMU returned 0.",
+    "phone_dtb_used": false,
+    "block_devices_attached": false,
+    "network_devices_attached": false,
+    "searched_fault_patterns": [
+      "Kernel panic",
+      "Oops:",
+      "BUG:",
+      "Unable to handle kernel"
+    ],
+    "searched_faults_found": false,
+    "nonfatal_console_observations": [
+      "QEMU reports cache hierarchy could not be detected for CPU 0.",
+      "The QEMU device tree contains no reserved-memory node; ramoops persistence is not exercised by this run."
+    ],
+    "exact_argument_list_checked_without_publishing_host_paths": true,
+    "ramoops_persistence_tested": false,
+    "log_validation_scope": "Pstore/ramoops code is configured and linked; QEMU verifies boot and the tiny PID1 init emitting console/kmsg markers. With no reserved-memory node, this run does not establish ramoops operation or persistence on kernel 6.18."
+  },
+  "previous_attempts": [
+    {
+      "id": 41165535272,
+      "url": "https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/41165535272",
+      "build_commit": "ed8955554167c6e5461f25c5736f555fef4b4b97",
+      "failed_stage": "Resolved Kconfig verification",
+      "reason": "PSTORE, PSTORE_CONSOLE and PSTORE_RAM were disabled because their MISC_FILESYSTEMS parent menu was disabled.",
+      "correction": "Enable MISC_FILESYSTEMS; retain BLOCK=n and all subsystem exclusions.",
+      "kernel_image_produced": false
+    },
+    {
+      "id": 41165802262,
+      "url": "https://github.com/lbdslbds/kernel-rmx2121cn/actions/runs/41165802262",
+      "build_commit": "afedef761da7be5928c75c46bb2a2ebde3727de1",
+      "failed_stage": "C compilation after successful Kconfig verification",
+      "reason": "PM=n exposed an unused gic_v3_suspend stub under WERROR; COREDUMP=n exposed an unguarded assignment to an absent min_coredump field.",
+      "correction": "Apply exactly the two reviewed source fixes, keeping PM=n, COREDUMP=n and WERROR=y.",
+      "kernel_image_produced": false
+    }
+  ],
+  "limitations": [
+    "This is an experimental minimum kernel and tiny init for CI/QEMU, not an Android-compatible or flashable phone build.",
+    "The five-second result is a runner host-monotonic observation after required markers, not an independent timed experiment or prolonged stability test.",
+    "The kernel was run on generic QEMU virt with two virtual CPUs, not the RMX2121 hardware or device tree.",
+    "The 8-CPU configuration limit does not establish eight physical CPUs booting this kernel.",
+    "Generic OF/reserved-memory, GIC, DMA, clock and power frameworks remain enabled. Disabling subsystem drivers does not prove firmware-memory or firmware-watchdog safety.",
+    "Ramoops cross-kernel persistence, phone recovery, storage, USB and Android userspace compatibility remain unvalidated for this kernel.",
+    "The toolchain uses recorded Ubuntu clang/LLD 18.1.3 packages and is not fully pinned or an official production Kleaf build.",
+    "Source cleanliness and runtime duration are checked against saved CI evidence; the entire original source tree and the running VM were not independently replayed."
+  ]
+}
