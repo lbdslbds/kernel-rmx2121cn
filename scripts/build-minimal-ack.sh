@@ -47,6 +47,7 @@ import json, sys
 t = json.load(open(sys.argv[1], encoding='utf-8'))
 assert t['source_url'] == 'https://android.googlesource.com/kernel/common'
 assert t['source_commit'] == '846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef'
+assert t['source_patch_series'] == 'patches/minimal-ack/series.json'
 assert t['not_for_flashing'] and not t['phone_test_allowed_by_this_workflow']
 assert t['architecture'] == 'arm64' and t['page_size_bytes'] == 4096
 print(t['source_commit'])
@@ -65,6 +66,8 @@ git -C "$source_dir" show -s --format=fuller HEAD > "$diagnostics/source-commit.
 git -C "$source_dir" rev-parse HEAD^{tree} > "$diagnostics/source-tree.txt"
 git -C "$source_dir" status --porcelain > "$diagnostics/source-status-before.txt"
 [[ ! -s "$diagnostics/source-status-before.txt" ]]
+python3 "$inputs/source-patches.py" --source "$source_dir" \
+  --patches "$project_dir/patches/minimal-ack" --diagnostics "$diagnostics"
 cp "$source_dir/Makefile" "$diagnostics/kernel-Makefile"
 cp "$source_dir/scripts/min-tool-version.sh" "$diagnostics/min-tool-version.sh"
 python3 - "$source_dir/Makefile" <<'PY'
@@ -111,7 +114,8 @@ cp "$build_dir/System.map" "$kernel_outputs/System.map"
 cp "$build_dir/.config" "$kernel_outputs/final.config"
 cp "$build_dir/include/config/kernel.release" "$kernel_outputs/kernelrelease.txt"
 git -C "$source_dir" status --porcelain > "$diagnostics/source-status-after.txt"
-[[ ! -s "$diagnostics/source-status-after.txt" ]]
+python3 "$inputs/source-patches.py" --source "$source_dir" \
+  --patches "$project_dir/patches/minimal-ack" --diagnostics "$diagnostics" --verify-only
 cp "$inputs/target.json" "$kernel_outputs/target.json"
 cat > "$kernel_outputs/DO-NOT-FLASH.txt" <<'EOF'
 Experimental minimal ACK ARM64 core for CI/QEMU only.
@@ -140,6 +144,8 @@ manifest = {'schema_version': 1, 'not_for_flashing': True, 'phone_boot_tested': 
             'kernel_release': release, 'page_size_bytes': 4096,
             'final_config_sha256': files['final.config']['sha256'], 'files': files,
             'gzip_matches_Image': True, 'runtime_tested_by_builder': False,
+            'source_pristine_before_patches': True,
+            'source_patch_verification': json.loads((diag / 'source-patches-after-build.json').read_text()),
             'toolchain_policy': target['toolchain_policy']}
 (out / 'build-manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
 with (out / 'SHA256SUMS').open('w') as stream:

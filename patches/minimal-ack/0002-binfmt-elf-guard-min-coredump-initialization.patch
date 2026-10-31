@@ -1,0 +1,17 @@
+Subject: [PATCH] binfmt_elf: guard min_coredump initialization with CONFIG_COREDUMP
+
+Pinned base: 846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef
+
+diff --git a/fs/binfmt_elf.c b/fs/binfmt_elf.c
+--- a/fs/binfmt_elf.c
++++ b/fs/binfmt_elf.c
+@@ -2128,7 +2128,9 @@
+ 
+ static int __init init_elf_binfmt(void)
+ {
++#ifdef CONFIG_COREDUMP
+ 	elf_format.min_coredump = ELF_EXEC_PAGESIZE;
++#endif
+ 	register_binfmt(&elf_format);
+ 	return 0;
+ }

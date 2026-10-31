@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "source_commit": "846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef",
+  "patches": [
+    {
+      "file": "0001-irqchip-gic-v3-drop-unused-no-pm-suspend-stub.patch",
+      "sha256": "cf2567063a202b34c2e0745b12863ebde344fa8e420fe85a29016de3cdfc8b62"
+    },
+    {
+      "file": "0002-binfmt-elf-guard-min-coredump-initialization.patch",
+      "sha256": "39dcfbd9d2a8428847dba57ce7ed4b90588a0b338124bee393e3e9efe1b84bf3"
+    }
+  ],
+  "files": [
+    {
+      "path": "drivers/irqchip/irq-gic-v3.c",
+      "original_sha256": "b3f5c2cded671dd60dbb3da99d990e51090cdac97f81af79bb5c570eacd95b3d",
+      "patched_sha256": "8541e2ff3168f686f69727d960eb6fe4f5471183f49b390e6d48826ee5b057cb"
+    },
+    {
+      "path": "fs/binfmt_elf.c",
+      "original_sha256": "166859bf82b432b92d25d1f032a223e8e32ae9f14202cdefa646e334c8ecea66",
+      "patched_sha256": "615e560d7ed0c6d4178eb8ce06e8fbc625c3c5533dffc3e10bb170df9097689f"
+    }
+  ]
+}

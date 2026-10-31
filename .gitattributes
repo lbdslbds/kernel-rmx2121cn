@@ -1,1 +1,2 @@
 bringup/**/*.dts text eol=lf
+patches/minimal-ack/*.patch text eol=lf

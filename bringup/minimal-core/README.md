@@ -29,7 +29,11 @@ before kernel compilation, and the final configuration gate remains mandatory.
 `scripts/build-minimal-ack.sh` performs the following sequence:
 
 1. Fetch the exact official Git object and require the checked-out HEAD to match;
-   record its tree, source timestamp and clean working-tree state.
+   record its tree, source timestamp and pristine working-tree state. Apply the
+   two declared [conditional-compilation fixes](../../patches/minimal-ack/README.md)
+   only after verifying their hashes and both original source hashes. Require
+   exactly the two declared modified paths and patched file hashes, save the
+   complete diff, and require the same diff and hashes after compilation.
 2. Resolve the fixed source's `defconfig` with the same compiler. The scan covers
    all `ERRATUM`-named symbols and mitigation/PAN/pointer-authentication/BTI
    defaults declared in `arch/arm64/Kconfig`, plus `ARM64_ERRATUM_*` declared in
@@ -63,7 +67,14 @@ MMC/SD/SDIO, SCSI/UFS, ATA/NVMe/MTD, PCI, I2C/SPI/SPMI, pinctrl/GPIO/regulators,
 IOMMU driver selection, watchdog drivers, CPU idle/frequency control, PM, ACPI,
 EFI, graphics/audio/input/media and remote processors. The checker stops on a
 missing, renamed or force-enabled required symbol; it does not turn failures into
-warnings or modify source to force the requested answer.
+warnings or rewrite Kconfig dependencies to force the requested answer.
+
+The fixed ACK source has two build defects when `PM=n` and `COREDUMP=n`: an
+unused GIC suspend stub and an unconditional assignment to a coredump-only ELF
+field. The local patches fix those conditional-compilation paths while keeping
+`WERROR=y`, both features disabled, and every configuration check active. They
+do not add a device driver. The output manifest explicitly identifies the
+patched source; it is not described as an untouched ACK source build.
 
 ARM64 itself selects extra generic infrastructure: AMBA, COMMON_CLK, power/reset
 frameworks, OF/reserved memory, GICv2/v3/v5 and other helpers. GICv3 ITS has a

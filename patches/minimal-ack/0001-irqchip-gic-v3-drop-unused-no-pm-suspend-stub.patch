@@ -1,0 +1,15 @@
+Subject: [PATCH] irqchip/gic-v3: remove unused suspend stub when PM is disabled
+
+Pinned base: 846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef
+
+diff --git a/drivers/irqchip/irq-gic-v3.c b/drivers/irqchip/irq-gic-v3.c
+--- a/drivers/irqchip/irq-gic-v3.c
++++ b/drivers/irqchip/irq-gic-v3.c
+@@ -1533,7 +1533,6 @@
+ 
+ #else
+ static inline void gic_syscore_init(void) { }
+-static int gic_v3_suspend(void) { return 0; }
+ #endif /* CONFIG_PM */
+ 
+ static struct irq_chip gic_chip = {
