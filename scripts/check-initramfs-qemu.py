@@ -19,6 +19,9 @@ def main():
     parser.add_argument("--kernel", type=Path, required=True)
     parser.add_argument("--initrd", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--expected-kernel-sha256", default=IMAGE_SHA256,
+                        help="Required image digest from the reviewed build provenance")
+    parser.add_argument("--expected-release", default="6.18.33-android17-5-maybe-dirty-4k")
     options = parser.parse_args()
     options.out.mkdir(parents=True, exist_ok=True)
     report = {"passed": False, "platform": "QEMU virt only", "phone_boot_tested": False,
@@ -27,9 +30,15 @@ def main():
     process = None
     log_path = options.out / "console.log"
     try:
+        if not re.fullmatch(r"[a-f0-9]{64}", options.expected_kernel_sha256):
+            raise ValueError("invalid expected Image SHA-256")
+        if not re.fullmatch(r"[A-Za-z0-9._+\-]{1,160}", options.expected_release):
+            raise ValueError("invalid expected kernel release")
+        report["expected_kernel_sha256"] = options.expected_kernel_sha256
+        report["expected_release"] = options.expected_release
         report["kernel_sha256"] = hashlib.sha256(options.kernel.read_bytes()).hexdigest()
-        if report["kernel_sha256"] != IMAGE_SHA256:
-            raise ValueError("kernel is not the independently verified baseline Image")
+        if report["kernel_sha256"] != options.expected_kernel_sha256:
+            raise ValueError("kernel does not match the expected Image digest")
         report["initramfs_sha256"] = hashlib.sha256(options.initrd.read_bytes()).hexdigest()
         report["qemu_version"] = subprocess.check_output(
             ["qemu-system-aarch64", "--version"], text=True).strip()
@@ -48,7 +57,7 @@ def main():
                 text = log_path.read_text(errors="replace")
                 markers = all(re.search(re.escape("rmx618-init: " + marker) + r"(?:\r?\n)", text)
                               for marker in MARKERS)
-                version = re.search(r"rmx618-init: release=6\.18\.33-android17-5-maybe-dirty-4k(?:\r?\n)", text)
+                version = re.search(re.escape("rmx618-init: release=" + options.expected_release) + r"(?:\r?\n)", text)
                 if re.search(r"Kernel panic|Oops:|BUG:|Unable to handle kernel", text):
                     raise ValueError("kernel fault in console log")
                 if process.poll() is not None:

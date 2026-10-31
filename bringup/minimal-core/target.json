@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "source_url": "https://android.googlesource.com/kernel/common",
+  "source_commit": "846dd6f9b6c61b6aa95e141455ce8f0ea44b29ef",
+  "source_version": "6.18.33",
+  "architecture": "arm64",
+  "page_size_bytes": 4096,
+  "expected_kernel_release": "6.18.33-rmx2121-minimal-core",
+  "configuration_method": "Resolve defconfig CPU safeguards, merge minimal.config with preserved defaults and explicit inactive dependencies, then KCONFIG_ALLCONFIG allnoconfig, olddefconfig and strict final checks",
+  "not_for_flashing": true,
+  "android_compatible_kernel_claimed": false,
+  "phone_test_allowed_by_this_workflow": false,
+  "qemu_machine": "virt",
+  "toolchain_policy": "Ubuntu clang/lld/llvm packages, LLVM=1 LLVM_IAS=1. Record versions and executable hashes; distribution packages are not fully pinned."
+}

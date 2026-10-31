@@ -1,0 +1,56 @@
+name: Minimal ACK 6.18 execution core - QEMU only
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: minimal-ack-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-minimal-core:
+    name: Build experimental minimal ARM64 ACK core
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      TZ: UTC
+      LC_ALL: C.UTF-8
+      GIT_TERMINAL_PROMPT: "0"
+      JOBS: "4"
+    steps:
+      - name: Check out build definitions
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Install host compiler and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            bc bison build-essential ca-certificates clang flex git gzip \
+            libelf-dev libssl-dev lld llvm python3 qemu-system-arm
+      - name: Build and verify the minimal core
+        shell: bash
+        run: bash scripts/build-minimal-ack.sh
+      - name: Build the deterministic diagnostic initramfs
+        run: python3 bringup/minimal-initramfs/build.py --out artifacts/minimal-ack/initramfs --clang clang --lld ld.lld
+      - name: Execute this Image and initramfs on QEMU virt
+        shell: bash
+        run: |
+          image_sha="$(python3 -c 'import json; print(json.load(open("artifacts/minimal-ack/kernel/build-manifest.json"))["files"]["Image"]["sha256"])')"
+          kernel_release="$(cat artifacts/minimal-ack/kernel/kernelrelease.txt)"
+          python3 scripts/check-initramfs-qemu.py \
+            --kernel artifacts/minimal-ack/kernel/Image \
+            --initrd artifacts/minimal-ack/initramfs/initramfs.cpio.gz \
+            --expected-kernel-sha256 "$image_sha" --expected-release "$kernel_release" \
+            --out artifacts/minimal-ack/qemu
+      - name: Upload experimental outputs and diagnostics - NOT for flashing
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: minimal-ack-experimental-NOT-FOR-FLASHING-${{ github.run_id }}
+          path: artifacts/minimal-ack/
+          retention-days: 14
+          if-no-files-found: warn
